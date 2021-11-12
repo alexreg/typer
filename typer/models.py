@@ -14,10 +14,9 @@ from typing import (
 )
 
 import click
+import click.shell_completion
 
 if TYPE_CHECKING:  # pragma: no cover
-    import click.shell_completion
-
     from .main import Typer  # noqa
 
 
@@ -172,7 +171,6 @@ class ParameterInfo:
                 Union[List["click.shell_completion.CompletionItem"], List[str]],
             ]
         ] = None,
-        autocompletion: Optional[Callable[..., Any]] = None,
         # TyperArgument
         show_default: Union[bool, str] = True,
         show_choices: bool = True,
@@ -211,7 +209,6 @@ class ParameterInfo:
         self.is_eager = is_eager
         self.envvar = envvar
         self.shell_complete = shell_complete
-        self.autocompletion = autocompletion
         # TyperArgument
         self.show_default = show_default
         self.show_choices = show_choices
@@ -261,7 +258,6 @@ class OptionInfo(ParameterInfo):
                 Union[List["click.shell_completion.CompletionItem"], List[str]],
             ]
         ] = None,
-        autocompletion: Optional[Callable[..., Any]] = None,
         # Option
         show_default: bool = True,
         prompt: Union[bool, str] = False,
@@ -309,7 +305,6 @@ class OptionInfo(ParameterInfo):
             is_eager=is_eager,
             envvar=envvar,
             shell_complete=shell_complete,
-            autocompletion=autocompletion,
             # TyperArgument
             show_default=show_default,
             show_choices=show_choices,
@@ -368,7 +363,6 @@ class ArgumentInfo(ParameterInfo):
                 Union[List["click.shell_completion.CompletionItem"], List[str]],
             ]
         ] = None,
-        autocompletion: Optional[Callable[..., Any]] = None,
         # TyperArgument
         show_default: Union[bool, str] = True,
         show_choices: bool = True,
@@ -408,7 +402,6 @@ class ArgumentInfo(ParameterInfo):
             is_eager=is_eager,
             envvar=envvar,
             shell_complete=shell_complete,
-            autocompletion=autocompletion,
             # TyperArgument
             show_default=show_default,
             show_choices=show_choices,

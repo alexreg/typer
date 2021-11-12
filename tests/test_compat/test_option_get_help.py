@@ -3,7 +3,7 @@ import subprocess
 
 from typer.testing import CliRunner
 
-from tests.assets import compat_click7_8 as mod
+from tests.assets import completion as mod
 
 runner = CliRunner()
 
@@ -32,10 +32,9 @@ def test_completion():
         encoding="utf-8",
         env={
             **os.environ,
-            "_COMPAT_CLICK7_8.PY_COMPLETE": "complete_zsh",
-            "_TYPER_COMPLETE_ARGS": "compat_click7_8.py --nickname ",
+            "_COMPLETION.PY_COMPLETE": "complete_zsh",
+            "_TYPER_COMPLETE_ARGS": "completion.py --nickname ",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    # TODO: when deprecating Click 7, remove second option
-    assert "Jonny" in result.stdout or "_files" in result.stdout
+    assert "Jonny" in result.stdout

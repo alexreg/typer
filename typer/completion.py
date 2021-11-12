@@ -7,7 +7,7 @@ import click
 from ._completion_shared import Shells, get_completion_script, install
 from .models import ParamMeta
 from .params import Option
-from .utils import _get_click_major, get_params_from_function
+from .utils import get_params_from_function
 
 try:
     import shellingham
@@ -102,14 +102,9 @@ def _install_completion_no_auto_placeholder_function(
 
 
 def completion_init() -> None:
-    if _get_click_major() < 8:
-        from ._completion_click7 import completion_init
+    from ._completion_click8 import completion_init
 
-        completion_init()
-    else:
-        from ._completion_click8 import completion_init
-
-        completion_init()
+    completion_init()
 
 
 # Re-implement Click's shell_complete to add error message with:

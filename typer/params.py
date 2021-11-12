@@ -23,7 +23,6 @@ def Option(
             Union[List["click.shell_completion.CompletionItem"], List[str]],
         ]
     ] = None,
-    autocompletion: Optional[Callable[..., Any]] = None,
     # Option
     show_default: bool = True,
     prompt: Union[bool, str] = False,
@@ -72,7 +71,6 @@ def Option(
         is_eager=is_eager,
         envvar=envvar,
         shell_complete=shell_complete,
-        autocompletion=autocompletion,
         # Option
         show_default=show_default,
         prompt=prompt,
@@ -128,7 +126,6 @@ def Argument(
             Union[List["click.shell_completion.CompletionItem"], List[str]],
         ]
     ] = None,
-    autocompletion: Optional[Callable[..., Any]] = None,
     # TyperArgument
     show_default: Union[bool, str] = True,
     show_choices: bool = True,
@@ -171,7 +168,6 @@ def Argument(
         is_eager=is_eager,
         envvar=envvar,
         shell_complete=shell_complete,
-        autocompletion=autocompletion,
         # TyperArgument
         show_default=show_default,
         show_choices=show_choices,

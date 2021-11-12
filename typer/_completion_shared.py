@@ -79,7 +79,7 @@ _completion_scripts = {
     "pwsh": COMPLETION_SCRIPT_POWER_SHELL,
 }
 
-# TODO: Probably refactor this, copied from Click 7.x
+# TODO: Probably refactor this; copied from Click 7.x
 _invalid_ident_char_re = re.compile(r"[^a-zA-Z0-9_]")
 
 

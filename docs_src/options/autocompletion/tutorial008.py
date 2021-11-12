@@ -1,6 +1,7 @@
 from typing import List
 
 import typer
+from click.shell_completion import CompletionItem
 
 valid_completion_items = [
     ("Camila", "The reader of books."),
@@ -9,16 +10,18 @@ valid_completion_items = [
 ]
 
 
-def complete_name(args: List[str], incomplete: str):
-    typer.echo(f"{args}", err=True)
+def complete_name(ctx, param, incomplete):
+    typer.echo(f"{ctx.args}", err=True)
+    completion = []
     for name, help_text in valid_completion_items:
         if name.startswith(incomplete):
-            yield (name, help_text)
+            completion.append(CompletionItem(name, help=help_text))
+    return completion
 
 
 def main(
     name: List[str] = typer.Option(
-        ["World"], help="The name to say hi to.", autocompletion=complete_name
+        ["World"], help="The name to say hi to.", shell_complete=complete_name
     )
 ):
     for n in name:

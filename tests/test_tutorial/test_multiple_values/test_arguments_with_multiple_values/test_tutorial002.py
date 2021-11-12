@@ -29,12 +29,7 @@ def test_defaults():
 def test_invalid_args():
     result = runner.invoke(app, ["Draco", "Hagrid"])
     assert result.exit_code != 0
-    # TODO: when deprecating Click 7, remove second option
-
-    assert (
-        "Error: Argument 'names' takes 3 values" in result.stdout
-        or "Error: argument names takes 3 values" in result.stdout
-    )
+    assert "Error: Argument 'names' takes 3 values" in result.stdout
 
 
 def test_valid_args():

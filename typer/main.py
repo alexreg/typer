@@ -63,6 +63,7 @@ class Typer:
     ):
         self._add_completion = add_completion
         self.info = TyperInfo(
+            self,
             name=name,
             cls=cls,
             invoke_without_command=invoke_without_command,
@@ -106,6 +107,7 @@ class Typer:
     ) -> Callable[[CommandFunctionType], CommandFunctionType]:
         def decorator(f: CommandFunctionType) -> CommandFunctionType:
             self.registered_callback = TyperInfo(
+                self,
                 name=name,
                 cls=cls,
                 invoke_without_command=invoke_without_command,
@@ -331,9 +333,7 @@ def solve_typer_info_defaults(typer_info: TyperInfo) -> TyperInfo:
             pass
         # Priority 3: Value set in subapp = typer.Typer()
         try:
-            instance_value = getattr(
-                typer_info.typer_instance.info, name  # type: ignore
-            )
+            instance_value = getattr(typer_info.typer_instance.info, name)  # type: ignore
             if not isinstance(instance_value, DefaultPlaceholder):
                 values[name] = instance_value
                 continue
@@ -746,7 +746,6 @@ def get_click_param(
                 is_eager=parameter_info.is_eager,
                 envvar=parameter_info.envvar,
                 shell_complete=parameter_info.shell_complete,
-                autocompletion=get_param_completion(parameter_info.autocompletion),
             ),
             convertor,
         )
@@ -777,7 +776,6 @@ def get_click_param(
                 expose_value=parameter_info.expose_value,
                 is_eager=parameter_info.is_eager,
                 envvar=parameter_info.envvar,
-                autocompletion=get_param_completion(parameter_info.autocompletion),
             ),
             convertor,
         )
@@ -872,7 +870,7 @@ def get_param_completion(
     if unassigned_params:
         show_params = " ".join([param.name for param in unassigned_params])
         raise click.ClickException(
-            f"Invalid autocompletion callback parameters: {show_params}"
+            f"Invalid shell-completion callback parameters: {show_params}"
         )
 
     def wrapper(ctx: click.Context, args: List[str], incomplete: Optional[str]) -> Any:
