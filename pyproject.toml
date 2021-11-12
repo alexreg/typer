@@ -4,8 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [tool.flit.metadata]
 module = "typer"
-author = "Sebastián Ramírez"
-author-email = "tiangolo@gmail.com"
+authors = [{name = "Sebastián Ramírez", email = "tiangolo@gmail.com"}, {name = "Alexander Regueiro", email = "alex@noldorin.com"}]
 home-page = "https://github.com/tiangolo/typer"
 classifiers = [
     "Intended Audience :: Information Technology",
