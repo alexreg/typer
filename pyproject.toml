@@ -1,10 +1,14 @@
 [build-system]
-requires = ["flit_core >=2,<3"]
+requires = ["flit_core ~= 3.7.1"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.metadata]
-module = "typer"
-authors = [{name = "Sebastián Ramírez", email = "tiangolo@gmail.com"}, {name = "Alexander Regueiro", email = "alex@noldorin.com"}]
+[project]
+name = "typer"
+authors = [
+    { name = "Sebastián Ramírez", email = "tiangolo@gmail.com" },
+    { name = "Alexander Regueiro", email = "alex@noldorin.com" },
+]
+dynamic = ["version", "description"]
 home-page = "https://github.com/tiangolo/typer"
 classifiers = [
     "Intended Audience :: Information Technology",
@@ -23,49 +27,49 @@ classifiers = [
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
-    "License :: OSI Approved :: MIT License"
-    ]
+    "License :: OSI Approved :: MIT License",
+]
 requires = [
-    "click >= 7.1.1, <9.0.0"
+    "cloup ~= 0.15.0",
 ]
 description-file = "README.md"
-requires-python = ">=3.6"
+requires-python = ">= 3.6"
 
-[tool.flit.metadata.urls]
+[project.urls]
 Documentation = "https://typer.tiangolo.com/"
 
-[tool.flit.metadata.requires-extra]
+[project.optional-dependencies]
 test = [
-    "shellingham >=1.3.0,<2.0.0",
-    "pytest >=4.4.0,<5.4.0",
-    "pytest-cov >=2.10.0,<3.0.0",
-    "coverage >=5.2,<6.0",
-    "pytest-xdist >=1.32.0,<2.0.0",
-    "pytest-sugar >=0.9.4,<0.10.0",
-    "mypy ==0.910",
-    "black >=22.3.0,<23.0.0",
-    "isort >=5.0.6,<6.0.0"
+    "shellingham ~= 1.3.0",
+    "pytest ~= 7.1.2",
+    "pytest-cov ~= 3.0.0",
+    "coverage ~= 6.3.2",
+    "pytest-xdist ~= 2.5.0",
+    "pytest-sugar ~= 0.9.4",
+    "mypy == 0.950",
+    "black ~= 22.3.0",
+    "isort ~= 5.10.1",
 ]
 doc = [
-    "mkdocs >=1.1.2,<2.0.0",
-    "mkdocs-material >=8.1.4,<9.0.0",
-    "mdx-include >=1.4.1,<2.0.0",
+    "mkdocs ~= 1.2.4",
+    "mkdocs-material ~= 8.1.11",
+    "mdx-include ~= 1.4.1",
 ]
 dev = [
-    "autoflake >=1.3.1,<2.0.0",
-    "flake8 >=3.8.3,<4.0.0",
-    "pre-commit >=2.17.0,<3.0.0",
+    "autoflake ~= 1.4",
+    "flake8 ~= 4.0.1",
+    "pre-commit ~= 2.19.0",
 ]
 all = [
-    "colorama >=0.4.3,<0.5.0",
-    "shellingham >=1.3.0,<2.0.0"
+    "colorama ~= 0.4.3",
+    "shellingham ~= 1.3.0",
 ]
 
 [tool.isort]
 profile = "black"
-known_third_party = ["typer", "click"]
+known_third_party = ["typer", "click", "cloup"]
 skip_glob = [
     "docs_src/subcommands/tutorial001/main.py",
     "docs_src/subcommands/tutorial003/lands.py",
     "docs_src/subcommands/tutorial003/main.py",
-    ]
+]
