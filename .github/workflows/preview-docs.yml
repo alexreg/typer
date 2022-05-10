@@ -5,7 +5,6 @@ on:
       - Build Docs
     types:
       - completed
-
 jobs:
   preview-docs:
     runs-on: ubuntu-20.04

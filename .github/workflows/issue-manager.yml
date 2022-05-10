@@ -1,5 +1,4 @@
 name: Issue Manager
-
 on:
   schedule:
     - cron: "0 0 * * *"
@@ -10,7 +9,6 @@ on:
   issues:
     types:
       - labeled
-
 jobs:
   issue-manager:
     runs-on: ubuntu-latest
