@@ -3,7 +3,18 @@ from datetime import datetime
 from enum import Enum
 from functools import update_wrapper
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    List,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 from uuid import UUID
 
 import click
@@ -216,7 +227,7 @@ class Typer:
         return get_command(self)(*args, **kwargs)
 
 
-def get_group(typer_instance: Typer) -> click.Command:
+def get_group(typer_instance: Typer) -> click.Group:
     group = get_group_from_info(TyperInfo(typer_instance))
     return group
 
@@ -231,7 +242,7 @@ def get_command(typer_instance: Typer) -> click.Command:
         or len(typer_instance.registered_commands) > 1
     ):
         # Create a Group
-        click_command = get_group(typer_instance)
+        click_command = cast(click.Command, get_group(typer_instance))
         if typer_instance._add_completion:
             click_command.params.append(click_install_param)
             click_command.params.append(click_show_param)
@@ -347,7 +358,7 @@ def solve_typer_info_defaults(typer_info: TyperInfo) -> TyperInfo:
     return TyperInfo(**values)
 
 
-def get_group_from_info(group_info: TyperInfo) -> click.Command:
+def get_group_from_info(group_info: TyperInfo) -> click.Group:
     assert (
         group_info.typer_instance
     ), "A Typer instance is needed to generate a Click Group"
@@ -366,8 +377,8 @@ def get_group_from_info(group_info: TyperInfo) -> click.Command:
         convertors,
         context_param_name,
     ) = get_params_convertors_ctx_param_name_from_function(solved_info.callback)
-    cls = solved_info.cls or TyperGroup
-    group = cls(  # type: ignore
+    cls = cast(Optional[Type[click.Group]], solved_info.cls) or TyperGroup
+    group = cls(
         name=solved_info.name or "",
         commands=commands,
         invoke_without_command=solved_info.invoke_without_command,
@@ -382,7 +393,7 @@ def get_group_from_info(group_info: TyperInfo) -> click.Command:
             convertors=convertors,
             context_param_name=context_param_name,
         ),
-        params=params,  # type: ignore
+        params=params,
         help=solved_info.help,
         epilog=solved_info.epilog,
         short_help=solved_info.short_help,
