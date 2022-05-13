@@ -50,6 +50,7 @@ test = [
     "pytest-sugar ~= 0.9.4",
     "pytest-xdist ~= 1.32.0",
     "shellingham ~= 1.4.0",
+    "types-docutils ~= 0.18.3",
 ]
 doc = [
     "mdx-include ~= 1.4.1",
@@ -63,6 +64,7 @@ dev = [
 ]
 all = [
     "colorama ~= 0.4.4",
+    "docutils ~= 0.18.1",
     "shellingham ~= 1.4.0",
 ]
 

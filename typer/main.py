@@ -310,6 +310,45 @@ class Typer:
         return get_command(self)(*args, **kwargs)
 
 
+def process_help_text(command: click.Command) -> None:
+    import docutils.nodes
+
+    from . import rst
+
+    if command.help is None:
+        return
+
+    doc = rst.parse(command.help)
+
+    paragraphs = (
+        node for node in doc.children if isinstance(node, docutils.nodes.paragraph)
+    )
+    command.help = "\n\n".join(paragraph.astext() for paragraph in paragraphs)
+
+    field_lists = doc.findall(lambda node: isinstance(node, docutils.nodes.field_list))
+    for field_list in field_lists:
+        for field in field_list.children:
+            assert isinstance(field, docutils.nodes.field)
+            field_name = field.children[0]
+            assert isinstance(field_name, docutils.nodes.field_name)
+            field_body = field.children[1]
+            assert isinstance(field_body, docutils.nodes.field_body)
+            field_name_parts = field_name.astext().split(" ", maxsplit=1)
+            if field_name_parts[0].casefold() == "param":
+                param_name = field_name_parts[1]
+                param_help = field_body.astext()
+                param = next(
+                    (param for param in command.params if param.name == param_name),
+                    None,
+                )
+                if isinstance(param, click.Option):
+                    if not param.help:
+                        param.help = param_help
+                elif isinstance(param, TyperArgument):
+                    if not param.help:
+                        param.help = param_help
+
+
 def get_group(typer_instance: Typer) -> click.Group:
     group = get_group_from_info(TyperInfo(typer_instance))
     return group
@@ -485,6 +524,7 @@ def get_group_from_info(group_info: TyperInfo) -> click.Group:
         hidden=solved_info.hidden,
         deprecated=solved_info.deprecated,
     )
+    process_help_text(group)
     return group
 
 
@@ -544,6 +584,7 @@ def get_command_from_info(command_info: CommandInfo) -> click.Command:
         hidden=command_info.hidden,
         deprecated=command_info.deprecated,
     )
+    process_help_text(command)
     return command
 
 
