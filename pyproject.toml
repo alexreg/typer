@@ -9,7 +9,7 @@ authors = [
     { name = "Alexander Regueiro", email = "alex@noldorin.com" },
 ]
 dynamic = ["version", "description"]
-home-page = "https://github.com/tiangolo/typer"
+home-page = "https://github.com/alexreg/typer"
 classifiers = [
     "Intended Audience :: Information Technology",
     "Intended Audience :: System Administrators",

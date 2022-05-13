@@ -1,6 +1,6 @@
 site_name: Typer
 site_description: Typer, build great CLIs. Easy to code. Based on Python type hints.
-site_url: https://typer.tiangolo.com/
+site_url: https://alexreg-typer.netlify.app
 
 theme:
   name: material
@@ -13,8 +13,8 @@ theme:
   logo: img/icon-white.svg
   favicon: img/favicon.png
 
-repo_name: tiangolo/typer
-repo_url: https://github.com/tiangolo/typer
+repo_name: alexreg/typer
+repo_url: https://github.com/alexreg/typer
 edit_uri: ""
 
 nav:
@@ -109,7 +109,7 @@ extra:
     property: UA-133183413-1
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/tiangolo/typer
+      link: https://github.com/alexreg/typer
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/tiangolo
     - icon: fontawesome/brands/linkedin
