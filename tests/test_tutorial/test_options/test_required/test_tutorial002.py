@@ -1,7 +1,7 @@
 import subprocess
 
 import typer
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 from docs_src.options.required import tutorial001 as mod
 
@@ -26,8 +26,7 @@ def test_option_lastname():
 def test_help():
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
-    assert "--lastname TEXT" in result.output
-    assert "[required]" in result.output
+    assert columns_match(result.output, "--lastname TEXT", "[required]")
 
 
 def test_script():

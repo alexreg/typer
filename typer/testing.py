@@ -1,3 +1,4 @@
+import re
 from typing import IO, Any, Mapping, Optional, Sequence, Union
 
 from click.testing import CliRunner as ClickCliRunner  # noqa
@@ -27,3 +28,8 @@ class CliRunner(ClickCliRunner):
             color=color,
             **extra,
         )
+
+
+def columns_match(output: str, *cols: str) -> bool:
+    pattern = r" *  ".join(re.escape(col) for col in cols)
+    return bool(re.search(pattern, output))

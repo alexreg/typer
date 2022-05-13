@@ -1,7 +1,7 @@
 import subprocess
 
 import typer
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 from docs_src.multiple_values.arguments_with_multiple_values import tutorial002 as mod
 
@@ -15,7 +15,11 @@ def test_help():
     assert result.exit_code == 0
     assert "[OPTIONS] [NAMES]..." in result.output
     assert "Arguments:" in result.output
-    assert "[default: Harry, Hermione, Ron]" in result.output
+    assert columns_match(
+        result.output,
+        "[NAMES]...",
+        "Select 3 characters to play with  [default: Harry, Hermione, Ron]",
+    )
 
 
 def test_defaults():

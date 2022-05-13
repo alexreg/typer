@@ -1,7 +1,7 @@
 import subprocess
 
 import typer
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 from docs_src.options.prompt import tutorial003 as mod
 
@@ -36,8 +36,7 @@ def test_option():
 def test_help():
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
-    assert "--project-name TEXT" in result.output
-    assert "[required]" in result.output
+    assert columns_match(result.output, "--project-name TEXT", "[required]")
 
 
 def test_script():

@@ -1,7 +1,7 @@
 import subprocess
 
 import typer
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 from docs_src.first_steps import tutorial005 as mod
 
@@ -15,7 +15,7 @@ def test_help():
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
     assert "Arguments:" in result.output
-    assert "NAME  [required]" in result.output
+    assert columns_match(result.output, "NAME", "[required]")
     assert "--lastname TEXT" in result.output
     assert "--formal / --no-formal" in result.output
 

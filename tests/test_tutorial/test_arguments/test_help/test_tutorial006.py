@@ -1,7 +1,7 @@
 import subprocess
 
 import typer
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 from docs_src.arguments.help import tutorial006 as mod
 
@@ -16,8 +16,7 @@ def test_help():
     assert result.exit_code == 0
     assert "[OPTIONS] ✨username✨" in result.output
     assert "Arguments:" in result.output
-    assert "✨username✨" in result.output
-    assert "[default: World]" in result.output
+    assert columns_match(result.output, "✨username✨", "[default: World]")
 
 
 def test_call_arg():

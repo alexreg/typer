@@ -14,9 +14,11 @@ from typing import (
 )
 
 import click
-import click.shell_completion
+import cloup
 
 if TYPE_CHECKING:  # pragma: no cover
+    import click.shell_completion
+
     from .main import Typer  # noqa
 
 
@@ -27,7 +29,7 @@ AnyType = Type[Any]
 Required = ...
 
 
-class Context(click.Context):
+class Context(cloup.Context):
     pass
 
 
@@ -86,7 +88,7 @@ class CommandInfo:
         self,
         name: Optional[str] = None,
         *,
-        cls: Optional[Type[click.Command]] = None,
+        cls: Optional[Type[cloup.Command]] = None,
         context_settings: Optional[Dict[Any, Any]] = None,
         callback: Optional[Callable[..., Any]] = None,
         help: Optional[str] = None,
@@ -118,7 +120,7 @@ class TyperInfo:
         typer_instance: Optional["Typer"] = Default(None),
         *,
         name: Optional[str] = Default(None),
-        cls: Optional[Type[click.Command]] = Default(None),
+        cls: Optional[Type[cloup.Command]] = Default(None),
         invoke_without_command: bool = Default(False),
         no_args_is_help: bool = Default(False),
         subcommand_metavar: Optional[str] = Default(None),

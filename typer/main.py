@@ -19,6 +19,7 @@ from typing import (
 from uuid import UUID
 
 import click
+import cloup
 
 from .completion import get_completion_inspect_parameters
 from .core import TyperArgument, TyperCommand, TyperGroup, TyperOption
@@ -57,7 +58,7 @@ class Typer:
         self,
         *,
         name: Optional[str] = Default(None),
-        cls: Optional[Type[click.Command]] = Default(None),
+        cls: Optional[Type[cloup.Command]] = Default(None),
         invoke_without_command: bool = Default(False),
         no_args_is_help: bool = Default(False),
         subcommand_metavar: Optional[str] = Default(None),
@@ -103,7 +104,7 @@ class Typer:
         self,
         name: Optional[str] = Default(None),
         *,
-        cls: Optional[Type[click.Command]] = Default(None),
+        cls: Optional[Type[cloup.Command]] = Default(None),
         invoke_without_command: bool = Default(False),
         no_args_is_help: bool = Default(False),
         subcommand_metavar: Optional[str] = Default(None),
@@ -147,7 +148,7 @@ class Typer:
         self,
         name: Optional[str] = None,
         *,
-        cls: Optional[Type[click.Command]] = None,
+        cls: Optional[Type[cloup.Command]] = None,
         context_settings: Optional[Dict[Any, Any]] = None,
         help: Optional[str] = None,
         epilog: Optional[str] = None,
@@ -187,7 +188,7 @@ class Typer:
         typer_instance: "Typer",
         *,
         name: Optional[str] = Default(None),
-        cls: Optional[Type[click.Command]] = Default(None),
+        cls: Optional[Type[cloup.Command]] = Default(None),
         invoke_without_command: bool = Default(False),
         no_args_is_help: bool = Default(False),
         subcommand_metavar: Optional[str] = Default(None),
@@ -336,7 +337,7 @@ def process_help_text(command: click.Command) -> None:
             field_name_parts = field_name.astext().split(" ", maxsplit=1)
             if field_name_parts[0].casefold() == "param":
                 param_name = field_name_parts[1]
-                param_help = field_body.astext()
+                param_help = field_body.astext().replace("\n", " ")
                 param = next(
                     (param for param in command.params if param.name == param_name),
                     None,
@@ -574,7 +575,7 @@ def get_command_from_info(command_info: CommandInfo) -> click.Command:
             convertors=convertors,
             context_param_name=context_param_name,
         ),
-        params=params,  # type: ignore
+        params=params,
         help=use_help,
         epilog=command_info.epilog,
         short_help=command_info.short_help,

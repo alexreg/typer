@@ -12,6 +12,7 @@ from typing import (
     Sequence,
     Tuple,
     Union,
+    cast,
 )
 
 import click
@@ -19,12 +20,13 @@ import click.core
 import click.formatting
 import click.parser
 import click.types
+import cloup
 
 if TYPE_CHECKING:  # pragma: no cover
     import click.shell_completion
 
 
-class TyperArgument(click.core.Argument):
+class TyperArgument(cloup.Argument):
     def __init__(
         self,
         *,
@@ -72,12 +74,10 @@ class TyperArgument(click.core.Argument):
         self.show_envvar = show_envvar
         self.hidden = hidden
 
-    def get_help_record(self, ctx: click.Context) -> Optional[Tuple[str, str]]:
+    def get_help_record(self, ctx: click.Context) -> Tuple[str, str]:
         # Modified version of click.core.Option.get_help_record()
-        # to support Arguments
+        # to support arguments
 
-        if self.hidden:
-            return None
         name = self.make_metavar()
         help = self.help or ""
         extra = []
@@ -129,7 +129,7 @@ class TyperArgument(click.core.Argument):
         return super().shell_complete(ctx, incomplete)
 
 
-class TyperOption(click.core.Option):
+class TyperOption(cloup.Option):
     def __init__(
         self,
         # Parameter
@@ -197,9 +197,6 @@ class TyperOption(click.core.Option):
         # Duplicate all of Click's logic only to modify a single line, to allow boolean
         # flags with only names for False values as it's currently supported by Typer
         # Ref: https://alexreg-typer.netlify.app/tutorial/parameter-types/bool/#only-names-for-false
-
-        if self.hidden:
-            return None
 
         any_prefix_is_slash = False
 
@@ -309,31 +306,6 @@ class TyperOption(click.core.Option):
         return super().shell_complete(ctx, incomplete)
 
 
-def _typer_format_options(
-    self: click.core.Command, *, ctx: click.Context, formatter: click.HelpFormatter
-) -> None:
-    args = []
-    opts = []
-    for param in self.get_params(ctx):
-        rv = param.get_help_record(ctx)
-        if rv is not None:
-            if param.param_type_name == "argument":
-                args.append(rv)
-            elif param.param_type_name == "option":
-                opts.append(rv)
-
-    # TODO: explore adding Click's gettext support, e.g.:
-    # from gettext import gettext as _
-    # with formatter.section(_("Options")):
-    #     ...
-    if args:
-        with formatter.section("Arguments"):
-            formatter.write_dl(args)
-    if opts:
-        with formatter.section("Options"):
-            formatter.write_dl(opts)
-
-
 def _typer_main_shell_completion(
     self: click.core.Command,
     *,
@@ -355,12 +327,7 @@ def _typer_main_shell_completion(
     sys.exit(rv)
 
 
-class TyperCommand(click.core.Command):
-    def format_options(
-        self, ctx: click.Context, formatter: click.HelpFormatter
-    ) -> None:
-        _typer_format_options(self, ctx=ctx, formatter=formatter)
-
+class TyperCommand(cloup.Command):
     def _main_shell_completion(
         self,
         ctx_args: Dict[str, Any],
@@ -371,14 +338,38 @@ class TyperCommand(click.core.Command):
             self, ctx_args=ctx_args, prog_name=prog_name, complete_var=complete_var
         )
 
+    def get_arguments_help_section(
+        self, ctx: click.Context
+    ) -> Optional[cloup.HelpSection]:
+        def is_arg_hidden(arg: click.Argument) -> bool:
+            if isinstance(arg, TyperArgument):
+                return cast(TyperArgument, arg).hidden
+            return False
 
-class TyperGroup(click.core.Group):
-    def format_options(
-        self, ctx: click.Context, formatter: click.HelpFormatter
-    ) -> None:
-        _typer_format_options(self, ctx=ctx, formatter=formatter)
-        self.format_commands(ctx, formatter)
+        if all(is_arg_hidden(arg) for arg in self.arguments):
+            return None
+        return cloup.HelpSection(
+            heading="Arguments",
+            definitions=[
+                self.get_argument_help_record(arg, ctx)
+                for arg in self.arguments
+                if not is_arg_hidden(arg)
+            ],
+        )
 
+    def get_default_option_group(
+        self, ctx: click.Context, is_the_only_visible_option_group: bool = False
+    ) -> cloup.OptionGroup:
+        """
+        Returns an ``OptionGroup`` instance for the options not explicitly
+        assigned to an option group, eventually including the ``--help`` option.
+        """
+        default_group = cloup.OptionGroup("Options")
+        default_group.options = self.get_ungrouped_options(ctx)
+        return default_group
+
+
+class TyperGroup(cloup.Group):
     def _main_shell_completion(
         self,
         ctx_args: Dict[str, Any],

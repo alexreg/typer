@@ -1,7 +1,7 @@
 import subprocess
 
 import typer
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 from docs_src.arguments.envvar import tutorial003 as mod
 
@@ -17,7 +17,7 @@ def test_help():
     assert "[OPTIONS] [NAME]" in result.output
     assert "Arguments:" in result.output
     assert "[env var: AWESOME_NAME;default: World]" not in result.output
-    assert "[default: World]" in result.output
+    assert columns_match(result.output, "[NAME]", "[default: World]")
 
 
 def test_call_arg():

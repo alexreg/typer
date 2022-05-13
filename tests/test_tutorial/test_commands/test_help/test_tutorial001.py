@@ -1,6 +1,6 @@
 import subprocess
 
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 from docs_src.commands.help import tutorial001 as mod
 
@@ -45,9 +45,11 @@ def test_help_delete_all():
     assert "delete-all [OPTIONS]" in result.output
     assert "Delete ALL users in the database." in result.output
     assert "If --force is not used, will ask for confirmation." in result.output
-    assert "[required]" in result.output
-    assert "--force / --no-force" in result.output
-    assert "Force deletion without confirmation." in result.output
+    assert columns_match(
+        result.output,
+        "--force / --no-force",
+        "Force deletion without confirmation.  [required]",
+    )
 
 
 def test_help_init():

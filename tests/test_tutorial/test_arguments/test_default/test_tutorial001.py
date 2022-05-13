@@ -1,7 +1,7 @@
 import subprocess
 
 import typer
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 from docs_src.arguments.default import tutorial001 as mod
 
@@ -16,7 +16,7 @@ def test_help():
     assert result.exit_code == 0
     assert "[OPTIONS] [NAME]" in result.output
     assert "Arguments:" in result.output
-    assert "[default: Wade Wilson]" in result.output
+    assert columns_match(result.output, "[NAME]", "[default: Wade Wilson]")
 
 
 def test_call_no_arg():

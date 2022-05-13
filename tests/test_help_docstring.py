@@ -1,5 +1,5 @@
 import typer
-from typer.testing import CliRunner
+from typer.testing import CliRunner, columns_match
 
 runner = CliRunner()
 
@@ -41,9 +41,11 @@ def test_help_main():
     assert result.exit_code == 0
     assert "Callback" in result.output
     assert ":param" not in result.output
-    assert "--global-opt / --no-global-opt" in result.output
-    assert "Global option" in result.output
-    assert "[default: no-global-opt]" in result.output
+    assert columns_match(
+        result.output,
+        "--global-opt / --no-global-opt",
+        "Global option  [default: no-global-opt]",
+    )
 
 
 def test_help_cmd():
@@ -51,18 +53,10 @@ def test_help_cmd():
     assert result.exit_code == 0
     assert "Some command" in result.output
     assert ":param" not in result.output
-    assert "ARG1" in result.output
-    assert "First argument" in result.output
-    assert "[required]" in result.output
-    assert "[ARG2]" in result.output
-    assert "Second argument" in result.output
-    assert "[default: bar]" in result.output
-    assert "--opt1 TEXT" in result.output
-    assert "First option" in result.output
-    assert "[default: foo]" in result.output
-    assert "--opt2 / --no-opt2" in result.output
-    assert "Second option" in result.output
-    assert "[default: no-opt2]" in result.output
-    assert "--opt3 INTEGER" in result.output
-    assert "Third option" in result.output
-    assert "[default: 1]" in result.output
+    assert columns_match(result.output, "ARG1", "First argument  [required]")
+    assert columns_match(result.output, "[ARG2]", "Second argument  [default: bar]")
+    assert columns_match(result.output, "--opt1 TEXT", "First option  [default: foo]")
+    assert columns_match(
+        result.output, "--opt2 / --no-opt2", "Second option  [default: no-opt2]"
+    )
+    assert columns_match(result.output, "--opt3 INTEGER", "Third option  [default: 1]")
