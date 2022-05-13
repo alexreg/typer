@@ -8,7 +8,7 @@ Learn more about it below. 👇
 
 The latest versions of Typer are supported.
 
-You are encouraged to [write tests](https://typer.tiangolo.com/tutorial/testing/) for your application and update your Typer version frequently after ensuring that your tests are passing. This way you will benefit from the latest features, bug fixes, and **security fixes**.
+You are encouraged to [write tests](https://alexreg-typer.netlify.app/tutorial/testing/) for your application and update your Typer version frequently after ensuring that your tests are passing. This way you will benefit from the latest features, bug fixes, and **security fixes**.
 
 ## Reporting a Vulnerability
 

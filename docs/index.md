@@ -1,18 +1,18 @@
 <p align="center">
-  <a href="https://typer.tiangolo.com"><img src="https://typer.tiangolo.com/img/logo-margin/logo-margin-vector.svg" alt="Typer"></a>
+  <a href="https://alexreg-typer.netlify.app"><img src="https://alexreg-typer.netlify.app/img/logo-margin/logo-margin-vector.svg" alt="Typer"></a>
 </p>
 <p align="center">
     <em>Typer, build great CLIs. Easy to code. Based on Python type hints.</em>
 </p>
 <p align="center">
-<a href="https://github.com/tiangolo/typer/actions?query=workflow%3ATest" target="_blank">
-    <img src="https://github.com/tiangolo/typer/workflows/Test/badge.svg" alt="Test">
+<a href="https://github.com/alexreg/typer/actions?query=workflow%3ATest" target="_blank">
+    <img src="https://github.com/alexreg/typer/workflows/Test/badge.svg" alt="Test">
 </a>
-<a href="https://github.com/tiangolo/typer/actions?query=workflow%3APublish" target="_blank">
-    <img src="https://github.com/tiangolo/typer/workflows/Publish/badge.svg" alt="Publish">
+<a href="https://github.com/alexreg/typer/actions?query=workflow%3APublish" target="_blank">
+    <img src="https://github.com/alexreg/typer/workflows/Publish/badge.svg" alt="Publish">
 </a>
-<a href="https://codecov.io/gh/tiangolo/typer" target="_blank">
-    <img src="https://img.shields.io/codecov/c/github/tiangolo/typer?color=%2334D058" alt="Coverage">
+<a href="https://codecov.io/gh/alexreg/typer" target="_blank">
+    <img src="https://img.shields.io/codecov/c/github/alexreg/typer?color=%2334D058" alt="Coverage">
 </a>
 <a href="https://pypi.org/project/typer" target="_blank">
     <img src="https://img.shields.io/pypi/v/typer?color=%2334D058&label=pypi%20package" alt="Package version">
@@ -21,9 +21,9 @@
 
 ---
 
-**Documentation**: <a href="https://typer.tiangolo.com" target="_blank">https://typer.tiangolo.com</a>
+**Documentation**: <a href="https://alexreg-typer.netlify.app" target="_blank">https://alexreg-typer.netlify.app</a>
 
-**Source Code**: <a href="https://github.com/tiangolo/typer" target="_blank">https://github.com/tiangolo/typer</a>
+**Source Code**: <a href="https://github.com/alexreg/typer" target="_blank">https://github.com/alexreg/typer</a>
 
 ---
 
@@ -122,7 +122,7 @@ Hello Camila
 
 </div>
 
-**Note**: auto-completion works when you create a Python package and run it with `--install-completion` or when you use <a href="https://typer.tiangolo.com/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
+**Note**: auto-completion works when you create a Python package and run it with `--install-completion` or when you use <a href="https://alexreg-typer.netlify.app/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
 
 ## Example upgrade
 
@@ -261,9 +261,9 @@ And similarly for **files**, **paths**, **enums** (choices), etc. And there are 
 
 **You get**: great editor support, including **completion** and **type checks** everywhere.
 
-**Your users get**: automatic **`--help`**, **auto-completion** in their terminal (Bash, Zsh, Fish, PowerShell) when they install your package or when using <a href="https://typer.tiangolo.com/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
+**Your users get**: automatic **`--help`**, **auto-completion** in their terminal (Bash, Zsh, Fish, PowerShell) when they install your package or when using <a href="https://alexreg-typer.netlify.app/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
 
-For a more complete example including more features, see the <a href="https://typer.tiangolo.com/tutorial/">Tutorial - User Guide</a>.
+For a more complete example including more features, see the <a href="https://alexreg-typer.netlify.app/tutorial/">Tutorial - User Guide</a>.
 
 ## Optional Dependencies
 

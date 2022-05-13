@@ -1,6 +1,6 @@
 name: Comment Docs Preview in PR
 description: Comment with the docs URL preview in the PR
-author: Sebastián Ramírez <tiangolo@gmail.com>
+author: Alexander Regueiro <alex@noldorin.com>
 inputs:
   token:
     description: Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN }}

@@ -3,7 +3,7 @@ import typer
 
 def main():
     typer.echo("Opening Typer's docs")
-    typer.launch("https://typer.tiangolo.com")
+    typer.launch("https://alexreg-typer.netlify.app")
 
 
 if __name__ == "__main__":

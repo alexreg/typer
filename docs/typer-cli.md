@@ -4,11 +4,11 @@
     <em>Run <strong>Typer</strong> scripts with completion, without having to create a package, using <strong>Typer CLI</strong>.</em>
 </p>
 <p align="center">
-<a href="https://travis-ci.com/tiangolo/typer-cli" target="_blank">
-    <img src="https://travis-ci.com/tiangolo/typer-cli.svg?branch=master" alt="Build Status">
+<a href="https://travis-ci.com/alexreg/typer-cli" target="_blank">
+    <img src="https://travis-ci.com/alexreg/typer-cli.svg?branch=master" alt="Build Status">
 </a>
-<a href="https://codecov.io/gh/tiangolo/typer-cli" target="_blank">
-    <img src="https://img.shields.io/codecov/c/github/tiangolo/typer-cli" alt="Coverage">
+<a href="https://codecov.io/gh/alexreg/typer-cli" target="_blank">
+    <img src="https://img.shields.io/codecov/c/github/alexreg/typer-cli" alt="Coverage">
 </a>
 <a href="https://pypi.org/project/typer-cli" target="_blank">
     <img src="https://badge.fury.io/py/typer-cli.svg" alt="Package version">
@@ -29,9 +29,9 @@ You can also use **Typer CLI** to generate Markdown documentation for your own *
 
 ---
 
-**Documentation**: <a href="https://typer.tiangolo.com/typer-cli/" target="_blank">https://typer.tiangolo.com/typer-cli/</a>
+**Documentation**: <a href="https://alexreg-typer.netlify.app/typer-cli/" target="_blank">https://alexreg-typer.netlify.app/typer-cli/</a>
 
-**Source Code for Typer CLI**: <a href="https://github.com/tiangolo/typer-cli" target="_blank">https://github.com/tiangolo/typer-cli</a>
+**Source Code for Typer CLI**: <a href="https://github.com/alexreg/typer-cli" target="_blank">https://github.com/alexreg/typer-cli</a>
 
 ---
 

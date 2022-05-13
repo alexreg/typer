@@ -196,7 +196,7 @@ class TyperOption(click.core.Option):
     def get_help_record(self, ctx: click.Context) -> Optional[Tuple[str, str]]:
         # Duplicate all of Click's logic only to modify a single line, to allow boolean
         # flags with only names for False values as it's currently supported by Typer
-        # Ref: https://typer.tiangolo.com/tutorial/parameter-types/bool/#only-names-for-false
+        # Ref: https://alexreg-typer.netlify.app/tutorial/parameter-types/bool/#only-names-for-false
 
         if self.hidden:
             return None
