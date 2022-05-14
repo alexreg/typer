@@ -37,4 +37,5 @@ from .models import FileText as FileText
 from .models import FileTextWrite as FileTextWrite
 from .params import Argument as Argument
 from .params import Option as Option
+from .params import constraint as constraint
 from .params import option_group as option_group

@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING, Any, Callable, List, Optional, Type, Union, ca
 
 import click
 import cloup
+import cloup.constraints
 
 from .models import ArgumentInfo, CommandFunctionType, OptionInfo
 
@@ -230,3 +231,10 @@ def option_group(
         return f
 
     return decorator
+
+
+def constraint(
+    constr: cloup.constraints.Constraint,
+    *params: str,
+) -> Callable[[CommandFunctionType], CommandFunctionType]:
+    return cloup.constraint(constr, params)

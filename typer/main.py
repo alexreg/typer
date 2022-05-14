@@ -46,7 +46,7 @@ from .models import (
 from .utils import get_params_from_function
 
 if TYPE_CHECKING:  # pragma: no cover
-    import cloup.constraints
+    from cloup.constraints import BoundConstraintSpec
 
 CallbackReturnType = TypeVar("CallbackReturnType")
 
@@ -70,7 +70,10 @@ class Typer:
         chain: bool = Default(False),
         result_callback: Optional[Callable[..., Any]] = Default(None),
         # Command
+        aliases: Optional[Iterable[str]] = Default(None),
+        constraints: Sequence["BoundConstraintSpec"] = Default(()),
         context_settings: Optional[Dict[Any, Any]] = Default(None),
+        formatter_settings: Optional[Dict[str, Any]] = Default(None),
         callback: Optional[Callable[..., Any]] = Default(None),
         help: Optional[str] = Default(None),
         epilog: Optional[str] = Default(None),
@@ -79,6 +82,9 @@ class Typer:
         add_help_option: bool = Default(True),
         hidden: bool = Default(False),
         deprecated: bool = Default(False),
+        align_option_groups: Optional[bool] = Default(None),
+        show_constraints: Optional[bool] = Default(None),
+        # Completion
         add_completion: bool = True,
     ):
         self._add_completion = add_completion
@@ -91,7 +97,10 @@ class Typer:
             subcommand_metavar=subcommand_metavar,
             chain=chain,
             result_callback=result_callback,
+            aliases=aliases,
+            constraints=constraints,
             context_settings=context_settings,
+            formatter_settings=formatter_settings,
             callback=callback,
             help=help,
             epilog=epilog,
@@ -100,6 +109,8 @@ class Typer:
             add_help_option=add_help_option,
             hidden=hidden,
             deprecated=deprecated,
+            align_option_groups=align_option_groups,
+            show_constraints=show_constraints,
         )
         self.registered_groups: List[TyperInfo] = []
         self.registered_commands: List[CommandInfo] = []
@@ -116,7 +127,10 @@ class Typer:
         chain: bool = Default(False),
         result_callback: Optional[Callable[..., Any]] = Default(None),
         # Command
+        aliases: Optional[Iterable[str]] = Default(None),
+        constraints: Sequence["BoundConstraintSpec"] = Default(()),
         context_settings: Optional[Dict[Any, Any]] = Default(None),
+        formatter_settings: Optional[Dict[str, Any]] = Default(None),
         help: Optional[str] = Default(None),
         epilog: Optional[str] = Default(None),
         short_help: Optional[str] = Default(None),
@@ -124,7 +138,11 @@ class Typer:
         add_help_option: bool = Default(True),
         hidden: bool = Default(False),
         deprecated: bool = Default(False),
+        align_option_groups: Optional[bool] = Default(None),
+        show_constraints: Optional[bool] = Default(None),
     ) -> Callable[[CommandFunctionType], CommandFunctionType]:
+        cloup.Command
+
         def decorator(f: CommandFunctionType) -> CommandFunctionType:
             self.registered_callback = TyperInfo(
                 self,
@@ -135,7 +153,10 @@ class Typer:
                 subcommand_metavar=subcommand_metavar,
                 chain=chain,
                 result_callback=result_callback,
+                aliases=aliases,
+                constraints=constraints,
                 context_settings=context_settings,
+                formatter_settings=formatter_settings,
                 callback=f,
                 help=help,
                 epilog=epilog,
@@ -144,6 +165,8 @@ class Typer:
                 add_help_option=add_help_option,
                 hidden=hidden,
                 deprecated=deprecated,
+                align_option_groups=align_option_groups,
+                show_constraints=show_constraints,
             )
             return f
 
@@ -153,8 +176,11 @@ class Typer:
         self,
         name: Optional[str] = None,
         *,
+        aliases: Optional[Iterable[str]] = None,
+        constraints: Sequence["BoundConstraintSpec"] = (),
         cls: Optional[Type[cloup.Command]] = None,
         context_settings: Optional[Dict[Any, Any]] = None,
+        formatter_settings: Optional[Dict[str, Any]] = None,
         help: Optional[str] = None,
         epilog: Optional[str] = None,
         short_help: Optional[str] = None,
@@ -163,11 +189,8 @@ class Typer:
         no_args_is_help: bool = False,
         hidden: bool = False,
         deprecated: bool = False,
-        constraints: Sequence[cloup.constraints.BoundConstraintSpec] = (),
-        show_constraints: Optional[bool] = None,
         align_option_groups: Optional[bool] = None,
-        aliases: Optional[Iterable[str]] = None,
-        formatter_settings: Optional[Dict[str, Any]] = None,
+        show_constraints: Optional[bool] = None,
     ) -> Callable[[CommandFunctionType], CommandFunctionType]:
         if cls is None:
             cls = TyperCommand
@@ -176,8 +199,11 @@ class Typer:
             self.registered_commands.append(
                 CommandInfo(
                     name=name,
+                    aliases=aliases,
+                    constraints=constraints,
                     cls=cls,
                     context_settings=context_settings,
+                    formatter_settings=formatter_settings,
                     callback=f,
                     help=help,
                     epilog=epilog,
@@ -187,11 +213,8 @@ class Typer:
                     no_args_is_help=no_args_is_help,
                     hidden=hidden,
                     deprecated=deprecated,
-                    constraints=constraints,
-                    show_constraints=show_constraints,
                     align_option_groups=align_option_groups,
-                    aliases=aliases,
-                    formatter_settings=formatter_settings,
+                    show_constraints=show_constraints,
                 )
             )
             return f
@@ -210,7 +233,10 @@ class Typer:
         chain: bool = Default(False),
         result_callback: Optional[Callable[..., Any]] = Default(None),
         # Command
+        aliases: Optional[Iterable[str]] = Default(None),
+        constraints: Sequence["BoundConstraintSpec"] = Default(()),
         context_settings: Optional[Dict[Any, Any]] = Default(None),
+        formatter_settings: Optional[Dict[str, Any]] = Default(None),
         callback: Optional[Callable[..., Any]] = Default(None),
         help: Optional[str] = Default(None),
         epilog: Optional[str] = Default(None),
@@ -219,11 +245,8 @@ class Typer:
         add_help_option: bool = Default(True),
         hidden: bool = Default(False),
         deprecated: bool = Default(False),
-        constraints: Sequence[cloup.constraints.BoundConstraintSpec] = (),
-        show_constraints: Optional[bool] = None,
-        align_option_groups: Optional[bool] = None,
-        aliases: Optional[Iterable[str]] = None,
-        formatter_settings: Optional[Dict[str, Any]] = None,
+        align_option_groups: Optional[bool] = Default(None),
+        show_constraints: Optional[bool] = Default(None),
     ) -> None:
         self.registered_groups.append(
             TyperInfo(
@@ -235,7 +258,10 @@ class Typer:
                 subcommand_metavar=subcommand_metavar,
                 chain=chain,
                 result_callback=result_callback,
+                aliases=aliases,
+                constraints=constraints,
                 context_settings=context_settings,
+                formatter_settings=formatter_settings,
                 callback=callback,
                 help=help,
                 epilog=epilog,
@@ -244,11 +270,8 @@ class Typer:
                 add_help_option=add_help_option,
                 hidden=hidden,
                 deprecated=deprecated,
-                constraints=constraints,
                 show_constraints=show_constraints,
                 align_option_groups=align_option_groups,
-                aliases=aliases,
-                formatter_settings=formatter_settings,
             )
         )
 
@@ -552,7 +575,11 @@ def get_group_from_info(group_info: TyperInfo) -> cloup.Group:
         add_help_option=solved_info.add_help_option,
         hidden=solved_info.hidden,
         deprecated=solved_info.deprecated,
-        constraints=solved_info.constraints,
+        constraints=get_constraints(
+            cls=cls,
+            callback=solved_info.callback,
+            constraints=solved_info.constraints,
+        ),
         show_constraints=solved_info.show_constraints,
         align_option_groups=solved_info.align_option_groups,
         aliases=solved_info.aliases,
@@ -637,7 +664,11 @@ def get_command_from_info(command_info: CommandInfo) -> cloup.Command:
         no_args_is_help=command_info.no_args_is_help,
         hidden=command_info.hidden,
         deprecated=command_info.deprecated,
-        constraints=command_info.constraints,
+        constraints=get_constraints(
+            cls=cls,
+            callback=command_info.callback,
+            constraints=command_info.constraints,
+        ),
         show_constraints=command_info.show_constraints,
         align_option_groups=command_info.align_option_groups,
         aliases=command_info.aliases,
@@ -727,6 +758,27 @@ def get_callback(
 
     update_wrapper(wrapper, callback)
     return wrapper
+
+
+def get_constraints(
+    *,
+    cls: Optional[Type[cloup.Command]] = None,
+    callback: Optional[Callable[..., Any]] = None,
+    constraints: Sequence["BoundConstraintSpec"] = (),
+) -> Sequence["BoundConstraintSpec"]:
+    if not callback:
+        return constraints
+    callback_obj = cast(Any, callback)
+    if hasattr(callback_obj, "__constraints"):
+        if cls and not issubclass(cls, cloup.ConstraintMixin):
+            raise TypeError(
+                f"a Command must inherit from `cloup.ConstraintMixin` to support "
+                f"constraints; {cls} doesn't"
+            )
+        decorator_constraints = tuple(reversed(callback_obj.__constraints))
+        return tuple(constraints) + decorator_constraints
+
+    return constraints
 
 
 def get_click_type(

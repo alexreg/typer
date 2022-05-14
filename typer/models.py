@@ -19,6 +19,7 @@ import cloup
 
 if TYPE_CHECKING:  # pragma: no cover
     import click.shell_completion
+    from cloup.constraints import BoundConstraintSpec
 
     from .main import Typer  # noqa
 
@@ -100,7 +101,7 @@ class CommandInfo:
         no_args_is_help: bool = False,
         hidden: bool = False,
         deprecated: bool = False,
-        constraints: Sequence[cloup.constraints.BoundConstraintSpec] = (),
+        constraints: Sequence["BoundConstraintSpec"] = (),
         show_constraints: Optional[bool] = None,
         align_option_groups: Optional[bool] = None,
         aliases: Optional[Iterable[str]] = None,
@@ -150,7 +151,7 @@ class TyperInfo:
         add_help_option: bool = Default(True),
         hidden: bool = Default(False),
         deprecated: bool = Default(False),
-        constraints: Sequence[cloup.constraints.BoundConstraintSpec] = Default(()),
+        constraints: Sequence["BoundConstraintSpec"] = Default(()),
         show_constraints: Optional[bool] = Default(None),
         align_option_groups: Optional[bool] = Default(None),
         aliases: Optional[Iterable[str]] = Default(None),

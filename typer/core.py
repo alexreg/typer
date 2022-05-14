@@ -24,7 +24,6 @@ import cloup
 
 if TYPE_CHECKING:  # pragma: no cover
     import click.shell_completion
-    import cloup.constraints
 
 
 class TyperArgument(cloup.Argument):
