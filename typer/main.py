@@ -4,9 +4,11 @@ from enum import Enum
 from functools import update_wrapper
 from pathlib import Path
 from typing import (
+    TYPE_CHECKING,
     Any,
     Callable,
     Dict,
+    Iterable,
     List,
     Optional,
     Sequence,
@@ -43,13 +45,16 @@ from .models import (
 )
 from .utils import get_params_from_function
 
+if TYPE_CHECKING:  # pragma: no cover
+    import cloup.constraints
+
 CallbackReturnType = TypeVar("CallbackReturnType")
 
 
 def get_install_completion_arguments() -> Tuple[click.Parameter, click.Parameter]:
     install_param, show_param = get_completion_inspect_parameters()
-    click_install_param, _ = get_click_param(install_param)
-    click_show_param, _ = get_click_param(show_param)
+    click_install_param, _ = get_cloup_param(install_param)
+    click_show_param, _ = get_cloup_param(show_param)
     return click_install_param, click_show_param
 
 
@@ -158,6 +163,11 @@ class Typer:
         no_args_is_help: bool = False,
         hidden: bool = False,
         deprecated: bool = False,
+        constraints: Sequence[cloup.constraints.BoundConstraintSpec] = (),
+        show_constraints: Optional[bool] = None,
+        align_option_groups: Optional[bool] = None,
+        aliases: Optional[Iterable[str]] = None,
+        formatter_settings: Optional[Dict[str, Any]] = None,
     ) -> Callable[[CommandFunctionType], CommandFunctionType]:
         if cls is None:
             cls = TyperCommand
@@ -177,6 +187,11 @@ class Typer:
                     no_args_is_help=no_args_is_help,
                     hidden=hidden,
                     deprecated=deprecated,
+                    constraints=constraints,
+                    show_constraints=show_constraints,
+                    align_option_groups=align_option_groups,
+                    aliases=aliases,
+                    formatter_settings=formatter_settings,
                 )
             )
             return f
@@ -204,6 +219,11 @@ class Typer:
         add_help_option: bool = Default(True),
         hidden: bool = Default(False),
         deprecated: bool = Default(False),
+        constraints: Sequence[cloup.constraints.BoundConstraintSpec] = (),
+        show_constraints: Optional[bool] = None,
+        align_option_groups: Optional[bool] = None,
+        aliases: Optional[Iterable[str]] = None,
+        formatter_settings: Optional[Dict[str, Any]] = None,
     ) -> None:
         self.registered_groups.append(
             TyperInfo(
@@ -224,6 +244,11 @@ class Typer:
                 add_help_option=add_help_option,
                 hidden=hidden,
                 deprecated=deprecated,
+                constraints=constraints,
+                show_constraints=show_constraints,
+                align_option_groups=align_option_groups,
+                aliases=aliases,
+                formatter_settings=formatter_settings,
             )
         )
 
@@ -252,9 +277,9 @@ class Typer:
                     return typer_info
         return None
 
-    def _callback_to_click_command(
+    def _callback_to_cloup_command(
         self, callback: Union[TyperCommand, Callable[..., CallbackReturnType]]
-    ) -> Optional[click.Command]:
+    ) -> Optional[cloup.Command]:
         """
         Returns the `click.Command` object for a given callable, if it is registered under the given `Typer` nstance.
 
@@ -283,7 +308,7 @@ class Typer:
         Other arguments are passed on to `click.Context.invoke`.
         """
 
-        command = self._callback_to_click_command(callback) or callback
+        command = self._callback_to_cloup_command(callback) or callback
 
         ctx = click.get_current_context()
         return cast(CallbackReturnType, ctx.invoke(command, *args, **kwargs))
@@ -300,7 +325,7 @@ class Typer:
         Other arguments are passed on to `click.Context.forward`.
         """
 
-        command = self._callback_to_click_command(callback)
+        command = self._callback_to_cloup_command(callback)
         if not command:
             raise TypeError("Callback is not a command.")
 
@@ -481,7 +506,7 @@ def solve_typer_info_defaults(typer_info: TyperInfo) -> TyperInfo:
     return TyperInfo(**values)
 
 
-def get_group_from_info(group_info: TyperInfo) -> click.Group:
+def get_group_from_info(group_info: TyperInfo) -> cloup.Group:
     assert (
         group_info.typer_instance
     ), "A Typer instance is needed to generate a Click Group"
@@ -500,7 +525,7 @@ def get_group_from_info(group_info: TyperInfo) -> click.Group:
         convertors,
         context_param_name,
     ) = get_params_convertors_ctx_param_name_from_function(solved_info.callback)
-    cls = cast(Optional[Type[click.Group]], solved_info.cls) or TyperGroup
+    cls = cast(Optional[Type[cloup.Group]], solved_info.cls) or TyperGroup
     group = cls(
         name=solved_info.name or "",
         commands=commands,
@@ -509,6 +534,9 @@ def get_group_from_info(group_info: TyperInfo) -> click.Group:
         subcommand_metavar=solved_info.subcommand_metavar,
         chain=solved_info.chain,
         result_callback=solved_info.result_callback,
+        sections=solved_info.sections,
+        align_sections=solved_info.align_sections,
+        show_subcommand_aliases=solved_info.show_subcommand_aliases,
         context_settings=solved_info.context_settings,
         callback=get_callback(
             callback=solved_info.callback,
@@ -524,6 +552,11 @@ def get_group_from_info(group_info: TyperInfo) -> click.Group:
         add_help_option=solved_info.add_help_option,
         hidden=solved_info.hidden,
         deprecated=solved_info.deprecated,
+        constraints=solved_info.constraints,
+        show_constraints=solved_info.show_constraints,
+        align_option_groups=solved_info.align_option_groups,
+        aliases=solved_info.aliases,
+        formatter_settings=solved_info.formatter_settings,
     )
     process_help_text(group)
     return group
@@ -535,8 +568,8 @@ def get_command_name(name: str) -> str:
 
 def get_params_convertors_ctx_param_name_from_function(
     callback: Optional[Callable[..., Any]]
-) -> Tuple[List[Union[click.Argument, click.Option]], Dict[str, Any], Optional[str]]:
-    params = []
+) -> Tuple[List[Union[cloup.Argument, cloup.Option]], Dict[str, Any], Optional[str]]:
+    params = {}
     convertors = {}
     context_param_name = None
     if callback:
@@ -545,14 +578,34 @@ def get_params_convertors_ctx_param_name_from_function(
             if lenient_issubclass(param.annotation, click.Context):
                 context_param_name = param_name
                 continue
-            click_param, convertor = get_click_param(param)
+            click_param, convertor = get_cloup_param(param)
             if convertor:
                 convertors[param_name] = convertor
-            params.append(click_param)
-    return params, convertors, context_param_name
+            params[param_name] = click_param
+        callback_obj = cast(Any, callback)
+        if hasattr(callback_obj, "__opt_groups"):
+            for (opt_group, opt_group_params) in reversed(callback_obj.__opt_groups):
+                for param_name in opt_group_params:
+                    option = params.get(param_name, None)  #  type: ignore
+                    if option is None:
+                        raise ValueError("{param} is not a parameter")
+                    if not isinstance(option, click.Option):
+                        raise TypeError(
+                            "only parameter of type `Option` can be added to option groups"
+                        )
+                    option_obj = cast(Any, option)
+                    if getattr(option_obj, "group", None) is not None:
+                        raise ValueError(
+                            f"`{option}` was first assigned to `{option_obj.group}` and then "
+                            f"passed as argument to `@option_group({opt_group.title!r}, ...)`"
+                        )
+                    option_obj.group = opt_group
+                    if opt_group.hidden:
+                        option.hidden = True
+    return list(params.values()), convertors, context_param_name
 
 
-def get_command_from_info(command_info: CommandInfo) -> click.Command:
+def get_command_from_info(command_info: CommandInfo) -> cloup.Command:
     assert command_info.callback, "A command must have a callback function"
     name = command_info.name or get_command_name(command_info.callback.__name__)
     use_help = command_info.help
@@ -584,6 +637,11 @@ def get_command_from_info(command_info: CommandInfo) -> click.Command:
         no_args_is_help=command_info.no_args_is_help,
         hidden=command_info.hidden,
         deprecated=command_info.deprecated,
+        constraints=command_info.constraints,
+        show_constraints=command_info.show_constraints,
+        align_option_groups=command_info.align_option_groups,
+        aliases=command_info.aliases,
+        formatter_settings=command_info.formatter_settings,
     )
     process_help_text(command)
     return command
@@ -764,9 +822,9 @@ def lenient_issubclass(
     return isinstance(cls, type) and issubclass(cls, class_or_tuple)
 
 
-def get_click_param(
+def get_cloup_param(
     param: ParamMeta,
-) -> Tuple[Union[click.Argument, click.Option], Any]:
+) -> Tuple[Union[cloup.Argument, cloup.Option], Any]:
     # First, find out what will be:
     # * ParamInfo (ArgumentInfo or OptionInfo)
     # * default_value
@@ -871,6 +929,8 @@ def get_click_param(
                 hidden=parameter_info.hidden,
                 show_choices=parameter_info.show_choices,
                 show_envvar=parameter_info.show_envvar,
+                # TyperOption
+                group=parameter_info.group,
                 # Parameter
                 required=required,
                 default=default_value,

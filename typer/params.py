@@ -1,8 +1,9 @@
-from typing import TYPE_CHECKING, Any, Callable, List, Optional, Type, Union
+from typing import TYPE_CHECKING, Any, Callable, List, Optional, Type, Union, cast
 
 import click
+import cloup
 
-from .models import ArgumentInfo, OptionInfo
+from .models import ArgumentInfo, CommandFunctionType, OptionInfo
 
 if TYPE_CHECKING:  # pragma: no cover
     import click.shell_completion
@@ -37,6 +38,7 @@ def Option(
     hidden: bool = False,
     show_choices: bool = True,
     show_envvar: bool = True,
+    group: Optional[cloup.OptionGroup] = None,
     # Choice
     case_sensitive: bool = True,
     # Numbers
@@ -85,6 +87,7 @@ def Option(
         hidden=hidden,
         show_choices=show_choices,
         show_envvar=show_envvar,
+        group=group,
         # Choice
         case_sensitive=case_sensitive,
         # Numbers
@@ -198,3 +201,32 @@ def Argument(
         allow_dash=allow_dash,
         path_type=path_type,
     )
+
+
+def option_group(
+    title: str,
+    *options: str,
+    help: Optional[str] = None,
+    constraint: Optional[cloup.constraints.Constraint] = None,
+    hidden: bool = False,
+) -> Callable[[CommandFunctionType], CommandFunctionType]:
+    if not isinstance(title, str):
+        raise TypeError(
+            "the first argument of `@option_group` must be its title, a string; "
+            "you probably forgot it"
+        )
+
+    if not options:
+        raise ValueError("you must provide at least one option")
+
+    def decorator(f: CommandFunctionType) -> CommandFunctionType:
+        opt_group = cloup.OptionGroup(
+            title, help=help, constraint=constraint, hidden=hidden
+        )
+        f_obj = cast(Any, f)
+        if not hasattr(f, "__opt_groups"):
+            f_obj.__opt_groups = []
+        f_obj.__opt_groups.append((opt_group, options))
+        return f
+
+    return decorator

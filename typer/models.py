@@ -5,6 +5,7 @@ from typing import (
     Any,
     Callable,
     Dict,
+    Iterable,
     List,
     Optional,
     Sequence,
@@ -99,6 +100,11 @@ class CommandInfo:
         no_args_is_help: bool = False,
         hidden: bool = False,
         deprecated: bool = False,
+        constraints: Sequence[cloup.constraints.BoundConstraintSpec] = (),
+        show_constraints: Optional[bool] = None,
+        align_option_groups: Optional[bool] = None,
+        aliases: Optional[Iterable[str]] = None,
+        formatter_settings: Optional[Dict[str, Any]] = None,
     ):
         self.name = name
         self.cls = cls
@@ -112,6 +118,11 @@ class CommandInfo:
         self.no_args_is_help = no_args_is_help
         self.hidden = hidden
         self.deprecated = deprecated
+        self.constraints = constraints
+        self.show_constraints = show_constraints
+        self.align_option_groups = align_option_groups
+        self.aliases = aliases
+        self.formatter_settings = formatter_settings
 
 
 class TyperInfo:
@@ -126,6 +137,9 @@ class TyperInfo:
         subcommand_metavar: Optional[str] = Default(None),
         chain: bool = Default(False),
         result_callback: Optional[Callable[..., Any]] = Default(None),
+        sections: Iterable[cloup.Section] = Default(()),
+        align_sections: Optional[bool] = Default(None),
+        show_subcommand_aliases: Optional[bool] = Default(None),
         # Command
         context_settings: Optional[Dict[Any, Any]] = Default(None),
         callback: Optional[Callable[..., Any]] = Default(None),
@@ -136,6 +150,11 @@ class TyperInfo:
         add_help_option: bool = Default(True),
         hidden: bool = Default(False),
         deprecated: bool = Default(False),
+        constraints: Sequence[cloup.constraints.BoundConstraintSpec] = Default(()),
+        show_constraints: Optional[bool] = Default(None),
+        align_option_groups: Optional[bool] = Default(None),
+        aliases: Optional[Iterable[str]] = Default(None),
+        formatter_settings: Optional[Dict[str, Any]] = Default(None),
     ):
         self.typer_instance = typer_instance
         self.name = name
@@ -145,6 +164,9 @@ class TyperInfo:
         self.subcommand_metavar = subcommand_metavar
         self.chain = chain
         self.result_callback = result_callback
+        self.sections = sections
+        self.align_sections = align_sections
+        self.show_subcommand_aliases = show_subcommand_aliases
         self.context_settings = context_settings
         self.callback = callback
         self.help = help
@@ -154,6 +176,11 @@ class TyperInfo:
         self.add_help_option = add_help_option
         self.hidden = hidden
         self.deprecated = deprecated
+        self.constraints = constraints
+        self.show_constraints = show_constraints
+        self.align_option_groups = align_option_groups
+        self.aliases = aliases
+        self.formatter_settings = formatter_settings
 
 
 class ParameterInfo:
@@ -274,6 +301,7 @@ class OptionInfo(ParameterInfo):
         hidden: bool = False,
         show_choices: bool = True,
         show_envvar: bool = True,
+        group: Optional[cloup.OptionGroup] = None,
         # Choice
         case_sensitive: bool = True,
         # Numbers
@@ -345,6 +373,7 @@ class OptionInfo(ParameterInfo):
         self.flag_value = flag_value
         self.count = count
         self.allow_from_autoenv = allow_from_autoenv
+        self.group = group
 
 
 class ArgumentInfo(ParameterInfo):

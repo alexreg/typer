@@ -24,6 +24,7 @@ import cloup
 
 if TYPE_CHECKING:  # pragma: no cover
     import click.shell_completion
+    import cloup.constraints
 
 
 class TyperArgument(cloup.Argument):
@@ -132,7 +133,7 @@ class TyperArgument(cloup.Argument):
 class TyperOption(cloup.Option):
     def __init__(
         self,
-        # Parameter
+        # click.Parameter
         param_decls: List[str],
         type: Optional[Union[click.types.ParamType, Any]] = None,
         required: Optional[bool] = None,
@@ -149,7 +150,7 @@ class TyperOption(cloup.Option):
                 Union[List["click.shell_completion.CompletionItem"], List[str]],
             ]
         ] = None,
-        # Option
+        # click.Option
         show_default: Union[bool, str] = False,
         prompt: Union[bool, str] = False,
         confirmation_prompt: Union[bool, str] = False,
@@ -164,6 +165,8 @@ class TyperOption(cloup.Option):
         hidden: bool = False,
         show_choices: bool = True,
         show_envvar: bool = False,
+        # cloup.Option
+        group: Optional[cloup.OptionGroup] = None,
     ):
         super().__init__(
             param_decls=param_decls,
@@ -191,6 +194,7 @@ class TyperOption(cloup.Option):
             hidden=hidden,
             show_choices=show_choices,
             show_envvar=show_envvar,
+            group=group,
         )
 
     def get_help_record(self, ctx: click.Context) -> Optional[Tuple[str, str]]:
