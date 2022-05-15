@@ -69,11 +69,11 @@ class Typer:
         subcommand_metavar: Optional[str] = Default(None),
         chain: bool = Default(False),
         result_callback: Optional[Callable[..., Any]] = Default(None),
-        sections: Iterable[cloup.Section] = Default(()),
         align_sections: Optional[bool] = Default(None),
         show_subcommand_aliases: Optional[bool] = Default(None),
         # Command
         aliases: Optional[Iterable[str]] = Default(None),
+        section: Optional[cloup.Section] = Default(None),
         constraints: Sequence["BoundConstraintSpec"] = Default(()),
         context_settings: Optional[Dict[Any, Any]] = Default(None),
         formatter_settings: Optional[Dict[str, Any]] = Default(None),
@@ -100,10 +100,10 @@ class Typer:
             subcommand_metavar=subcommand_metavar,
             chain=chain,
             result_callback=result_callback,
-            sections=sections,
             align_sections=align_sections,
             show_subcommand_aliases=show_subcommand_aliases,
             aliases=aliases,
+            section=section,
             constraints=constraints,
             context_settings=context_settings,
             formatter_settings=formatter_settings,
@@ -183,6 +183,7 @@ class Typer:
         name: Optional[str] = None,
         *,
         aliases: Optional[Iterable[str]] = None,
+        section: Optional[cloup.Section] = None,
         constraints: Sequence["BoundConstraintSpec"] = (),
         cls: Optional[Type[cloup.Command]] = None,
         context_settings: Optional[Dict[Any, Any]] = None,
@@ -206,6 +207,7 @@ class Typer:
                 CommandInfo(
                     name=name,
                     aliases=aliases,
+                    section=section,
                     constraints=constraints,
                     cls=cls,
                     context_settings=context_settings,
@@ -240,6 +242,7 @@ class Typer:
         result_callback: Optional[Callable[..., Any]] = Default(None),
         # Command
         aliases: Optional[Iterable[str]] = Default(None),
+        section: Optional[cloup.Section] = Default(None),
         constraints: Sequence["BoundConstraintSpec"] = Default(()),
         context_settings: Optional[Dict[Any, Any]] = Default(None),
         formatter_settings: Optional[Dict[str, Any]] = Default(None),
@@ -265,6 +268,7 @@ class Typer:
                 chain=chain,
                 result_callback=result_callback,
                 aliases=aliases,
+                section=section,
                 constraints=constraints,
                 context_settings=context_settings,
                 formatter_settings=formatter_settings,
@@ -540,10 +544,14 @@ def get_group_from_info(group_info: TyperInfo) -> click.Group:
         group_info.typer_instance
     ), "A Typer instance is needed to generate a Click Group"
     commands: Dict[str, click.Command] = {}
+    sections = set()
     for command_info in group_info.typer_instance.registered_commands:
         command = get_command_from_info(command_info=command_info)
         if command.name:
             commands[command.name] = command
+            if isinstance(command, cloup.Command) and command_info.section is not None:
+                command_info.section.add_command(command, command.name)
+                sections.add(command_info.section)
     for sub_group_info in group_info.typer_instance.registered_groups:
         sub_group = get_group_from_info(sub_group_info)
         if sub_group.name:
@@ -558,7 +566,7 @@ def get_group_from_info(group_info: TyperInfo) -> click.Group:
     kwargs: Dict[str, Any] = {}
     if issubclass(cls, cloup.Group):
         kwargs = dict(
-            sections=solved_info.sections,
+            sections=sections,
             align_sections=solved_info.align_sections,
             show_subcommand_aliases=solved_info.show_subcommand_aliases,
             constraints=get_constraints(

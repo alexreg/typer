@@ -101,6 +101,7 @@ class CommandInfo:
         no_args_is_help: bool = False,
         hidden: bool = False,
         deprecated: bool = False,
+        section: Optional[cloup.Section] = None,
         constraints: Sequence["BoundConstraintSpec"] = (),
         show_constraints: Optional[bool] = None,
         align_option_groups: Optional[bool] = None,
@@ -119,6 +120,7 @@ class CommandInfo:
         self.no_args_is_help = no_args_is_help
         self.hidden = hidden
         self.deprecated = deprecated
+        self.section = section
         self.constraints = constraints
         self.show_constraints = show_constraints
         self.align_option_groups = align_option_groups
@@ -138,7 +140,7 @@ class TyperInfo:
         subcommand_metavar: Optional[str] = Default(None),
         chain: bool = Default(False),
         result_callback: Optional[Callable[..., Any]] = Default(None),
-        sections: Iterable[cloup.Section] = Default(()),
+        section: Optional[cloup.Section] = Default(None),
         align_sections: Optional[bool] = Default(None),
         show_subcommand_aliases: Optional[bool] = Default(None),
         # Command
@@ -165,7 +167,7 @@ class TyperInfo:
         self.subcommand_metavar = subcommand_metavar
         self.chain = chain
         self.result_callback = result_callback
-        self.sections = sections
+        self.section = section
         self.align_sections = align_sections
         self.show_subcommand_aliases = show_subcommand_aliases
         self.context_settings = context_settings
