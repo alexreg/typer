@@ -8,7 +8,6 @@
 coverage.xml
 dist
 env
-env3.6
 env3.7
 htmlcov
 site

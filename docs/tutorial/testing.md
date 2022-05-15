@@ -85,9 +85,9 @@ Then you can call `pytest` in your directory and it will run your tests:
 $ pytest
 
 ================ test session starts ================
-platform linux -- Python 3.6.9, pytest-5.3.5, py-1.8.1, pluggy-0.13.1
-rootdir: /home/user/code/superawesome-cli/app
-plugins: forked-1.1.3, xdist-1.31.0, cov-2.8.1
+platform darwin -- Python 3.9.12, pytest-7.1.2, pluggy-1.0.0
+rootdir: /Users/user/code/my-cli-app
+plugins: xdist-2.5.0, anyio-3.5.0, forked-1.4.0, hypothesis-6.46.2, cov-3.0.0
 collected 1 item
 
 ---> 100%

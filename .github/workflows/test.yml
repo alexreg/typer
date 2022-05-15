@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
       fail-fast: false
 
     steps:
@@ -26,7 +26,6 @@ jobs:
       - name: Install Dependencies
         run: flit install --deps=develop --symlink
       - name: Lint
-        if: ${{ matrix.python-version != '3.6' }}
         run: bash scripts/lint.sh
       - name: Test
         run: bash scripts/test.sh
