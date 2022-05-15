@@ -1,6 +1,37 @@
 ## Latest Changes
 
+### Features
+
+* ✨ Add support for Cloup sections
+* ✨ Add support for Cloup aliases
+* ✨ Add support for Cloup decorator & manual constraints
+* ✨ Add support for Cloup option groups
+* ✨ Get help for params from docstrings
+* ✨ Add `Typer.invoke` and `Typer.forward` methods.
+* ✨ Drop support for Python 3.6.
+* ✨ Drop support for Click 7.
+
+### Fixes
+
+* 🐛 Fix type signature of `typer.main.get_group`
+* 🐛 Fix type annotation of `run` function
+
+### Docs
+
+* 📝 Update docs to point to own site
 * ✏ Fix typo, "ASCII codes" to "ANSI escape sequences". PR [#308](https://github.com/tiangolo/typer/pull/308) by [@septatrix](https://github.com/septatrix).
+
+### Internal
+
+* 📝 Update project metadata
+* 🔧 Fix type checking
+* ✨ Use Cloup subclasses of Click types where appropriate
+* 👷 Fix building docs
+* 👷 Fix formatting of GitHub workflows
+* 👷 Fix `build-docs` GitHub workflow
+* ✨ Add test for issue tiangolo/typer#365
+* ✨ Add test for issue tiangolo/typer#208
+* ⬆️ Update dependencies
 
 ## 0.4.2
 
