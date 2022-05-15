@@ -3,13 +3,18 @@ requires = ["flit_core ~= 3.7.1"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "typer"
+name = "typer-cloup"
+readme = "README.md"
+requires-python = ">= 3.7"
+license = {file = "LICENSE"}
 authors = [
     { name = "Sebastián Ramírez", email = "tiangolo@gmail.com" },
     { name = "Alexander Regueiro", email = "alex@noldorin.com" },
 ]
-dynamic = ["version", "description"]
-home-page = "https://github.com/alexreg/typer"
+maintainers = [
+    { name = "Alexander Regueiro", email = "alex@noldorin.com" },
+]
+keywords = ["shell", "cli", "terminal", "click", "cloup", "typer", "typehints"]
 classifiers = [
     "Intended Audience :: Information Technology",
     "Intended Audience :: System Administrators",
@@ -30,14 +35,15 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "License :: OSI Approved :: MIT License",
 ]
-requires = [
+dependencies = [
     "cloup ~= 0.15.0",
 ]
-description-file = "README.md"
-requires-python = ">= 3.7"
+dynamic = ["version", "description"]
 
 [project.urls]
-Documentation = "https://typer.tiangolo.com/"
+homepage = "https://github.com/alexreg/typer"
+documentation = "https://alexreg-typer.netlify.app"
+repository = "https://github.com/alexreg/typer"
 
 [project.optional-dependencies]
 test = [
@@ -67,6 +73,9 @@ all = [
     "docutils ~= 0.18.1",
     "shellingham ~= 1.4.0",
 ]
+
+[tool.flit.module]
+name = "typer"
 
 [tool.isort]
 profile = "black"
