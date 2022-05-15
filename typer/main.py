@@ -69,6 +69,9 @@ class Typer:
         subcommand_metavar: Optional[str] = Default(None),
         chain: bool = Default(False),
         result_callback: Optional[Callable[..., Any]] = Default(None),
+        sections: Iterable[cloup.Section] = Default(()),
+        align_sections: Optional[bool] = Default(None),
+        show_subcommand_aliases: Optional[bool] = Default(None),
         # Command
         aliases: Optional[Iterable[str]] = Default(None),
         constraints: Sequence["BoundConstraintSpec"] = Default(()),
@@ -97,6 +100,9 @@ class Typer:
             subcommand_metavar=subcommand_metavar,
             chain=chain,
             result_callback=result_callback,
+            sections=sections,
+            align_sections=align_sections,
+            show_subcommand_aliases=show_subcommand_aliases,
             aliases=aliases,
             constraints=constraints,
             context_settings=context_settings,
@@ -300,9 +306,9 @@ class Typer:
                     return typer_info
         return None
 
-    def _callback_to_cloup_command(
+    def _callback_to_click_command(
         self, callback: Union[TyperCommand, Callable[..., CallbackReturnType]]
-    ) -> Optional[cloup.Command]:
+    ) -> Optional[click.Command]:
         """
         Returns the `click.Command` object for a given callable, if it is registered under the given `Typer` nstance.
 
@@ -331,7 +337,7 @@ class Typer:
         Other arguments are passed on to `click.Context.invoke`.
         """
 
-        command = self._callback_to_cloup_command(callback) or callback
+        command = self._callback_to_click_command(callback) or callback
 
         ctx = click.get_current_context()
         return cast(CallbackReturnType, ctx.invoke(command, *args, **kwargs))
@@ -348,7 +354,7 @@ class Typer:
         Other arguments are passed on to `click.Context.forward`.
         """
 
-        command = self._callback_to_cloup_command(callback)
+        command = self._callback_to_click_command(callback)
         if not command:
             raise TypeError("Callback is not a command.")
 
@@ -529,7 +535,7 @@ def solve_typer_info_defaults(typer_info: TyperInfo) -> TyperInfo:
     return TyperInfo(**values)
 
 
-def get_group_from_info(group_info: TyperInfo) -> cloup.Group:
+def get_group_from_info(group_info: TyperInfo) -> click.Group:
     assert (
         group_info.typer_instance
     ), "A Typer instance is needed to generate a Click Group"
@@ -548,7 +554,22 @@ def get_group_from_info(group_info: TyperInfo) -> cloup.Group:
         convertors,
         context_param_name,
     ) = get_params_convertors_ctx_param_name_from_function(solved_info.callback)
-    cls = cast(Optional[Type[cloup.Group]], solved_info.cls) or TyperGroup
+    cls = cast(Optional[Type[click.Group]], solved_info.cls) or TyperGroup
+    kwargs: Dict[str, Any] = {}
+    if issubclass(cls, cloup.Group):
+        kwargs = dict(
+            sections=solved_info.sections,
+            align_sections=solved_info.align_sections,
+            show_subcommand_aliases=solved_info.show_subcommand_aliases,
+            constraints=get_constraints(
+                cls=cls,
+                callback=solved_info.callback,
+                constraints=solved_info.constraints,
+            ),
+            show_constraints=solved_info.show_constraints,
+            align_option_groups=solved_info.align_option_groups,
+            formatter_settings=solved_info.formatter_settings,
+        )
     group = cls(
         name=solved_info.name or "",
         commands=commands,
@@ -557,9 +578,6 @@ def get_group_from_info(group_info: TyperInfo) -> cloup.Group:
         subcommand_metavar=solved_info.subcommand_metavar,
         chain=solved_info.chain,
         result_callback=solved_info.result_callback,
-        sections=solved_info.sections,
-        align_sections=solved_info.align_sections,
-        show_subcommand_aliases=solved_info.show_subcommand_aliases,
         context_settings=solved_info.context_settings,
         callback=get_callback(
             callback=solved_info.callback,
@@ -575,16 +593,14 @@ def get_group_from_info(group_info: TyperInfo) -> cloup.Group:
         add_help_option=solved_info.add_help_option,
         hidden=solved_info.hidden,
         deprecated=solved_info.deprecated,
-        constraints=get_constraints(
-            cls=cls,
-            callback=solved_info.callback,
-            constraints=solved_info.constraints,
-        ),
-        show_constraints=solved_info.show_constraints,
-        align_option_groups=solved_info.align_option_groups,
-        aliases=solved_info.aliases,
-        formatter_settings=solved_info.formatter_settings,
+        **kwargs,
     )
+    if solved_info.aliases:
+        group.aliases = list(solved_info.aliases)  # type: ignore
+    for name, command in commands.items():
+        aliases = getattr(command, "aliases") or ()
+        for alias in aliases:
+            group.alias2name[alias] = name  # type: ignore
     process_help_text(group)
     return group
 
@@ -632,7 +648,7 @@ def get_params_convertors_ctx_param_name_from_function(
     return list(params.values()), convertors, context_param_name
 
 
-def get_command_from_info(command_info: CommandInfo) -> cloup.Command:
+def get_command_from_info(command_info: CommandInfo) -> click.Command:
     assert command_info.callback, "A command must have a callback function"
     name = command_info.name or get_command_name(command_info.callback.__name__)
     use_help = command_info.help
@@ -646,6 +662,18 @@ def get_command_from_info(command_info: CommandInfo) -> cloup.Command:
         context_param_name,
     ) = get_params_convertors_ctx_param_name_from_function(command_info.callback)
     cls = command_info.cls or TyperCommand
+    kwargs: Dict[str, Any] = {}
+    if issubclass(cls, cloup.Command):
+        kwargs = dict(
+            constraints=get_constraints(
+                cls=cls,
+                callback=command_info.callback,
+                constraints=command_info.constraints,
+            ),
+            show_constraints=command_info.show_constraints,
+            align_option_groups=command_info.align_option_groups,
+            formatter_settings=command_info.formatter_settings,
+        )
     command = cls(
         name=name,
         context_settings=command_info.context_settings,
@@ -664,16 +692,10 @@ def get_command_from_info(command_info: CommandInfo) -> cloup.Command:
         no_args_is_help=command_info.no_args_is_help,
         hidden=command_info.hidden,
         deprecated=command_info.deprecated,
-        constraints=get_constraints(
-            cls=cls,
-            callback=command_info.callback,
-            constraints=command_info.constraints,
-        ),
-        show_constraints=command_info.show_constraints,
-        align_option_groups=command_info.align_option_groups,
-        aliases=command_info.aliases,
-        formatter_settings=command_info.formatter_settings,
+        **kwargs,
     )
+    if command_info.aliases:
+        command.aliases = list(command_info.aliases)  # type: ignore
     process_help_text(command)
     return command
 
