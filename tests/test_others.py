@@ -55,9 +55,10 @@ def test_callback_too_many_parameters():
 
     with pytest.raises(click.ClickException) as exc_info:
         runner.invoke(app, ["--name", "Camila"])
-    assert (
-        exc_info.value.message == "Too many CLI parameter callback function parameters"
-    )
+        assert (
+            exc_info.value.message
+            == "Too many CLI parameter callback function parameters"
+        )
 
 
 def test_callback_2_untyped_parameters():

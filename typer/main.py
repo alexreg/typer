@@ -360,7 +360,7 @@ class Typer:
 
         command = self._callback_to_click_command(callback)
         if not command:
-            raise TypeError("Callback is not a command.")
+            raise TypeError("callback is not a command")
 
         ctx = click.get_current_context()
         return cast(CallbackReturnType, ctx.forward(command, *args, **kwargs))
