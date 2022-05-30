@@ -12,7 +12,6 @@ from typing import (
     Sequence,
     Tuple,
     Union,
-    cast,
 )
 
 import click
@@ -346,7 +345,7 @@ class TyperCommand(cloup.Command):
     ) -> Optional[cloup.HelpSection]:
         def is_arg_hidden(arg: click.Argument) -> bool:
             if isinstance(arg, TyperArgument):
-                return cast(TyperArgument, arg).hidden
+                return arg.hidden
             return False
 
         if all(is_arg_hidden(arg) for arg in self.arguments):

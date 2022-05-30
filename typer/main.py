@@ -637,7 +637,7 @@ def get_params_convertors_ctx_param_name_from_function(
         if hasattr(callback_obj, "__opt_groups"):
             for (opt_group, opt_group_params) in reversed(callback_obj.__opt_groups):
                 for param_name in opt_group_params:
-                    option = params.get(param_name, None)  #  type: ignore
+                    option = params.get(param_name, None)
                     if option is None:
                         raise ValueError("{param} is not a parameter")
                     if not isinstance(option, click.Option):
@@ -703,7 +703,7 @@ def get_command_from_info(command_info: CommandInfo) -> click.Command:
         **kwargs,
     )
     if command_info.aliases:
-        command.aliases = list(command_info.aliases)  # type: ignore
+        command.aliases = list(command_info.aliases)
     process_help_text(command)
     return command
 
