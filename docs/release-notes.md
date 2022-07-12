@@ -1,5 +1,7 @@
 ## Latest Changes
 
+* ⬆️ Upgrade codecov GitHub Action. PR [#420](https://github.com/tiangolo/typer/pull/420) by [@tiangolo](https://github.com/tiangolo).
+
 ### Features
 
 * ✨ Add support for Cloup sections
