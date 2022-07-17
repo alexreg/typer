@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+* ✏ Update `first-steps.md`, clarify distinction between parameter and argument. PR [#176](https://github.com/tiangolo/typer/pull/176) by [@mccarthysean](https://github.com/mccarthysean).
+
 ## 0.5.1
 
 ### Fixes
