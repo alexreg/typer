@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 0.5.0
+
 ### Features
 
 * ✨ Add support for Cloup sections
