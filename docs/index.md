@@ -49,7 +49,7 @@ And it's intended to be the FastAPI of CLIs.
 
 Python 3.7+
 
-**Typer** stands on the shoulders of a giant. Its only internal dependency is <a href="https://click.palletsprojects.com/" class="external-link" target="_blank">Click</a>.
+**Typer** stands on the shoulders of a giant. Its only internal dependency is <a href="https://github.com/janLuke/cloup" class="external-link" target="_blank">Cloup</a>, which is based on <a href="https://click.palletsprojects.com/" class="external-link" target="_blank">Click</a>.
 
 ## Installation
 
@@ -267,7 +267,7 @@ For a more complete example including more features, see the <a href="https://al
 
 ## Optional Dependencies
 
-Typer uses <a href="https://click.palletsprojects.com/" class="external-link" target="_blank">Click</a> internally. That's the only dependency.
+Typer uses <a href="https://github.com/janLuke/cloup" class="external-link" target="_blank">Cloup</a> internally, which is based on <a href="https://click.palletsprojects.com/" class="external-link" target="_blank">Click</a>. That's the only dependency.
 
 But you can also install extras:
 
