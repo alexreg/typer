@@ -23,6 +23,12 @@ from uuid import UUID
 import click
 import cloup
 
+try:
+    import docutils
+    import docutils.nodes
+except ImportError:  # pragma: nocover
+    docutils = None
+
 from .completion import get_completion_inspect_parameters
 from .core import TyperArgument, TyperCommand, TyperGroup, TyperOption
 from .models import (
@@ -370,7 +376,8 @@ class Typer:
 
 
 def process_help_text(command: click.Command) -> None:
-    import docutils.nodes
+    if not docutils:
+        return None
 
     from . import rst
 
