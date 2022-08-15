@@ -56,9 +56,9 @@ Python 3.7+
 <div class="termy">
 
 ```console
-$ pip install typer
+$ pip install typer-cloup
 ---> 100%
-Successfully installed typer
+Successfully installed typer-cloup
 ```
 
 </div>
@@ -278,7 +278,7 @@ But you can also install extras:
     * With `shellingham` you can just use `--install-completion`.
     * Without `shellingham`, you have to pass the name of the shell to install completion for, e.g. `--install-completion bash`.
 
-You can install `typer` with `colorama` and `shellingham` with `pip install typer[all]`.
+You can install `typer` with all optional dependencies by running `pip install typer-cloup[all]`.
 
 ## Other tools and plug-ins
 
