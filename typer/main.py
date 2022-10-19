@@ -24,10 +24,9 @@ import click
 import cloup
 
 try:
-    import docutils
-    import docutils.nodes
+    import docstring_parser
 except ImportError:  # pragma: nocover
-    docutils = None
+    docstring_parser = None  # type: ignore
 
 from .completion import get_completion_inspect_parameters
 from .core import TyperArgument, TyperCommand, TyperGroup, TyperOption
@@ -376,43 +375,35 @@ class Typer:
 
 
 def process_help_text(command: click.Command) -> None:
-    if not docutils:
+    if not docstring_parser:
         return None
-
-    from . import rst
 
     if command.help is None:
         return
 
-    doc = rst.parse(command.help)
+    docstring = docstring_parser.parse(command.help)
 
-    paragraphs = (
-        node for node in doc.children if isinstance(node, docutils.nodes.paragraph)
-    )
-    command.help = "\n\n".join(paragraph.astext() for paragraph in paragraphs)
+    if docstring.short_description:
+        command.help = docstring.short_description
+        if docstring.long_description:
+            command.help += "\n\n" + docstring.long_description
 
-    field_lists = doc.findall(lambda node: isinstance(node, docutils.nodes.field_list))
-    for field_list in field_lists:
-        for field in field_list.children:
-            assert isinstance(field, docutils.nodes.field)
-            field_name = field.children[0]
-            assert isinstance(field_name, docutils.nodes.field_name)
-            field_body = field.children[1]
-            assert isinstance(field_body, docutils.nodes.field_body)
-            field_name_parts = field_name.astext().split(" ", maxsplit=1)
-            if field_name_parts[0].casefold() == "param":
-                param_name = field_name_parts[1]
-                param_help = field_body.astext().replace("\n", " ")
-                param = next(
-                    (param for param in command.params if param.name == param_name),
-                    None,
-                )
-                if isinstance(param, click.Option):
-                    if not param.help:
-                        param.help = param_help
-                elif isinstance(param, TyperArgument):
-                    if not param.help:
-                        param.help = param_help
+    for doc_param in docstring.params:
+        param = next(
+            (param for param in command.params if param.name == doc_param.arg_name),
+            None,
+        )
+
+        help = doc_param.description
+        if help is not None:
+            help = help.replace("\n", " ")
+
+        if isinstance(param, click.Option):
+            if not param.help:
+                param.help = help
+        elif isinstance(param, TyperArgument):
+            if not param.help:
+                param.help = help
 
 
 def get_group(typer_instance: Typer) -> click.Group:
