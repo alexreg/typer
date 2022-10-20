@@ -290,7 +290,7 @@ For example:
     * There are several other Click plug-ins at <a href="https://github.com/click-contrib" class="external-link" target="_blank">click-contrib</a> that you can explore.
 * <a href="https://pypi.org/project/tabulate/" class="external-link" target="_blank"><code>tabulate</code></a>: to automatically display tabular data nicely. Independent of Click or Typer.
 * <a href="https://github.com/tqdm/tqdm" class="external-link" target="_blank"><code>tqdm</code></a>: a fast, extensible progress bar, alternative to Typer's own `typer.progressbar()`.
-* etc... you can re-use many of the great available tools for building CLIs.
+* etc... you can reuse many of the great available tools for building CLIs.
 
 ## License
 
