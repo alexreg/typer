@@ -19,9 +19,9 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.7"
       # Allow debugging with tmate
@@ -30,7 +30,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
         with:
           limit-access-to-actor: true
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cache
         with:
           path: ${{ env.pythonLocation }}
@@ -41,7 +41,7 @@ jobs:
       - name: Install docs extras
         if: steps.cache.outputs.cache-hit != 'true'
         run: python3.7 -m flit install --extras doc
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           key: mkdocs-cards-${{ github.ref }}-v1
           path: .cache
@@ -49,7 +49,7 @@ jobs:
         run: python3.7 -m mkdocs build
       - name: Zip docs
         run: bash ./scripts/zip-docs.sh
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: docs-zip
           path: ./docs.zip
