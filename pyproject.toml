@@ -8,32 +8,32 @@ readme = "README.md"
 requires-python = ">= 3.7"
 license = {file = "LICENSE"}
 authors = [
-    { name = "Sebastián Ramírez", email = "tiangolo@gmail.com" },
-    { name = "Alexander Regueiro", email = "alex@noldorin.com" },
+    {name = "Sebastián Ramírez", email = "tiangolo@gmail.com"},
+    {name = "Alexander Regueiro", email = "alex@noldorin.com"},
 ]
 maintainers = [
-    { name = "Alexander Regueiro", email = "alex@noldorin.com" },
+    {name = "Alexander Regueiro", email = "alex@noldorin.com"},
 ]
-keywords = ["shell", "cli", "terminal", "click", "cloup", "typer", "typehints"]
+keywords = ["cli", "click", "cloup", "shell", "terminal", "typer", "typehints"]
 classifiers = [
-    "Intended Audience :: Information Technology",
-    "Intended Audience :: System Administrators",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python",
-    "Topic :: Software Development :: Libraries :: Application Frameworks",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Software Development :: Libraries",
-    "Topic :: Software Development",
-    "Typing :: Typed",
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
 ]
 dependencies = [
     "cloup ~= 0.15.0",
@@ -51,11 +51,11 @@ test = [
     "coverage ~= 5.2",
     "docstring_parser ~= 0.15",
     "isort ~= 5.10.1",
-    "mypy == 0.950",
+    "mypy ~= 0.950",
     "pytest ~= 7.1.2",
     "pytest-cov ~= 3.0.0",
     "pytest-sugar ~= 0.9.4",
-    "pytest-xdist ~= 1.32.0",
+    "pytest-xdist ~= 2.1.0",
     "shellingham ~= 1.4.0",
 ]
 doc = [
@@ -64,7 +64,7 @@ doc = [
     "mkdocs-material ~= 8.1.11",
 ]
 dev = [
-    "autoflake ~= 1.4",
+    "autoflake ~= 1.4.0",
     "flake8 ~= 4.0.1",
     "pre-commit ~= 2.19.0",
 ]
