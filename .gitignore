@@ -1,14 +1,14 @@
-*.pyc
+__pycache__
 .coverage
 .coverage.*
 .idea
 .mypy_cache
 .pytest_cache
 .vscode
+*.pyc
 coverage.xml
 dist
 env
 env3.7
 htmlcov
 site
-__pycache__
