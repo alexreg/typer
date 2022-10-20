@@ -1,22 +1,22 @@
 <p align="center">
-  <a href="https://alexreg-typer.netlify.app"><img src="https://alexreg-typer.netlify.app/img/logo-margin/logo-margin-vector.svg" alt="Typer"></a>
+    <a href="https://alexreg-typer.netlify.app"><img src="https://alexreg-typer.netlify.app/img/logo-margin/logo-margin-vector.svg" alt="Typer"></a>
 </p>
 <p align="center">
     <em>Typer, build great CLIs. Easy to code. Based on Python type hints.</em>
 </p>
 <p align="center">
-<a href="https://github.com/alexreg/typer/actions?query=workflow%3ATest" target="_blank">
-    <img src="https://github.com/alexreg/typer/workflows/Test/badge.svg" alt="Test">
-</a>
-<a href="https://github.com/alexreg/typer/actions?query=workflow%3APublish" target="_blank">
-    <img src="https://github.com/alexreg/typer/workflows/Publish/badge.svg" alt="Publish">
-</a>
-<a href="https://codecov.io/gh/alexreg/typer" target="_blank">
-    <img src="https://img.shields.io/codecov/c/github/alexreg/typer?color=%2334D058" alt="Coverage">
-</a>
-<a href="https://pypi.org/project/typer" target="_blank">
-    <img src="https://img.shields.io/pypi/v/typer?color=%2334D058&label=pypi%20package" alt="Package version">
-</a>
+    <a href="https://github.com/alexreg/typer/actions?query=workflow%3ATest" target="_blank">
+        <img src="https://github.com/alexreg/typer/workflows/Test/badge.svg" alt="Test">
+    </a>
+    <a href="https://github.com/alexreg/typer/actions?query=workflow%3APublish" target="_blank">
+        <img src="https://github.com/alexreg/typer/workflows/Publish/badge.svg" alt="Publish">
+    </a>
+    <a href="https://codecov.io/gh/alexreg/typer" target="_blank">
+        <img src="https://img.shields.io/codecov/c/github/alexreg/typer?color=%2334D058" alt="Coverage">
+    </a>
+    <a href="https://pypi.org/project/typer" target="_blank">
+        <img src="https://img.shields.io/pypi/v/typer?color=%2334D058&label=pypi%20package" alt="Package version">
+    </a>
 </p>
 
 ---
