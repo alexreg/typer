@@ -47,11 +47,11 @@ def test_callback_too_many_parameters():
     app = typer.Typer()
 
     def name_callback(ctx, param, val1, val2):
-        pass  # pragma: nocover
+        pass  # pragma: no cover
 
     @app.command()
     def main(name: str = typer.Option(..., callback=name_callback)):
-        pass  # pragma: nocover
+        pass  # pragma: no cover
 
     with pytest.raises(click.ClickException) as exc_info:
         runner.invoke(app, ["--name", "Camila"])
@@ -182,7 +182,7 @@ def test_context_settings_inheritance_single_command():
 
     @app.command()
     def main(name: str):
-        pass  # pragma: nocover
+        pass  # pragma: no cover
 
     result = runner.invoke(app, ["main", "-h"])
     assert "Show this message and exit." in result.stdout

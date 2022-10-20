@@ -11,7 +11,7 @@ from .utils import get_params_from_function
 
 try:
     import shellingham
-except ImportError:  # pragma: nocover
+except ImportError:  # pragma: no cover
     shellingham = None
 
 

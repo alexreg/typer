@@ -19,7 +19,7 @@ another_group = OptionGroup("Another group")
 def main(
     foo: str = typer.Option(None, group=another_group),
 ):
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 def test_double_assignment():

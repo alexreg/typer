@@ -25,7 +25,7 @@ import cloup
 
 try:
     import docstring_parser
-except ImportError:  # pragma: nocover
+except ImportError:  # pragma: no cover
     docstring_parser = None  # type: ignore
 
 from .completion import get_completion_inspect_parameters

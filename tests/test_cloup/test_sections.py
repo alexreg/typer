@@ -19,7 +19,7 @@ section3 = Section("Examine the history and state (see also: git help revisions)
 
 @app.command(section=section1, help="Clone a repository into a new directory")
 def clone():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 @app.command(
@@ -27,43 +27,43 @@ def clone():
     help="Create an empty Git repository or reinitialize an existing one",
 )
 def init():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 @app.command(
     section=section2, help="Remove files from the working tree and from the index"
 )
 def rm():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 @app.command(section=section2, help="Initialize and modify the sparse-checkout")
 def sparse_checkout():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 @app.command(section=section2, help="Move or rename a file, a directory, or a symlink")
 def mv():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 @app.command(section=section3, help="Show the working tree status")
 def status():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 @app.command(
     section=section3, help="Show changes between commits, commit and working tree, etc"
 )
 def diff():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 @app.command(
     section=section3, help="Use binary search to find the commit that introduced a bug"
 )
 def bisect():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 # The following commands will be added to the "default section" (a sorted Section)
@@ -71,12 +71,12 @@ def bisect():
 
 @app.command(help="Fake command #2")
 def fake_2():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 @app.command(help="Fake command #1")
 def fake_1():
-    pass  # pragma: nocover
+    pass  # pragma: no cover
 
 
 def test_help():
