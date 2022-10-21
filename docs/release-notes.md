@@ -1,5 +1,25 @@
 ## Latest Changes
 
+### Fixes
+
+* 🐛 Allow *docutils* dependency to be absent
+
+### Docs
+
+* 📝 Do not prefix calls with `python -m` when unnecessary
+* 📝 Update copyright in license
+* ✏ Remove hyphen in main page / README
+* ✏ Fix indentation in main page / README
+
+### Internal
+
+* 🔧 Sort gitignore entries
+* 👷 Update versions of actions in GitHub workflows
+* 📝 Update project metadata
+* 🔧 Replace `pragma: nocover` with `pragma: no cover`
+* ✨ Use *docstring-parser* package to parse help text
+* 📝 Update package name in main page / README
+
 ## 0.5.0
 
 ### Features
