@@ -444,7 +444,7 @@ But you can also call Python with the `-m` *CLI Option* and pass a module for it
 <div class="termy">
 
 ```console
-$ python -m pip install fastapi
+$ pip install fastapi
 ```
 
 </div>

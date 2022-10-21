@@ -78,7 +78,7 @@ Install **Typer CLI**:
 <div class="termy">
 
 ```console
-$ python -m pip install typer-cli
+$ pip install typer-cli
 ---> 100%
 Successfully installed typer-cli
 ```
@@ -137,7 +137,7 @@ For it to work, you would also install **Typer**:
 <div class="termy">
 
 ```console
-$ python -m pip install typer
+$ pip install typer
 ---> 100%
 Successfully installed typer
 ```
