@@ -4,7 +4,6 @@ __pycache__
 .idea
 .mypy_cache
 .pytest_cache
-.vscode
 *.pyc
 coverage.xml
 dist
