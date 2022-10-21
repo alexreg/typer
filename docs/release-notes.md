@@ -1,5 +1,7 @@
 ## Latest Changes
 
+## 0.5.1
+
 ### Fixes
 
 * 🐛 Allow *docutils* dependency to be absent
