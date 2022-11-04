@@ -59,9 +59,11 @@ test = [
     "shellingham ~= 1.4.0",
 ]
 doc = [
+    "cairosvg ~= 2.5.2",
     "mdx-include ~= 1.4.1",
     "mkdocs ~= 1.2.4",
     "mkdocs-material ~= 8.1.11",
+    "pillow ~= 9.3.0",
 ]
 dev = [
     "autoflake ~= 1.4.0",

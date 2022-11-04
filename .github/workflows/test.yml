@@ -21,7 +21,8 @@ jobs:
       - name: Install Flit
         run: pip install flit
       - name: Install Dependencies
-        run: flit install --deps=develop --symlink
+        # run: flit install --deps=develop --symlink
+        run: python -m pip install ".[test]"
       - name: Lint
         run: bash scripts/lint.sh
       - name: Test
