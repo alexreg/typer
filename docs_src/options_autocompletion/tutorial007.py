@@ -1,3 +1,5 @@
+from typing import List
+
 import typer
 from click.shell_completion import CompletionItem
 
@@ -9,20 +11,26 @@ valid_completion_items = [
 
 
 def complete_name(ctx, param, incomplete):
+    names = ctx.params.get("name") or []
     completion = []
     for name, help_text in valid_completion_items:
-        if name.startswith(incomplete):
+        if name.startswith(incomplete) and name not in names:
             completion.append(CompletionItem(name, help=help_text))
     return completion
 
 
+app = typer.Typer()
+
+
+@app.command()
 def main(
-    name: str = typer.Option(
-        "World", help="The name to say hi to.", shell_complete=complete_name
+    name: List[str] = typer.Option(
+        ["World"], help="The name to say hi to.", shell_complete=complete_name
     )
 ):
-    typer.echo(f"Hello {name}")
+    for n in name:
+        typer.echo(f"Hello {n}")
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()

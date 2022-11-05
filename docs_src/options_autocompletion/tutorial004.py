@@ -16,6 +16,10 @@ def complete_name(ctx, param, incomplete):
     return completion
 
 
+app = typer.Typer()
+
+
+@app.command()
 def main(
     name: str = typer.Option(
         "World", help="The name to say hi to.", shell_complete=complete_name
@@ -25,4 +29,4 @@ def main(
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()

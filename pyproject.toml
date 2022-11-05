@@ -88,3 +88,17 @@ skip_glob = [
     "docs_src/subcommands/tutorial003/lands.py",
     "docs_src/subcommands/tutorial003/main.py",
 ]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--strict-config",
+    "--strict-markers",
+]
+xfail_strict = true
+junit_family = "xunit2"
+filterwarnings = [
+    "error",
+    'ignore:starlette.middleware.wsgi is deprecated and will be removed in a future release\..*:DeprecationWarning:starlette',
+    # For pytest-xdist
+    'ignore::DeprecationWarning:xdist',
+]
