@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* ✨ Make `typer.run()` not add completion scripts by default, it only makes sense in installed apps. PR [#488](https://github.com/tiangolo/typer/pull/488) by [@tiangolo](https://github.com/tiangolo).
 * ✨ Add support for Python 3.11, tests in CI and official marker. PR [#487](https://github.com/tiangolo/typer/pull/487) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Add note about how subcommands with function names using underscores are converted to dashes. PR [#403](https://github.com/tiangolo/typer/pull/403) by [@targhs](https://github.com/targhs).
 * 📝 Add docs for deprecating commands (tiangolo/typer#419)
