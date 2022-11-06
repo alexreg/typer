@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+* 👷 Fix formatting of GitHub workflows
+
 ## 0.6.0
 
 ### Features
