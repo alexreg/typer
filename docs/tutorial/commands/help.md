@@ -118,3 +118,54 @@ Commands:
 ```
 
 </div>
+
+## Deprecate a Command
+
+There could be cases where you have a command in your app that you need to deprecate, so that your users stop using it, even while it's still supported for a while.
+
+You can mark it with the parameter `deprecated=True`:
+
+```Python hl_lines="14"
+{!../docs_src/commands/help/tutorial003.py!}
+```
+
+And when you show the `--help` option you will see it's marked as "`deprecated`":
+
+<div class="termy">
+
+```console
+$ python main.py --help
+
+Usage: main.py [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  create  Create a user.
+  delete  (Deprecated) Delete a user.
+```
+
+</div>
+
+And if you check the `--help` for the deprecated command (in this example, the command `delete`), it also shows it as deprecated:
+
+<div class="termy">
+
+```console
+$ python main.py delete --help
+
+Usage: main.py delete [OPTIONS] USERNAME
+
+  (DEPRECATED) Delete a user.
+
+  This is deprecated and will stop being supported soon.
+
+Arguments:
+  USERNAME  [required]
+
+Options:
+  --help    Show this message and exit.
+```
+
+</div>
