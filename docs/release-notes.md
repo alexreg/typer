@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+## 0.6.0
+
 ### Features
 
 * ✨ Make `typer.run()` not add completion scripts by default, it only makes sense in installed apps. PR [#488](https://github.com/tiangolo/typer/pull/488) by [@tiangolo](https://github.com/tiangolo).
