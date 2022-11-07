@@ -153,6 +153,23 @@ def test_completion_untyped_parameters_different_order_correct_names():
     assert "Hello World" in result.stdout
 
 
+def test_autocompletion_too_many_parameters():
+    app = typer.Typer()
+
+    def name_callback(ctx, param, incomplete, val2):
+        pass  # pragma: nocover
+
+    @app.command()
+    def main(name: str = typer.Option(..., shell_complete=name_callback)):
+        pass  # pragma: nocover
+
+    with pytest.raises(click.ClickException) as exc_info:
+        runner.invoke(app, ["--name", "Camila"])
+    assert (
+        exc_info.value.message == "Invalid shell-completion callback parameters: val2"
+    )
+
+
 def test_forward_references():
     app = typer.Typer()
 
