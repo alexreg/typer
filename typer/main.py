@@ -375,7 +375,7 @@ class Typer:
 
 
 def process_help_text(command: click.Command) -> None:
-    if not docstring_parser:
+    if not docstring_parser:  # pragma: no cover
         return None
 
     if command.help is None:

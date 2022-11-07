@@ -18,7 +18,7 @@ app = typer.Typer(
 def main(
     arg: str = typer.Argument(..., help=ARG_HELP_TEXT),
 ):
-    pass
+    pass  # pragma: no cover
 
 
 def test_help_output():

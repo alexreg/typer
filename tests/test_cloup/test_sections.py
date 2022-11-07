@@ -9,7 +9,7 @@ app = typer.Typer(name="git", align_sections=True)
 
 def f(**kwargs):
     """Dummy command callback"""
-    print(**kwargs)
+    pass  # pragma: no cover
 
 
 section1 = Section("Start a working area (see also: git help tutorial)")

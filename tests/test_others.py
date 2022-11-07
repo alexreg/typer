@@ -55,10 +55,9 @@ def test_callback_too_many_parameters():
 
     with pytest.raises(click.ClickException) as exc_info:
         runner.invoke(app, ["--name", "Camila"])
-        assert (
-            exc_info.value.message
-            == "Too many CLI parameter callback function parameters"
-        )
+    assert (
+        exc_info.value.message == "Too many CLI parameter callback function parameters"
+    )
 
 
 def test_callback_2_untyped_parameters():
@@ -157,11 +156,11 @@ def test_autocompletion_too_many_parameters():
     app = typer.Typer()
 
     def name_callback(ctx, param, incomplete, val2):
-        pass  # pragma: nocover
+        pass  # pragma: no cover
 
     @app.command()
     def main(name: str = typer.Option(..., shell_complete=name_callback)):
-        pass  # pragma: nocover
+        pass  # pragma: no cover
 
     with pytest.raises(click.ClickException) as exc_info:
         runner.invoke(app, ["--name", "Camila"])

@@ -346,7 +346,7 @@ class TyperCommand(cloup.Command):
         def is_arg_hidden(arg: click.Argument) -> bool:
             if isinstance(arg, TyperArgument):
                 return arg.hidden
-            return False
+            return False  # pragma: no cover
 
         if all(is_arg_hidden(arg) for arg in self.arguments):
             return None

@@ -25,7 +25,7 @@ def main(
 def test_double_assignment():
     with pytest.raises(ValueError) as exc_info:
         runner.invoke(app, ["--foo", "foo"])
-        assert (
-            exc_info.value.message
-            == "<TyperOption foo>` was first assigned to `OptionGroup('Another group', options=[])` and then passed as argument to `@option_group('Some group', ...)"
-        )
+    assert (
+        exc_info.value.args[0]
+        == "`<TyperOption foo>` was first assigned to `OptionGroup('Another group', options=[])` and then passed as argument to `@option_group('Some group', ...)`"
+    )

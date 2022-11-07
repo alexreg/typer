@@ -86,7 +86,7 @@ _invalid_ident_char_re = re.compile(r"[^a-zA-Z0-9_]")
 def get_completion_script(*, prog_name: str, complete_var: str, shell: str) -> str:
     cf_name = _invalid_ident_char_re.sub("", prog_name.replace("-", "_"))
     script = _completion_scripts.get(shell)
-    if script is None:
+    if script is None:  # pragma: no cover
         click.echo(f"Shell {shell} not supported.", err=True)
         sys.exit(1)
     return (

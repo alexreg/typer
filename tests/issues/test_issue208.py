@@ -12,7 +12,7 @@ app = typer.Typer(
 
 @app.command()
 def main():
-    pass
+    pass  # pragma: no cover
 
 
 def test_help_short_option():

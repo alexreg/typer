@@ -3,7 +3,7 @@ import typer
 
 def name_callback(ctx: typer.Context, param: typer.CallbackParam, value: str):
     if ctx.resilient_parsing:
-        return
+        return  # pragma: no cover
     typer.echo(f"Validating param: {param.name}")
     if value != "Camila":
         raise typer.BadParameter("Only Camila is allowed")
