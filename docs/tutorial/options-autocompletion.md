@@ -319,7 +319,7 @@ Sebastian  -- The type hints guy.
 
 Of course, you can declare everything if you need it, the context, the raw *CLI parameters*, and the incomplete `str`:
 
-```Python hl_lines="13"
+```Python hl_lines="14"
 {!../docs_src/options_autocompletion/tutorial009.py!}
 ```
 

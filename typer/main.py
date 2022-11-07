@@ -1021,7 +1021,7 @@ def get_cloup_param(
                 expose_value=parameter_info.expose_value,
                 is_eager=parameter_info.is_eager,
                 envvar=parameter_info.envvar,
-                shell_complete=parameter_info.shell_complete,
+                shell_complete=get_param_completion(parameter_info.shell_complete),
             ),
             convertor,
         )
@@ -1052,6 +1052,7 @@ def get_cloup_param(
                 expose_value=parameter_info.expose_value,
                 is_eager=parameter_info.is_eager,
                 envvar=parameter_info.envvar,
+                shell_complete=get_param_completion(parameter_info.shell_complete),
             ),
             convertor,
         )
@@ -1117,16 +1118,15 @@ def get_param_completion(
         return None
     parameters = get_params_from_function(callback)
     ctx_name = None
-    args_name = None
+    param_name = None
     incomplete_name = None
     unassigned_params = [param for param in parameters.values()]
     for param_sig in unassigned_params[:]:
-        origin = getattr(param_sig.annotation, "__origin__", None)
         if lenient_issubclass(param_sig.annotation, click.Context):
             ctx_name = param_sig.name
             unassigned_params.remove(param_sig)
-        elif lenient_issubclass(origin, List):
-            args_name = param_sig.name
+        elif lenient_issubclass(param_sig.annotation, click.Parameter):
+            param_name = param_sig.name
             unassigned_params.remove(param_sig)
         elif lenient_issubclass(param_sig.annotation, str):
             incomplete_name = param_sig.name
@@ -1136,8 +1136,8 @@ def get_param_completion(
         if ctx_name is None and param_sig.name == "ctx":
             ctx_name = param_sig.name
             unassigned_params.remove(param_sig)
-        elif args_name is None and param_sig.name == "args":
-            args_name = param_sig.name
+        elif param_name is None and param_sig.name == "param":
+            param_name = param_sig.name
             unassigned_params.remove(param_sig)
         elif incomplete_name is None and param_sig.name == "incomplete":
             incomplete_name = param_sig.name
@@ -1149,12 +1149,14 @@ def get_param_completion(
             f"Invalid shell-completion callback parameters: {show_params}"
         )
 
-    def wrapper(ctx: click.Context, args: List[str], incomplete: Optional[str]) -> Any:
+    def wrapper(
+        ctx: click.Context, param: click.Parameter, incomplete: Optional[str]
+    ) -> Any:
         use_params: Dict[str, Any] = {}
         if ctx_name:
             use_params[ctx_name] = ctx
-        if args_name:
-            use_params[args_name] = args
+        if param_name:
+            use_params[param_name] = param
         if incomplete_name:
             use_params[incomplete_name] = incomplete
         return callback(**use_params)  # type: ignore

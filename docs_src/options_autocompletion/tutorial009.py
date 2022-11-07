@@ -1,5 +1,6 @@
 from typing import List
 
+import click
 import typer
 from click.shell_completion import CompletionItem
 
@@ -10,7 +11,7 @@ valid_completion_items = [
 ]
 
 
-def complete_name(ctx, param, incomplete):
+def complete_name(ctx: typer.Context, param: click.Parameter, incomplete: str):
     typer.echo(f"{ctx.args}", err=True)
     completion = []
     names = ctx.params.get("name") or []
