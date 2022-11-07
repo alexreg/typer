@@ -202,3 +202,78 @@ def test_context_settings_inheritance_single_command():
 
     result = runner.invoke(app, ["main", "-h"])
     assert "Show this message and exit." in result.stdout
+
+
+def test_help_defaults():
+    app = typer.Typer(context_settings=dict(auto_envvar_prefix="TEST"))
+
+    @app.command()
+    def main(
+        name: str = typer.Option("John"),
+        lastname: str = typer.Option("Doe", show_default="Mr. Doe"),
+        age: int = typer.Option(lambda: 42, show_default=True),
+    ):
+        pass  # pragma: no cover
+
+    result = runner.invoke(app, ["main", "--help"])
+    assert result.exit_code == 0
+    assert "John" in result.output
+    assert "Mr. Doe" in result.output
+    assert "(dynamic)" in result.output
+
+
+def test_help_auto_envvar_prefix():
+    app = typer.Typer(context_settings=dict(auto_envvar_prefix="TEST"))
+
+    @app.command()
+    def main(name: str = typer.Option(...)):
+        pass  # pragma: no cover
+
+    result = runner.invoke(app, ["main", "--help"])
+    assert result.exit_code == 0
+    assert "env var: TEST_NAME" in result.output
+
+
+def test_help_slash_option():
+    app = typer.Typer()
+
+    @app.command()
+    def main(name: str = typer.Option(..., "/name")):
+        pass  # pragma: no cover
+
+    result = runner.invoke(app, ["main", "--help"])
+    assert result.exit_code == 0
+    assert "/name TEXT" in result.output
+
+
+def test_help_hidden_option():
+    app = typer.Typer()
+
+    @app.command()
+    def main(
+        name: str = typer.Option(..., hidden=True),
+        lastname: str = typer.Option(...),
+    ):
+        pass  # pragma: no cover
+
+    result = runner.invoke(app, ["main", "--help"])
+    assert result.exit_code == 0
+    assert "--name" not in result.output
+    assert "lastname" in result.output
+
+
+def test_help_hidden_group():
+    app = typer.Typer()
+
+    @app.command()
+    def main(
+        name: str = typer.Argument(..., hidden=True),
+        lastname: str = typer.Argument(..., hidden=True),
+    ):
+        pass  # pragma: no cover
+
+    result = runner.invoke(app, ["main", "--help"])
+    assert result.exit_code == 0
+    assert "NAME" in result.output
+    assert "LASTNAME" in result.output
+    assert "Arguments:" not in result.output
