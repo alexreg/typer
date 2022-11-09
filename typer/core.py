@@ -11,6 +11,7 @@ from typing import (
     Optional,
     Sequence,
     Tuple,
+    Type,
     Union,
 )
 
@@ -20,6 +21,8 @@ import click.formatting
 import click.parser
 import click.types
 import cloup
+
+from .models import Context
 
 if TYPE_CHECKING:  # pragma: no cover
     import click.shell_completion
@@ -330,6 +333,8 @@ def _typer_main_shell_completion(
 
 
 class TyperCommand(cloup.Command):
+    context_class: Type[Context] = Context
+
     def _main_shell_completion(
         self,
         ctx_args: Dict[str, Any],
