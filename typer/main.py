@@ -14,7 +14,6 @@ from typing import (
     Sequence,
     Tuple,
     Type,
-    TypeVar,
     Union,
     cast,
 )
@@ -52,8 +51,6 @@ from .utils import get_params_from_function
 
 if TYPE_CHECKING:  # pragma: no cover
     from cloup.constraints import BoundConstraintSpec
-
-CallbackReturnType = TypeVar("CallbackReturnType")
 
 
 def get_install_completion_arguments() -> Tuple[click.Parameter, click.Parameter]:
@@ -152,10 +149,8 @@ class Typer:
         align_option_groups: Optional[bool] = Default(None),
         show_constraints: Optional[bool] = Default(None),
     ) -> Callable[[CommandFunctionType], CommandFunctionType]:
-        cloup.Command
-
         def decorator(f: CommandFunctionType) -> CommandFunctionType:
-            self.registered_callback = TyperInfo(
+            info = TyperInfo(
                 self,
                 name=name,
                 cls=cls,
@@ -179,6 +174,8 @@ class Typer:
                 align_option_groups=align_option_groups,
                 show_constraints=show_constraints,
             )
+            self.registered_callback = info
+            cast(Any, f)._typer_info = self
             return f
 
         return decorator
@@ -208,28 +205,28 @@ class Typer:
             cls = TyperCommand
 
         def decorator(f: CommandFunctionType) -> CommandFunctionType:
-            self.registered_commands.append(
-                CommandInfo(
-                    name=name,
-                    aliases=aliases,
-                    section=section,
-                    constraints=constraints,
-                    cls=cls,
-                    context_settings=context_settings,
-                    formatter_settings=formatter_settings,
-                    callback=f,
-                    help=help,
-                    epilog=epilog,
-                    short_help=short_help,
-                    options_metavar=options_metavar,
-                    add_help_option=add_help_option,
-                    no_args_is_help=no_args_is_help,
-                    hidden=hidden,
-                    deprecated=deprecated,
-                    align_option_groups=align_option_groups,
-                    show_constraints=show_constraints,
-                )
+            info = CommandInfo(
+                name=name,
+                aliases=aliases,
+                section=section,
+                constraints=constraints,
+                cls=cls,
+                context_settings=context_settings,
+                formatter_settings=formatter_settings,
+                callback=f,
+                help=help,
+                epilog=epilog,
+                short_help=short_help,
+                options_metavar=options_metavar,
+                add_help_option=add_help_option,
+                no_args_is_help=no_args_is_help,
+                hidden=hidden,
+                deprecated=deprecated,
+                align_option_groups=align_option_groups,
+                show_constraints=show_constraints,
             )
+            self.registered_commands.append(info)
+            cast(Any, f)._command_info = info
             return f
 
         return decorator
@@ -290,85 +287,47 @@ class Typer:
             )
         )
 
-    def _find_command_info(
-        self, callback: Callable[..., CallbackReturnType]
-    ) -> Optional["CommandInfo"]:
-        for reg_command_info in self.registered_commands:
-            if reg_command_info.callback == callback:
-                return reg_command_info
-        for group in self.registered_groups:
-            if group.typer_instance:
-                command_info = group.typer_instance._find_command_info(callback)
-                if command_info:
-                    return command_info
-        return None
-
-    def _find_typer_info(
-        self, callback: Callable[..., CallbackReturnType]
-    ) -> Optional["TyperInfo"]:
-        if self.registered_callback and self.registered_callback.callback == callback:
-            return self.registered_callback
-        for group in self.registered_groups:
-            if group.typer_instance:
-                typer_info = group.typer_instance._find_typer_info(callback)
-                if typer_info:
-                    return typer_info
-        return None
-
-    def _callback_to_click_command(
-        self, callback: Union[TyperCommand, Callable[..., CallbackReturnType]]
-    ) -> Optional[click.Command]:
-        """
-        Returns the `click.Command` object for a given callable, if it is registered under the given `Typer` nstance.
-
-        If the callback is not a registered command, just returns the callback.
-        """
-
-        command_info = self._find_command_info(callback)
-        if command_info:
-            return get_command_from_info(command_info)
-        else:
-            typer_info = self._find_typer_info(callback)
-            if typer_info:
-                typer_info.typer_instance = self
-                return get_group_from_info(typer_info)
-        return None
-
     def invoke(
         self,
-        callback: Union[TyperCommand, Callable[..., CallbackReturnType]],
+        callback: Callable[..., Any],
         *args: Any,
         **kwargs: Any,
-    ) -> CallbackReturnType:
+    ) -> Any:
         """
         Invokes a callable that is a registered command or subcommand of the given `Typer` instance.
 
         Other arguments are passed on to `click.Context.invoke`.
         """
 
-        command = self._callback_to_click_command(callback) or callback
+        info = getattr(callback, "_command_info", None)
+        if not info:
+            raise TypeError("callback is not a command")
+
+        command = get_command_from_info(info)
 
         ctx = click.get_current_context()
-        return cast(CallbackReturnType, ctx.invoke(command, *args, **kwargs))
+        return ctx.invoke(command, *args, **kwargs)
 
     def forward(
         self,
-        callback: Union[TyperCommand, Callable[..., CallbackReturnType]],
+        callback: Callable[..., Any],
         *args: Any,
         **kwargs: Any,
-    ) -> CallbackReturnType:
+    ) -> Any:
         """
         Forwards a callable that is a registered command or subcommand of the given `Typer` instance.
 
         Other arguments are passed on to `click.Context.forward`.
         """
 
-        command = self._callback_to_click_command(callback)
-        if not command:
+        info = getattr(callback, "_command_info", None)
+        if not info:
             raise TypeError("callback is not a command")
 
+        command = get_command_from_info(info)
+
         ctx = click.get_current_context()
-        return cast(CallbackReturnType, ctx.forward(command, *args, **kwargs))
+        return ctx.forward(command, *args, **kwargs)
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         return get_command(self)(*args, **kwargs)
