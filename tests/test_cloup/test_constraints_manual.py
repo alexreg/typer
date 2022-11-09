@@ -1,3 +1,5 @@
+from typing import *
+
 import typer
 from cloup.constraints import BoundConstraintSpec, RequireAtLeast, mutually_exclusive
 from typer.testing import CliRunner, columns_match
@@ -14,12 +16,16 @@ app = typer.Typer()
     )
 )
 def main(
-    foo: str = typer.Option(None, help="This text should describe the option --foo."),
-    bar: str = typer.Option(None, help="This text should describe the option --bar."),
-    pippo: str = typer.Option(
+    foo: Optional[str] = typer.Option(
+        None, help="This text should describe the option --foo."
+    ),
+    bar: Optional[str] = typer.Option(
+        None, help="This text should describe the option --bar."
+    ),
+    pippo: Optional[str] = typer.Option(
         None, help="This text should describe the option --pippo."
     ),
-    pluto: str = typer.Option(
+    pluto: Optional[str] = typer.Option(
         None, help="This text should describe the option --pluto."
     ),
 ):

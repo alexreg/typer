@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pytest
 import typer
 from cloup import OptionGroup

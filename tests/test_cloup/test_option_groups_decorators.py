@@ -1,3 +1,5 @@
+from typing import Optional
+
 import typer
 from cloup.constraints import RequireAtLeast, mutually_exclusive
 from typer import option_group

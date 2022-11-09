@@ -1,3 +1,5 @@
+from typing import Optional
+
 import typer
 from cloup import OptionGroup
 from cloup.constraints import RequireAtLeast, mutually_exclusive
@@ -20,16 +22,16 @@ opt_group_2 = OptionGroup(
 
 @app.command()
 def main(
-    foo: str = typer.Option(
+    foo: Optional[str] = typer.Option(
         None, group=opt_group_1, help="This text should describe the option --foo."
     ),
-    bar: str = typer.Option(
+    bar: Optional[str] = typer.Option(
         None, group=opt_group_1, help="This text should describe the option --bar."
     ),
-    pippo: str = typer.Option(
+    pippo: Optional[str] = typer.Option(
         None, group=opt_group_2, help="This text should describe the option --pippo."
     ),
-    pluto: str = typer.Option(
+    pluto: Optional[str] = typer.Option(
         None, group=opt_group_2, help="This text should describe the option --pluto."
     ),
 ):
