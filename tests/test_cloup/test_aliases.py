@@ -68,3 +68,26 @@ def test_rm():
     result = runner.invoke(app, ["rm", "foo"])
     assert result.exit_code == 0
     assert "uninstall: foo" in result.output
+
+
+def test_group():
+    app = typer.Typer(show_subcommand_aliases=True)
+    foo_app = typer.Typer(name="foo", aliases=["bar"], show_subcommand_aliases=True)
+
+    app.add_typer(foo_app)
+
+    @foo_app.command()
+    def main():
+        typer.echo("Hello World")
+
+    result = runner.invoke(app, ["--help"])
+    assert result.exit_code == 0
+    assert "foo (bar)" in result.stdout
+
+    result = runner.invoke(app, ["foo", "main"])
+    assert result.exit_code == 0
+    assert "Hello World" in result.stdout
+
+    result = runner.invoke(app, ["bar", "main"])
+    assert result.exit_code == 0
+    assert "Hello World" in result.stdout

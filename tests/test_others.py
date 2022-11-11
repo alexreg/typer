@@ -204,6 +204,53 @@ def test_context_settings_inheritance_single_command():
     assert "Show this message and exit." in result.stdout
 
 
+def test_invoke():
+    app = typer.Typer()
+    foo_app = typer.Typer(name="foo")
+
+    app.add_typer(foo_app)
+
+    @app.command()
+    def invoke():
+        app.invoke(hello)
+
+    @app.command()
+    def forward(name: str):
+        app.forward(hello)
+
+    @foo_app.command()
+    def hello(name: str = "World"):
+        typer.echo(f"Hello {name}")
+
+    result = runner.invoke(app, ["invoke"])
+    assert result.exit_code == 0
+    assert "Hello World" in result.stdout
+
+    result = runner.invoke(app, ["forward", "John"])
+    assert result.exit_code == 0
+    assert "Hello John" in result.stdout
+
+
+def test_invoke_callback_not_command():
+    app = typer.Typer()
+
+    @app.command()
+    def invoke():
+        app.invoke(None)
+
+    @app.command()
+    def forward(name: str):
+        app.forward(None)
+
+    with pytest.raises(TypeError) as exc_info:
+        runner.invoke(app, ["invoke"], catch_exceptions=False)
+    assert exc_info.value.args[0] == "callback is not a command"
+
+    with pytest.raises(TypeError) as exc_info:
+        runner.invoke(app, ["forward", "John"], catch_exceptions=False)
+    assert exc_info.value.args[0] == "callback is not a command"
+
+
 def test_help_defaults():
     app = typer.Typer(context_settings=dict(auto_envvar_prefix="TEST"))
 

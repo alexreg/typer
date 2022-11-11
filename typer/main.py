@@ -527,7 +527,6 @@ def get_group_from_info(group_info: TyperInfo) -> click.Group:
             align_sections=solved_info.align_sections,
             show_subcommand_aliases=solved_info.show_subcommand_aliases,
             constraints=get_constraints(
-                cls=cls,
                 callback=solved_info.callback,
                 constraints=solved_info.constraints,
             ),
@@ -631,7 +630,6 @@ def get_command_from_info(command_info: CommandInfo) -> click.Command:
     if issubclass(cls, cloup.Command):
         kwargs = dict(
             constraints=get_constraints(
-                cls=cls,
                 callback=command_info.callback,
                 constraints=command_info.constraints,
             ),
@@ -749,7 +747,6 @@ def get_callback(
 
 def get_constraints(
     *,
-    cls: Optional[Type[cloup.Command]] = None,
     callback: Optional[Callable[..., Any]] = None,
     constraints: Sequence["BoundConstraintSpec"] = (),
 ) -> Sequence["BoundConstraintSpec"]:
@@ -757,11 +754,6 @@ def get_constraints(
         return constraints
     callback_obj = cast(Any, callback)
     if hasattr(callback_obj, "__constraints"):
-        if cls and not issubclass(cls, cloup.ConstraintMixin):
-            raise TypeError(
-                f"a Command must inherit from `cloup.ConstraintMixin` to support "
-                f"constraints; {cls} doesn't"
-            )
         decorator_constraints = tuple(reversed(callback_obj.__constraints))
         return tuple(constraints) + decorator_constraints
 

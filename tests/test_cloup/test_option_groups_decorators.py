@@ -88,3 +88,17 @@ def test_too_few_options():
     assert "Error: at least 1 of the following parameters must be set:" in result.output
     assert "--pippo" in result.output
     assert "--pluto" in result.output
+
+
+def test_help_hidden_group():
+    app = typer.Typer()
+
+    @app.command()
+    @option_group("Some group", "foo", hidden=True)
+    def main(foo: Optional[str] = typer.Option(None)):
+        pass  # pragma: no cover
+
+    result = runner.invoke(app, ["--help"])
+    assert result.exit_code == 0
+    assert "Some group" not in result.stdout
+    assert "--foo" not in result.stdout
