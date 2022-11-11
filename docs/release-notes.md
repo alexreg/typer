@@ -2,6 +2,17 @@
 
 ## Latest Changes
 
+* ✅ Add tests for complete coverage
+* ✏ Improve error messages
+* ✨ Improve efficiency of `Typer.invoke` and `Typer.forward` methods
+* 🐛 Use `typer.Context` as command context class
+* 🔧 Fix type hints
+* ⬆️ Update *cloup* dependency to stable release
+* 🔥 Remove `tests/test_compat`
+* 🔧 Remove "Commit to Help" section from issue templates
+* ✅ Add `pragma: no cover` to various lines
+* 🐛 Restore accidentally removed test `test_others::test_autocompletion_too_many_parameters`
+* 🐛 Fix `get_param_completion` function
 * 👷 Fix formatting of GitHub workflows
 
 ## 0.6.0
