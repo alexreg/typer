@@ -596,7 +596,7 @@ def get_params_convertors_ctx_param_name_from_function(
                 for param_name in opt_group_params:
                     option = params.get(param_name, None)
                     if option is None:
-                        raise ValueError("{param} is not a parameter")
+                        raise ValueError(f"`{param_name}` is not a parameter")
                     if not isinstance(option, click.Option):
                         raise TypeError(
                             "only parameter of type `Option` can be added to option groups"
@@ -901,7 +901,7 @@ def get_cloup_param(
                 if type_ is NoneType:
                     continue
                 types.append(type_)
-            assert len(types) == 1, "Typer Currently doesn't support Union types"
+            assert len(types) == 1, "Typer currently doesn't support `Union` types"
             main_type = types[0]
             origin = getattr(main_type, "__origin__", None)
         # Handle Tuples and Lists
