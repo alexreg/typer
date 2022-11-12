@@ -2,22 +2,30 @@
 
 ## Latest Changes
 
-* ✏️ Fix typo in datetime docs. PR [#495](https://github.com/tiangolo/typer/pull/495) by [@huxuan](https://github.com/huxuan).
-* ⬆ Bump dawidd6/action-download-artifact from 2.24.1 to 2.24.2. PR [#494](https://github.com/tiangolo/typer/pull/494) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* ⬆ Bump dawidd6/action-download-artifact from 2.9.0 to 2.24.1. PR [#491](https://github.com/tiangolo/typer/pull/491) by [@dependabot[bot]](https://github.com/apps/dependabot).
-* 👷‍♂️ Ensure the `PYTHONPATH` is set properly when testing the tutorial scripts. PR [#407](https://github.com/tiangolo/typer/pull/407) by [@theMarix](https://github.com/theMarix).
-* ✏️ Add quotes to package name that includes brackets in docs. PR [#475](https://github.com/tiangolo/typer/pull/475) by [@gjolga](https://github.com/gjolga).
-* ✅ Add tests for complete coverage
+### Fixes
+
 * ✏ Improve error messages
 * ✨ Improve efficiency of `Typer.invoke` and `Typer.forward` methods
 * 🐛 Use `typer.Context` as command context class
 * 🔧 Fix type hints
-* ⬆️ Update *cloup* dependency to stable release
+* 🐛 Restore accidentally removed test `test_others::test_autocompletion_too_many_parameters`
+* 🐛 Fix `get_param_completion` function
+
+### Docs
+
+* ✏️ Fix typo in datetime docs. PR [#495](https://github.com/tiangolo/typer/pull/495) by [@huxuan](https://github.com/huxuan).
+* ✏️ Add quotes to package name that includes brackets in docs. PR [#475](https://github.com/tiangolo/typer/pull/475) by [@gjolga](https://github.com/gjolga).
+
+### Internal
+
+* ⬆ Bump dawidd6/action-download-artifact from 2.24.1 to 2.24.2. PR [#494](https://github.com/tiangolo/typer/pull/494) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* ⬆ Bump dawidd6/action-download-artifact from 2.9.0 to 2.24.1. PR [#491](https://github.com/tiangolo/typer/pull/491) by [@dependabot[bot]](https://github.com/apps/dependabot).
+* 👷‍♂️ Ensure the `PYTHONPATH` is set properly when testing the tutorial scripts. PR [#407](https://github.com/tiangolo/typer/pull/407) by [@theMarix](https://github.com/theMarix).
+* ✅ Add tests for complete coverage
+* ⬆️ Update dependency *cloup* to 1.0.0
 * 🔥 Remove `tests/test_compat`
 * 🔧 Remove "Commit to Help" section from issue templates
 * ✅ Add `pragma: no cover` to various lines
-* 🐛 Restore accidentally removed test `test_others::test_autocompletion_too_many_parameters`
-* 🐛 Fix `get_param_completion` function
 * 👷 Fix formatting of GitHub workflows
 
 ## 0.6.0
