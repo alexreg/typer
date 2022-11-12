@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+## 0.7.0
+
 ### Fixes
 
 * ✏ Improve error messages
