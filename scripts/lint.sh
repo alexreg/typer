@@ -1,7 +1,4 @@
-#!/usr/bin/env bash
-
-set -e
-set -x
+#!/usr/bin/env bash -ex
 
 mypy --install-types --non-interactive typer
 black typer tests docs_src --check

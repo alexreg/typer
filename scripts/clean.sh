@@ -1,8 +1,8 @@
-#!/bin/sh -e
+#!/usr/bin/env bash -e
 
-if [ -d 'dist' ] ; then
+if [[ -d 'dist' ]]; then
     rm -r dist
 fi
-if [ -d 'site' ] ; then
+if [[ -d 'site' ]]; then
     rm -r site
 fi

@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -ex
 
-set -e
-set -x
-
-bash scripts/test.sh --cov-report=html ${@}
+./scripts/test.sh --cov-report=html "$@"

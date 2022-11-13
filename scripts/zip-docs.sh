@@ -1,9 +1,6 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash -ex
 
-set -x
-set -e
-
-if [ -f docs.zip ]; then
+if [[ -f docs.zip ]]; then
     rm -rf docs.zip
 fi
 zip -r docs.zip ./site
