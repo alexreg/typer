@@ -753,8 +753,8 @@ def get_constraints(
     if not callback:
         return constraints
     callback_obj = cast(Any, callback)
-    if hasattr(callback_obj, "__constraints"):
-        decorator_constraints = tuple(reversed(callback_obj.__constraints))
+    if hasattr(callback_obj, "__cloup_constraints__"):
+        decorator_constraints = tuple(reversed(callback_obj.__cloup_constraints__))
         return tuple(constraints) + decorator_constraints
 
     return constraints

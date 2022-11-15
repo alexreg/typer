@@ -37,7 +37,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "cloup ~= 1.0.0",
+    "cloup ~= 2.0.0",
 ]
 dynamic = ["version", "description"]
 
