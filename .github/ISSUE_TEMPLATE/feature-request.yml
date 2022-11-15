@@ -50,7 +50,7 @@ body:
         If I (or someone) can copy it, run it, and see it right away, there's a much higher chance I (or someone) will be able to help you.
 
       placeholder: |
-        import typer
+        import typer_cloup as typer
 
 
         def main(name: str):
@@ -92,7 +92,7 @@ body:
       label: Wanted Code
       description: Show me an example of how you would want the code to look like.
       placeholder: |
-        import typer
+        import typer_cloup as typer
 
 
         def main(name: str):
@@ -140,7 +140,7 @@ body:
         You can find the Typer version with:
 
         ```bash
-        python -c "import typer; print(typer.__version__)"
+        python -c "import typer_cloup as typer; print(typer.__version__)"
         ```
     validations:
       required: true

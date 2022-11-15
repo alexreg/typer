@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-import typer
+import typer_cloup as typer
 
 
 def main(user: Optional[List[str]] = typer.Option(None)):

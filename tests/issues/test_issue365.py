@@ -1,5 +1,5 @@
-import typer
-from typer.testing import CliRunner
+import typer_cloup as typer
+from typer_cloup.testing import CliRunner
 
 TERMINAL_WIDTH = 800
 ARG_HELP_TEXT = "This is an argument with a very long help text. " * 10

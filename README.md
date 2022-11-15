@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://alexreg-typer.netlify.app"><img src="https://alexreg-typer.netlify.app/img/logo-margin/logo-margin-vector.svg" alt="Typer"></a>
+    <a href="https://typer-cloup.netlify.app"><img src="https://typer-cloup.netlify.app/img/logo-margin/logo-margin-vector.svg" alt="Typer"></a>
 </p>
 <p align="center">
     <em>Typer, build great CLIs. Easy to code. Based on Python type hints.</em>
@@ -20,7 +20,7 @@
 
 ---
 
-**Documentation**: <a href="https://alexreg-typer.netlify.app" target="_blank">https://alexreg-typer.netlify.app</a>
+**Documentation**: <a href="https://typer-cloup.netlify.app" target="_blank">https://typer-cloup.netlify.app</a>
 
 **Source Code**: <a href="https://github.com/alexreg/typer" target="_blank">https://github.com/alexreg/typer</a>
 
@@ -69,7 +69,7 @@ Successfully installed typer-cloup
 * Create a file `main.py` with:
 
 ```Python
-import typer
+import typer_cloup as typer
 
 
 def main(name: str):
@@ -121,7 +121,7 @@ Hello Camila
 
 </div>
 
-**Note**: auto-completion works when you create a Python package and run it with `--install-completion` or when you use <a href="https://alexreg-typer.netlify.app/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
+**Note**: auto-completion works when you create a Python package and run it with `--install-completion` or when you use <a href="https://typer-cloup.netlify.app/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
 
 ## Example upgrade
 
@@ -136,7 +136,7 @@ Modify the file `main.py`.
 Create a `typer.Typer()` app, and create two subcommands with their parameters.
 
 ```Python hl_lines="3  6  11  20"
-import typer
+import typer_cloup as typer
 
 app = typer.Typer()
 
@@ -260,9 +260,9 @@ And similarly for **files**, **paths**, **enums** (choices), etc. And there are 
 
 **You get**: great editor support, including **completion** and **type checks** everywhere.
 
-**Your users get**: automatic **`--help`**, **auto-completion** in their terminal (Bash, Zsh, Fish, PowerShell) when they install your package or when using <a href="https://alexreg-typer.netlify.app/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
+**Your users get**: automatic **`--help`**, **auto-completion** in their terminal (Bash, Zsh, Fish, PowerShell) when they install your package or when using <a href="https://typer-cloup.netlify.app/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
 
-For a more complete example including more features, see the <a href="https://alexreg-typer.netlify.app/tutorial/">Tutorial - User Guide</a>.
+For a more complete example including more features, see the <a href="https://typer-cloup.netlify.app/tutorial/">Tutorial - User Guide</a>.
 
 ## Optional Dependencies
 

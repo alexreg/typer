@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Optional
 
-import typer
+import typer_cloup as typer
 
 
 def main(config: Optional[Path] = typer.Option(None)):

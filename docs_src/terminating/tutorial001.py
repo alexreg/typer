@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 existing_usernames = ["rick", "morty"]
 

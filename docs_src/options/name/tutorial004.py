@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 
 def main(user_name: str = typer.Option(..., "--user-name", "-n")):

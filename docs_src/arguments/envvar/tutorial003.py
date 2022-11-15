@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 
 def main(name: str = typer.Argument("World", envvar="AWESOME_NAME", show_envvar=False)):

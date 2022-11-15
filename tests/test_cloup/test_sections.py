@@ -1,6 +1,7 @@
-import typer
 from cloup import Section
-from typer.testing import CliRunner, columns_match
+
+import typer_cloup as typer
+from typer_cloup.testing import CliRunner, columns_match
 
 runner = CliRunner()
 

@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 app = typer.Typer(help="Awesome CLI user manager.")
 

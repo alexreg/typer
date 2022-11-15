@@ -1,6 +1,6 @@
 from uuid import UUID
 
-import typer
+import typer_cloup as typer
 
 
 def main(user_id: UUID):

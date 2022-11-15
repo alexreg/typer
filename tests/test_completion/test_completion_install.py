@@ -4,10 +4,10 @@ from pathlib import Path
 from unittest import mock
 
 import shellingham
-import typer
-from typer.testing import CliRunner
 
+import typer_cloup as typer
 from docs_src.commands.index import tutorial001 as mod
+from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
 app = typer.Typer()

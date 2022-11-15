@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 import items
 import lands

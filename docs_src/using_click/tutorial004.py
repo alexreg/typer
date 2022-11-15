@@ -1,5 +1,6 @@
 import click
-import typer
+
+import typer_cloup as typer
 
 
 @click.group()

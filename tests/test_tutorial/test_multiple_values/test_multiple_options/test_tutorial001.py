@@ -1,9 +1,8 @@
 import subprocess
 
-import typer
-from typer.testing import CliRunner
-
+import typer_cloup as typer
 from docs_src.multiple_values.multiple_options import tutorial001 as mod
+from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
 app = typer.Typer()

@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
 
-import typer
+import typer_cloup as typer
 
 
 def main(files: List[Path], celebration: str):

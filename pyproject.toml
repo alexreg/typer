@@ -43,7 +43,7 @@ dynamic = ["version", "description"]
 
 [project.urls]
 homepage = "https://github.com/alexreg/typer"
-documentation = "https://alexreg-typer.netlify.app"
+documentation = "https://typer-cloup.netlify.app"
 repository = "https://github.com/alexreg/typer"
 
 [project.optional-dependencies]
@@ -78,7 +78,7 @@ all = [
 ]
 
 [tool.flit.module]
-name = "typer"
+name = "typer_cloup"
 
 [tool.isort]
 profile = "black"

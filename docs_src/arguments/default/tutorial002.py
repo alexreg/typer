@@ -1,6 +1,6 @@
 import random
 
-import typer
+import typer_cloup as typer
 
 
 def get_name():

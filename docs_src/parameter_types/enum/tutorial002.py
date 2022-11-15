@@ -1,6 +1,6 @@
 from enum import Enum
 
-import typer
+import typer_cloup as typer
 
 
 class NeuralNetwork(str, Enum):

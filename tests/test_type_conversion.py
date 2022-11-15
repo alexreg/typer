@@ -3,8 +3,9 @@ from pathlib import Path
 from typing import List, Optional, Tuple
 
 import pytest
-import typer
-from typer.testing import CliRunner
+
+import typer_cloup as typer
+from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
 

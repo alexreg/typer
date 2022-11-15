@@ -1,4 +1,4 @@
-from typer.testing import CliRunner
+from typer_cloup.testing import CliRunner
 
 from .main import app
 

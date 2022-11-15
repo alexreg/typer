@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 
 def main(verbose: int = typer.Option(0, "--verbose", "-v", count=True)):

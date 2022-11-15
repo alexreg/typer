@@ -1,8 +1,9 @@
 from typing import *
 
-import typer
 from cloup.constraints import BoundConstraintSpec, RequireAtLeast, mutually_exclusive
-from typer.testing import CliRunner, columns_match
+
+import typer_cloup as typer
+from typer_cloup.testing import CliRunner, columns_match
 
 runner = CliRunner()
 

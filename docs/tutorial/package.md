@@ -112,7 +112,7 @@ Now let's create an extremely simple **Typer** app.
 Create a file `rick_portal_gun/main.py` with:
 
 ```Python
-import typer
+import typer_cloup as typer
 
 
 app = typer.Typer()

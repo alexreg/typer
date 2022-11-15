@@ -1,6 +1,6 @@
 from typing import Optional
 
-import typer
+import typer_cloup as typer
 
 __version__ = "0.1.0"
 

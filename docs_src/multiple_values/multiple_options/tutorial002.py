@@ -1,6 +1,6 @@
 from typing import List
 
-import typer
+import typer_cloup as typer
 
 
 def main(number: List[float] = typer.Option([])):

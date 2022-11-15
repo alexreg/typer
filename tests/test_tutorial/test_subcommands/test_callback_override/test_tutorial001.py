@@ -1,8 +1,7 @@
 import subprocess
 
-from typer.testing import CliRunner
-
 from docs_src.subcommands.callback_override import tutorial001 as mod
+from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
 

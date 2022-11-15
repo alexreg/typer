@@ -1,10 +1,9 @@
 import os
 import subprocess
 
-import typer
-from typer.testing import CliRunner
-
+import typer_cloup as typer
 from docs_src.options.callback import tutorial003 as mod
+from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
 

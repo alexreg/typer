@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 
 def main(fullname: str = typer.Option("Wade Wilson", show_default=False)):

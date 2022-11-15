@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import typer
+import typer_cloup as typer
 
 
 def main(

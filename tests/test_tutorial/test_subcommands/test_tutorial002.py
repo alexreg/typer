@@ -1,8 +1,7 @@
 import subprocess
 
-from typer.testing import CliRunner
-
 from docs_src.subcommands.tutorial002 import main as mod
+from typer_cloup.testing import CliRunner
 
 app = mod.app
 runner = CliRunner()

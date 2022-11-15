@@ -6,11 +6,11 @@ from unittest import mock
 import click
 import pytest
 import shellingham
-import typer
-import typer.completion
-from typer.main import solve_typer_info_defaults, solve_typer_info_help
-from typer.models import TyperInfo
-from typer.testing import CliRunner
+
+import typer_cloup as typer
+from typer_cloup.main import solve_typer_info_defaults, solve_typer_info_help
+from typer_cloup.models import TyperInfo
+from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
 

@@ -1,6 +1,6 @@
 from typing import Optional
 
-import typer
+import typer_cloup as typer
 
 
 def main(name: Optional[str] = typer.Argument(None)):

@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 
 def complete_name(ctx, param, incomplete):

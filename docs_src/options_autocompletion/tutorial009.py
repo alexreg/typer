@@ -1,8 +1,9 @@
 from typing import List
 
 import click
-import typer
 from click.shell_completion import CompletionItem
+
+import typer_cloup as typer
 
 valid_completion_items = [
     ("Camila", "The reader of books."),

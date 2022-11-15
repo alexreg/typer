@@ -29,7 +29,7 @@ You can also use **Typer CLI** to generate Markdown documentation for your own *
 
 ---
 
-**Documentation**: <a href="https://alexreg-typer.netlify.app/typer-cli/" target="_blank">https://alexreg-typer.netlify.app/typer-cli/</a>
+**Documentation**: <a href="https://typer-cloup.netlify.app/typer-cli/" target="_blank">https://typer-cloup.netlify.app/typer-cli/</a>
 
 **Source Code for Typer CLI**: <a href="https://github.com/alexreg/typer-cli" target="_blank">https://github.com/alexreg/typer-cli</a>
 
@@ -42,7 +42,7 @@ You can also use **Typer CLI** to generate Markdown documentation for your own *
 You use **Typer** in your Python scripts. Like in:
 
 ```Python
-import typer
+import typer_cloup as typer
 
 
 def main():
@@ -107,7 +107,7 @@ Let's say you have a script that uses **Typer** in `my_custom_script.py`:
 ```Python
 from typing import Optional
 
-import typer
+import typer_cloup as typer
 
 app = typer.Typer()
 

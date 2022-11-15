@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 
 def main(project_name: str = typer.Option(..., prompt=True, confirmation_prompt=True)):

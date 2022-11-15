@@ -2,9 +2,9 @@ import os
 import subprocess
 
 import pytest
-from typer.testing import CliRunner
 
 from docs_src.subcommands import tutorial001
+from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
 

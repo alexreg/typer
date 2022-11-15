@@ -1,10 +1,11 @@
 from typing import Optional
 
 import pytest
-import typer
 from cloup import OptionGroup
-from typer import option_group
-from typer.testing import CliRunner
+
+import typer_cloup as typer
+from typer_cloup import option_group
+from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
 

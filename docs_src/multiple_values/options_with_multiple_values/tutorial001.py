@@ -1,6 +1,6 @@
 from typing import Tuple
 
-import typer
+import typer_cloup as typer
 
 
 def main(user: Tuple[str, int, bool] = typer.Option((None, None, None))):

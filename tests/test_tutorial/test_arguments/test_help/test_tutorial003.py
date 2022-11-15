@@ -1,9 +1,8 @@
 import subprocess
 
-import typer
-from typer.testing import CliRunner, columns_match
-
+import typer_cloup as typer
 from docs_src.arguments.help import tutorial003 as mod
+from typer_cloup.testing import CliRunner, columns_match
 
 runner = CliRunner()
 

@@ -1,4 +1,4 @@
-import typer
+import typer_cloup as typer
 
 
 def main(name: str, age: int = 20, height_meters: float = 1.89, female: bool = True):
