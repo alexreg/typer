@@ -9,8 +9,9 @@ on:
     inputs:
       debug_enabled:
         description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        type: boolean
         required: false
-        default: 'false'
+        default: false
 jobs:
   build-docs:
     runs-on: ubuntu-20.04
