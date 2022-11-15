@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+## 0.8.0
+
 ### Features
 
 * 🔧 Rename package module to `typer_cloup`
