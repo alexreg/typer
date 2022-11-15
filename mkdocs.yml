@@ -14,7 +14,7 @@ theme:
   favicon: img/favicon.png
 
 repo_name: alexreg/typer
-repo_url: https://github.com/alexreg/typer
+repo_url: https://github.com/alexreg/typer-cloup
 edit_uri: ""
 
 nav:
@@ -109,7 +109,7 @@ extra:
     property: UA-133183413-1
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/alexreg/typer
+      link: https://github.com/alexreg/typer-cloup
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/tiangolo
     - icon: fontawesome/brands/linkedin

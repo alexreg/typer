@@ -5,11 +5,11 @@
     <em>Typer, build great CLIs. Easy to code. Based on Python type hints.</em>
 </p>
 <p align="center">
-    <a href="https://github.com/alexreg/typer/actions?query=workflow%3ATest" target="_blank">
-        <img src="https://github.com/alexreg/typer/workflows/Test/badge.svg" alt="Test">
+    <a href="https://github.com/alexreg/typer-cloup/actions?query=workflow%3ATest" target="_blank">
+        <img src="https://github.com/alexreg/typer-cloup/workflows/Test/badge.svg" alt="Test">
     </a>
-    <a href="https://github.com/alexreg/typer/actions?query=workflow%3APublish" target="_blank">
-        <img src="https://github.com/alexreg/typer/workflows/Publish/badge.svg" alt="Publish">
+    <a href="https://github.com/alexreg/typer-cloup/actions?query=workflow%3APublish" target="_blank">
+        <img src="https://github.com/alexreg/typer-cloup/workflows/Publish/badge.svg" alt="Publish">
     </a>
     <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/alexreg/typer" target="_blank">
         <img src="https://coverage-badge.samuelcolvin.workers.dev/alexreg/typer.svg" alt="Coverage">
@@ -22,7 +22,7 @@
 
 **Documentation**: <a href="https://typer-cloup.netlify.app" target="_blank">https://typer-cloup.netlify.app</a>
 
-**Source Code**: <a href="https://github.com/alexreg/typer" target="_blank">https://github.com/alexreg/typer</a>
+**Source Code**: <a href="https://github.com/alexreg/typer-cloup" target="_blank">https://github.com/alexreg/typer-cloup</a>
 
 ---
 

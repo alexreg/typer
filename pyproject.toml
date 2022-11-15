@@ -42,9 +42,9 @@ dependencies = [
 dynamic = ["version", "description"]
 
 [project.urls]
-homepage = "https://github.com/alexreg/typer"
+homepage = "https://github.com/alexreg/typer-cloup"
 documentation = "https://typer-cloup.netlify.app"
-repository = "https://github.com/alexreg/typer"
+repository = "https://github.com/alexreg/typer-cloup"
 
 [project.optional-dependencies]
 test = [

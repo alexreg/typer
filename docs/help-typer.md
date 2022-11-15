@@ -10,13 +10,13 @@ And there are several ways to get help too.
 
 ## Star **Typer** in GitHub
 
-You can "star" Typer in GitHub (clicking the star button at the top right): <a href="https://github.com/alexreg/typer" class="external-link" target="_blank">https://github.com/alexreg/typer</a>.
+You can "star" Typer in GitHub (clicking the star button at the top right): <a href="https://github.com/alexreg/typer-cloup" class="external-link" target="_blank">https://github.com/alexreg/typer-cloup</a>.
 
 By adding a star, other users will be able to find it more easily and see that it has been already useful for others.
 
 ## Watch the GitHub repository for releases
 
-You can "watch" Typer in GitHub (clicking the "watch" button at the top right): <a href="https://github.com/alexreg/typer" class="external-link" target="_blank">https://github.com/alexreg/typer</a>.
+You can "watch" Typer in GitHub (clicking the "watch" button at the top right): <a href="https://github.com/alexreg/typer-cloup" class="external-link" target="_blank">https://github.com/alexreg/typer-cloup</a>.
 
 There you can select "Releases only".
 
@@ -24,11 +24,11 @@ Doing it, you will receive notifications (in your email) whenever there's a new 
 
 ## Help others with issues in GitHub
 
-You can see <a href="https://github.com/alexreg/typer/issues" class="external-link" target="_blank">existing issues</a> and try and help others.
+You can see <a href="https://github.com/alexreg/typer-cloup/issues" class="external-link" target="_blank">existing issues</a> and try and help others.
 
 ## Watch the GitHub repository
 
-You can "watch" Typer in GitHub (clicking the "watch" button at the top right): <a href="https://github.com/alexreg/typer" class="external-link" target="_blank">https://github.com/alexreg/typer</a>.
+You can "watch" Typer in GitHub (clicking the "watch" button at the top right): <a href="https://github.com/alexreg/typer-cloup" class="external-link" target="_blank">https://github.com/alexreg/typer-cloup</a>.
 
 If you select "Watching" instead of "Releases only", you will receive notifications when someone creates a new issue.
 
@@ -36,7 +36,7 @@ Then you can try and help them solving those issues.
 
 ## Create issues
 
-You can <a href="https://github.com/alexreg/typer/issues/new/choose" class="external-link" target="_blank">create a new issue</a> in the GitHub repository, for example to:
+You can <a href="https://github.com/alexreg/typer-cloup/issues/new/choose" class="external-link" target="_blank">create a new issue</a> in the GitHub repository, for example to:
 
 * Report a bug/issue.
 * Suggest a new feature.
@@ -44,7 +44,7 @@ You can <a href="https://github.com/alexreg/typer/issues/new/choose" class="exte
 
 ## Create a Pull Request
 
-You can <a href="https://github.com/alexreg/typer" class="external-link" target="_blank">create a Pull Request</a>, for example:
+You can <a href="https://github.com/alexreg/typer-cloup" class="external-link" target="_blank">create a Pull Request</a>, for example:
 
 * To fix a typo you found on the documentation.
 * To propose new documentation sections.
