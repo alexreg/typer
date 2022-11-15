@@ -2,6 +2,20 @@
 
 ## Latest Changes
 
+### Features
+
+* 🔧 Rename package module to `typer_cloup`
+
+### Docs
+
+* 🐛 Fix links in docs
+
+### Internal
+
+* 👷 Fix definitions of manual inputs in GitHub workflows
+* ⬆️ Update dependency *cloup* to 2.0.0
+* 🔧 Update scripts
+
 ## 0.7.0
 
 ### Fixes
