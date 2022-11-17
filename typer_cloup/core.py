@@ -376,13 +376,5 @@ class TyperCommand(cloup.Command):
         return default_group
 
 
-class TyperGroup(cloup.Group):
-    def _main_shell_completion(
-        self,
-        ctx_args: Dict[str, Any],
-        prog_name: str,
-        complete_var: Optional[str] = None,
-    ) -> None:
-        _typer_main_shell_completion(
-            self, ctx_args=ctx_args, prog_name=prog_name, complete_var=complete_var
-        )
+class TyperGroup(TyperCommand, cloup.Group):
+    context_class: Type[Context] = Context
