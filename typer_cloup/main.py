@@ -55,8 +55,8 @@ if TYPE_CHECKING:  # pragma: no cover
 
 def get_install_completion_arguments() -> Tuple[click.Parameter, click.Parameter]:
     install_param, show_param = get_completion_inspect_parameters()
-    click_install_param, _ = get_cloup_param(install_param)
-    click_show_param, _ = get_cloup_param(show_param)
+    click_install_param, _ = get_click_param(install_param)
+    click_show_param, _ = get_click_param(show_param)
     return click_install_param, click_show_param
 
 
@@ -575,7 +575,7 @@ def get_command_name(name: str) -> str:
 
 def get_params_convertors_ctx_param_name_from_function(
     callback: Optional[Callable[..., Any]]
-) -> Tuple[List[Union[cloup.Argument, cloup.Option]], Dict[str, Any], Optional[str]]:
+) -> Tuple[List[Union[click.Argument, click.Option]], Dict[str, Any], Optional[str]]:
     params = {}
     convertors = {}
     context_param_name = None
@@ -585,7 +585,7 @@ def get_params_convertors_ctx_param_name_from_function(
             if lenient_issubclass(param.annotation, click.Context):
                 context_param_name = param_name
                 continue
-            click_param, convertor = get_cloup_param(param)
+            click_param, convertor = get_click_param(param)
             if convertor:
                 convertors[param_name] = convertor
             params[param_name] = click_param
@@ -853,9 +853,9 @@ def lenient_issubclass(
     return isinstance(cls, type) and issubclass(cls, class_or_tuple)
 
 
-def get_cloup_param(
+def get_click_param(
     param: ParamMeta,
-) -> Tuple[Union[cloup.Argument, cloup.Option], Any]:
+) -> Tuple[Union[click.Argument, click.Option], Any]:
     # First, find out what will be:
     # * ParamInfo (ArgumentInfo or OptionInfo)
     # * default_value
