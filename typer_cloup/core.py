@@ -8,6 +8,7 @@ from typing import (
     Callable,
     Dict,
     List,
+    Mapping,
     Optional,
     Sequence,
     Tuple,
@@ -28,11 +29,29 @@ if TYPE_CHECKING:  # pragma: no cover
     import click.shell_completion
 
 
-class TyperArgument(cloup.Argument):
+class TyperParameterMixin(click.Parameter):
+    convertor: Optional[Any] = None
+
+    def __init__(self, convertor: Optional[Any] = None, *args: Any, **kwargs: Any):
+        super().__init__(*args, **kwargs)
+        self.convertor = convertor
+
+    def handle_parse_result(
+        self, ctx: click.Context, opts: Mapping[str, Any], args: List[str]
+    ) -> Tuple[Any, List[str]]:
+        value, args = super().handle_parse_result(ctx, opts, args)
+
+        if self.convertor and self.expose_value:
+            ctx.params[self.name] = self.convertor(ctx.params[self.name])  # type: ignore
+
+        return value, args
+
+
+class TyperArgument(TyperParameterMixin, cloup.Argument):
     def __init__(
         self,
         *,
-        # Parameter
+        # click.Parameter
         param_decls: List[str],
         type: Optional[Any] = None,
         required: Optional[bool] = None,
@@ -49,6 +68,8 @@ class TyperArgument(cloup.Argument):
                 Union[List["click.shell_completion.CompletionItem"], List[str]],
             ]
         ] = None,
+        # TyperParameter
+        convertor: Optional[Any] = None,
         # TyperArgument
         show_default: Union[bool, str] = True,
         show_choices: bool = True,
@@ -68,6 +89,7 @@ class TyperArgument(cloup.Argument):
             is_eager=is_eager,
             envvar=envvar,
             shell_complete=shell_complete,
+            convertor=convertor,
         )
 
         self.help = help
@@ -131,7 +153,7 @@ class TyperArgument(cloup.Argument):
         return super().shell_complete(ctx, incomplete)
 
 
-class TyperOption(cloup.Option):
+class TyperOption(TyperParameterMixin, cloup.Option):
     def __init__(
         self,
         # click.Parameter
@@ -151,6 +173,8 @@ class TyperOption(cloup.Option):
                 Union[List["click.shell_completion.CompletionItem"], List[str]],
             ]
         ] = None,
+        # TyperParameter
+        convertor: Optional[Any] = None,
         # click.Option
         show_default: Union[bool, str] = False,
         prompt: Union[bool, str] = False,
@@ -181,6 +205,7 @@ class TyperOption(cloup.Option):
             is_eager=is_eager,
             envvar=envvar,
             shell_complete=shell_complete,
+            convertor=convertor,
             show_default=show_default,
             prompt=prompt,
             confirmation_prompt=confirmation_prompt,

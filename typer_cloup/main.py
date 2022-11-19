@@ -546,7 +546,6 @@ def get_group_from_info(group_info: TyperInfo) -> click.Group:
         callback=get_callback(
             callback=solved_info.callback,
             params=params,
-            convertors=convertors,
             context_param_name=context_param_name,
         ),
         params=params,
@@ -643,7 +642,6 @@ def get_command_from_info(command_info: CommandInfo) -> click.Command:
         callback=get_callback(
             callback=command_info.callback,
             params=params,
-            convertors=convertors,
             context_param_name=context_param_name,
         ),
         params=params,
@@ -718,7 +716,6 @@ def get_callback(
     *,
     callback: Optional[Callable[..., Any]] = None,
     params: Sequence[click.Parameter] = [],
-    convertors: Dict[str, Callable[[str], Any]] = {},
     context_param_name: Optional[str] = None,
 ) -> Optional[Callable[..., Any]]:
     if not callback:
@@ -733,10 +730,7 @@ def get_callback(
 
     def wrapper(**kwargs: Any) -> Any:
         for k, v in kwargs.items():
-            if k in convertors:
-                use_params[k] = convertors[k](v)
-            else:
-                use_params[k] = v
+            use_params[k] = v
         if context_param_name:
             use_params[context_param_name] = click.get_current_context()
         return callback(**use_params)  # type: ignore
@@ -956,6 +950,7 @@ def get_click_param(
                 count=parameter_info.count,
                 allow_from_autoenv=parameter_info.allow_from_autoenv,
                 type=parameter_type,
+                convertor=convertor,
                 help=parameter_info.help,
                 hidden=parameter_info.hidden,
                 show_choices=parameter_info.show_choices,
@@ -986,6 +981,7 @@ def get_click_param(
                 # Argument
                 param_decls=param_decls,
                 type=parameter_type,
+                convertor=convertor,
                 required=required,
                 nargs=nargs,
                 # TyperArgument
