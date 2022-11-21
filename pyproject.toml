@@ -1,104 +1,103 @@
 [build-system]
-requires = ["flit_core ~= 3.7.1"]
 build-backend = "flit_core.buildapi"
+requires = ["flit_core ~= 3.7.1"]
 
 [project]
+authors = [
+  {name = "Sebastián Ramírez", email = "tiangolo@gmail.com"},
+  {name = "Alexander Regueiro", email = "alex@noldorin.com"},
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Software Development",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
+dependencies = [
+  "cloup ~= 2.0.0",
+]
+dynamic = ["version", "description"]
+keywords = ["cli", "click", "cloup", "shell", "terminal", "typer", "typehints"]
+license = {file = "LICENSE"}
+maintainers = [
+  {name = "Alexander Regueiro", email = "alex@noldorin.com"},
+]
 name = "typer-cloup"
 readme = "README.md"
 requires-python = ">= 3.7"
-license = {file = "LICENSE"}
-authors = [
-    {name = "Sebastián Ramírez", email = "tiangolo@gmail.com"},
-    {name = "Alexander Regueiro", email = "alex@noldorin.com"},
-]
-maintainers = [
-    {name = "Alexander Regueiro", email = "alex@noldorin.com"},
-]
-keywords = ["cli", "click", "cloup", "shell", "terminal", "typer", "typehints"]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Information Technology",
-    "Intended Audience :: System Administrators",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Topic :: Software Development",
-    "Topic :: Software Development :: Libraries",
-    "Topic :: Software Development :: Libraries :: Application Frameworks",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Typing :: Typed",
-]
-dependencies = [
-    "cloup ~= 2.0.0",
-]
-dynamic = ["version", "description"]
 
 [project.urls]
-homepage = "https://github.com/alexreg/typer-cloup"
 documentation = "https://typer-cloup.netlify.app"
+homepage = "https://github.com/alexreg/typer-cloup"
 repository = "https://github.com/alexreg/typer-cloup"
 
 [project.optional-dependencies]
-test = [
-    "black ~= 22.3.0",
-    "coverage ~= 6.0.0",
-    "docstring_parser ~= 0.15",
-    "isort ~= 5.10.1",
-    "mypy ~= 0.950",
-    "pytest ~= 7.1.2",
-    "pytest-cov ~= 3.0.0",
-    "pytest-sugar ~= 0.9.4",
-    "pytest-xdist ~= 2.1.0",
-    "shellingham ~= 1.4.0",
-]
-doc = [
-    "cairosvg ~= 2.5.2",
-    "mdx-include ~= 1.4.1",
-    "mkdocs ~= 1.2.4",
-    "mkdocs-material ~= 8.1.11",
-    "pillow ~= 9.3.0",
+all = [
+  "colorama ~= 0.4.4",
+  "docstring_parser ~= 0.15",
+  "shellingham ~= 1.4.0",
 ]
 dev = [
-    "autoflake ~= 1.4.0",
-    "flake8 ~= 4.0.1",
-    "pre-commit ~= 2.19.0",
+  "autoflake ~= 1.4.0",
+  "flake8 ~= 4.0.1",
+  "pre-commit ~= 2.19.0",
 ]
-all = [
-    "colorama ~= 0.4.4",
-    "docstring_parser ~= 0.15",
-    "shellingham ~= 1.4.0",
+doc = [
+  "cairosvg ~= 2.5.2",
+  "mdx-include ~= 1.4.1",
+  "mkdocs ~= 1.2.4",
+  "mkdocs-material ~= 8.1.11",
+  "pillow ~= 9.3.0",
+]
+test = [
+  "black ~= 22.3.0",
+  "coverage ~= 6.0.0",
+  "docstring_parser ~= 0.15",
+  "isort ~= 5.10.1",
+  "mypy ~= 0.950",
+  "pytest ~= 7.1.2",
+  "pytest-cov ~= 3.0.0",
+  "pytest-sugar ~= 0.9.4",
+  "pytest-xdist ~= 2.1.0",
+  "shellingham ~= 1.4.0",
 ]
 
 [tool.flit.module]
 name = "typer_cloup"
 
 [tool.isort]
-profile = "black"
 known_third_party = ["typer", "click", "cloup"]
+profile = "black"
 skip_glob = [
-    "docs_src/subcommands/tutorial001/main.py",
-    "docs_src/subcommands/tutorial003/lands.py",
-    "docs_src/subcommands/tutorial003/main.py",
+  "docs_src/subcommands/tutorial001/main.py",
+  "docs_src/subcommands/tutorial003/lands.py",
+  "docs_src/subcommands/tutorial003/main.py",
 ]
 
 [tool.pytest.ini_options]
 addopts = [
-    "--strict-config",
-    "--strict-markers",
+  "--strict-config",
+  "--strict-markers",
 ]
-xfail_strict = true
-junit_family = "xunit2"
 filterwarnings = [
-    "error",
-    'ignore:starlette.middleware.wsgi is deprecated and will be removed in a future release\..*:DeprecationWarning:starlette',
-    # For pytest-xdist
-    'ignore::DeprecationWarning:xdist',
+  "error",
+  'ignore:starlette.middleware.wsgi is deprecated and will be removed in a future release\..*:DeprecationWarning:starlette', # For pytest-xdist
+  'ignore::DeprecationWarning:xdist',
 ]
+junit_family = "xunit2"
+xfail_strict = true
