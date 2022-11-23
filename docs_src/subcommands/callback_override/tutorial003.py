@@ -8,7 +8,7 @@ def default_callback():
 
 
 users_app = typer.Typer(callback=default_callback)
-app.add_typer(users_app, name="users")
+app.add_sub(users_app, name="users")
 
 
 @users_app.callback()

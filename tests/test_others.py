@@ -208,7 +208,7 @@ def test_invoke():
     app = typer.Typer()
     foo_app = typer.Typer(name="foo")
 
-    app.add_typer(foo_app)
+    app.add_sub(foo_app)
 
     @app.command()
     def invoke():

@@ -77,7 +77,7 @@ Creating user: Camila
 
 ## Overriding the callback when adding a sub-Typer
 
-Lastly, you can override the callback defined anywhere else when adding a sub-Typer with `app.add_typer()` using the `callback` parameter.
+Lastly, you can override the callback defined anywhere else when adding a sub-Typer with `app.add_sub()` using the `callback` parameter.
 
 This has the highest priority:
 
@@ -85,9 +85,9 @@ This has the highest priority:
 {!../docs_src/subcommands/callback_override/tutorial004.py!}
 ```
 
-Notice that the precedence goes to `app.add_typer()` and is not affected by the order of execution. There's another callback defined below, but the one from `app.add_typer()` wins.
+Notice that the precedence goes to `app.add_sub()` and is not affected by the order of execution. There's another callback defined below, but the one from `app.add_sub()` wins.
 
-Now when you use the CLI program it will use the new callback function `callback_for_add_typer()`.
+Now when you use the CLI program it will use the new callback function `callback_for_add_sub()`.
 
 Check it:
 
@@ -96,7 +96,7 @@ Check it:
 ```console
 $ python users create Camila
 
-// Notice the message from the callback added in add_typer()
+// Notice the message from the callback added in add_sub()
 I have the high land! Running users command
 Creating user: Camila
 ```

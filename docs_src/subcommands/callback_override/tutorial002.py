@@ -8,7 +8,7 @@ def users_callback():
 
 
 users_app = typer.Typer(callback=users_callback)
-app.add_typer(users_app, name="users")
+app.add_sub(users_app, name="users")
 
 
 @users_app.command()

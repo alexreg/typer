@@ -18,7 +18,7 @@ def new_users():
     """
 
 
-app.add_typer(
+app.add_sub(
     users_app,
     callback=new_users,
     name="cake-sith-users",

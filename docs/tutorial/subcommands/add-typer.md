@@ -64,7 +64,7 @@ Here's what we do in `main.py`:
 
 * Import the other Python modules (the files `users.py` and `items.py`).
 * Create the main `typer.Typer()` application.
-* Use `app.add_typer()` to include the `app` from `items.py` and `users.py`, each of those 2 was also created with `typer.Typer()`.
+* Use `app.add_sub()` to include the `app` from `items.py` and `users.py`, each of those 2 was also created with `typer.Typer()`.
 * Define a `name` with the command that will be used for each of these "sub-Typers" to group their own commands.
 
 And now your *CLI program* has 2 commands:
@@ -162,7 +162,7 @@ You can just create `typer.Typer()` apps and add them inside one another.
 
 And you can do that with any levels of commands that you want.
 
-Do you need sub-sub-sub-subcommands? Go ahead, create all the `typer.Typer()`s you need and put them together with `app.add_typer()`.
+Do you need sub-sub-sub-subcommands? Go ahead, create all the `typer.Typer()`s you need and put them together with `app.add_sub()`.
 
 In the next sections we'll update this with more features, but you already have the core idea.
 

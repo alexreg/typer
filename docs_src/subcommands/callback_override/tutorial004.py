@@ -10,11 +10,11 @@ def default_callback():
 users_app = typer.Typer(callback=default_callback)
 
 
-def callback_for_add_typer():
+def callback_for_add_sub():
     typer.echo("I have the high land! Running users command")
 
 
-app.add_typer(users_app, name="users", callback=callback_for_add_typer)
+app.add_sub(users_app, name="users", callback=callback_for_add_sub)
 
 
 @users_app.callback()

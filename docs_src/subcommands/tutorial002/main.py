@@ -2,9 +2,9 @@ import typer_cloup as typer
 
 app = typer.Typer()
 items_app = typer.Typer()
-app.add_typer(items_app, name="items")
+app.add_sub(items_app, name="items")
 users_app = typer.Typer()
-app.add_typer(users_app, name="users")
+app.add_sub(users_app, name="users")
 
 
 @items_app.command("create")

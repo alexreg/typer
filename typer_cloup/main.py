@@ -231,7 +231,7 @@ class Typer:
 
         return decorator
 
-    def add_typer(
+    def add_sub(
         self,
         typer_instance: "Typer",
         *,
@@ -404,7 +404,7 @@ def get_command(typer_instance: Typer) -> click.Command:
 
 def get_group_name(typer_info: TyperInfo) -> Optional[str]:
     if typer_info.callback:
-        # Priority 1: Callback passed in app.add_typer()
+        # Priority 1: Callback passed in app.add_sub()
         return get_command_name(typer_info.callback.__name__)
     if typer_info.typer_instance:
         registered_callback = typer_info.typer_instance.registered_callback
@@ -418,7 +418,7 @@ def get_group_name(typer_info: TyperInfo) -> Optional[str]:
 
 
 def solve_typer_info_help(typer_info: TyperInfo) -> str:
-    # Priority 1: Explicit value was set in app.add_typer()
+    # Priority 1: Explicit value was set in app.add_sub()
     if not isinstance(typer_info.help, DefaultPlaceholder):
         return inspect.cleandoc(typer_info.help or "")
     # Priority 2: Explicit value was set in sub_app.callback()
@@ -435,7 +435,7 @@ def solve_typer_info_help(typer_info: TyperInfo) -> str:
             return inspect.cleandoc(instance_help or "")
     except AttributeError:
         pass
-    # Priority 4: Implicit inference from callback docstring in app.add_typer()
+    # Priority 4: Implicit inference from callback docstring in app.add_sub()
     if typer_info.callback:
         doc = inspect.getdoc(typer_info.callback)
         if doc:
@@ -466,7 +466,7 @@ def solve_typer_info_defaults(typer_info: TyperInfo) -> TyperInfo:
     values: Dict[str, Any] = {}
     name = None
     for name, value in typer_info.__dict__.items():
-        # Priority 1: Value was set in app.add_typer()
+        # Priority 1: Value was set in app.add_sub()
         if not isinstance(value, DefaultPlaceholder):
             values[name] = value
             continue

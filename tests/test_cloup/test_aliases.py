@@ -75,7 +75,7 @@ def test_group():
     app = typer.Typer(show_subcommand_aliases=True)
     foo_app = typer.Typer(name="foo", aliases=["bar"], show_subcommand_aliases=True)
 
-    app.add_typer(foo_app)
+    app.add_sub(foo_app)
 
     @foo_app.command()
     def main():

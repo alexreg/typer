@@ -3,7 +3,7 @@ When adding a Typer app to another we have seen how to set the `name` to use for
 For example to set the command to `users`:
 
 ```Python
-app.add_typer(users.app, name="users")
+app.add_sub(users.app, name="users")
 ```
 
 ## Add a help text
@@ -230,9 +230,9 @@ Commands:
 
 </div>
 
-### Infer name and help from callback in `app.add_typer()`
+### Infer name and help from callback in `app.add_sub()`
 
-If you override the callback in `app.add_typer()` when including a sub-app, the name and help will be inferred from this callback function.
+If you override the callback in `app.add_sub()` when including a sub-app, the name and help will be inferred from this callback function.
 
 This takes precedence over inferring the name and help from a callback set in `@sub_app.callback()` and `typer.Typer(callback=sub_app_callback)`.
 
@@ -286,7 +286,7 @@ So, when inferring a name and help text, the precedence order from lowest priori
 
 * `sub_app = typer.Typer(callback=some_function)`
 * `@sub_app.callback()`
-* `app.add_typer(sub_app, callback=new_function)`
+* `app.add_sub(sub_app, callback=new_function)`
 
 That's for inferring the name and help text from functions.
 
@@ -402,9 +402,9 @@ Commands:
 
 </div>
 
-### Name and help in `app.add_typer()`
+### Name and help in `app.add_sub()`
 
-And finally, with the highest priority, you can override all that by explicitly setting the `name` and `help` in `app.add_typer()`, just like we did on the first example above:
+And finally, with the highest priority, you can override all that by explicitly setting the `name` and `help` in `app.add_sub()`, just like we did on the first example above:
 
 ```Python hl_lines="21"
 {!../docs_src/subcommands/name_help/tutorial008.py!}
@@ -454,9 +454,9 @@ The precedence to generate a command's name and help, from lowest priority to hi
 
 * Implicitly inferred from `sub_app = typer.Typer(callback=some_function)`
 * Implicitly inferred from the callback function under `@sub_app.callback()`
-* Implicitly inferred from `app.add_typer(sub_app, callback=some_function)`
+* Implicitly inferred from `app.add_sub(sub_app, callback=some_function)`
 * Explicitly set on `sub_app = typer.Typer(name="some-name", help="Some help.")`
 * Explicitly set on `@sub_app.callback("some-name", help="Some help.")`
-* Explicitly set on `app.add_typer(sub_app, name="some-name", help="Some help.")`
+* Explicitly set on `app.add_sub(sub_app, name="some-name", help="Some help.")`
 
-So, `app.add_typer(sub_app, name="some-name", help="Some help.")` always wins.
+So, `app.add_sub(sub_app, name="some-name", help="Some help.")` always wins.
