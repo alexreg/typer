@@ -2,6 +2,10 @@
 
 ## Latest Changes
 
+* 📝 Miscellaneous improvements to docs
+* ✨ Fix Flake8 issues in codebase
+* ⬆️ Update dependency `pytest-xdist`
+* ✏ Fix comment in `scripts/test.sh`
 * ⬆ pre-commit autoupdate
 
 ## 0.9.0
