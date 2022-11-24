@@ -2,6 +2,25 @@
 
 ## Latest Changes
 
+### Features
+
+* ✨ Rename `Typer.add_typer` to `Typer.add_sub`
+* ✨ Apply convertors to `Context.params`
+* ✨ Rename `get_cloup_param` to `get_click_param` and fix type hints
+
+### Fixes
+
+* 🐛 Reorder positional args of `add_typer`, `callback`, `command` methods of `Typer`
+* 🐛 Make `TyperGroup` inherit `TyperCommand`
+
+### Docs
+
+* ✏ Fix links to GitHub repo in docs
+
+### Internal
+
+* 📝 Reformat project metadata
+
 ## 0.8.0
 
 ### Features
