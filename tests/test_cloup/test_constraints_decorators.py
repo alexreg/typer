@@ -1,4 +1,4 @@
-from typing import *
+from typing import Optional
 
 from cloup.constraints import RequireAtLeast, mutually_exclusive
 
