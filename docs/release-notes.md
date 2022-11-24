@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+## 0.9.0
+
 ### Features
 
 * ✨ Rename `Typer.add_typer` to `Typer.add_sub`
