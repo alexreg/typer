@@ -68,9 +68,9 @@ For the tutorial, you might want to install it with all the optional dependencie
 <div class="termy">
 
 ```console
-$ pip install typer[all]
+$ pip install typer-cloup[all]
 ---> 100%
-Successfully installed typer click colorama shellingham
+Successfully installed typer-cloup click colorama shellingham
 ```
 
 </div>

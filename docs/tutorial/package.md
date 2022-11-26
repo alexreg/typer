@@ -44,16 +44,16 @@ cd ./rick-portal-gun
 
 ## Dependencies and environment
 
-Add `typer[all]` to your dependencies:
+Add `typer-cloup[all]` to your dependencies:
 
 <div class="termy">
 
 ```console
-$ poetry add "typer[all]"
+$ poetry add "typer-cloup[all]"
 
 // It creates a virtual environment for your project
 Creating virtualenv rick-portal-gun-w31dJa0b-py7 in /home/rick/.cache/pypoetry/virtualenvs
-Using version ^0.1.0 for typer
+Using version ^0.1.0 for typer-cloup
 
 Updating dependencies
 Resolving dependencies... (1.2s)
@@ -62,23 +62,7 @@ Writing lock file
 
 ---> 100%
 
-Package operations: 15 installs, 0 updates, 0 removals
-
-  - Installing zipp (3.1.0)
-  - Installing importlib-metadata (1.5.0)
-  - Installing pyparsing (2.4.6)
-  - Installing six (1.14.0)
-  - Installing attrs (19.3.0)
-  - Installing click (7.1.1)
-  - Installing colorama (0.4.3)
-  - Installing more-itertools (8.2.0)
-  - Installing packaging (20.3)
-  - Installing pluggy (0.13.1)
-  - Installing py (1.8.1)
-  - Installing shellingham (1.3.2)
-  - Installing wcwidth (0.1.8)
-  - Installing pytest (5.4.1)
-  - Installing typer (0.0.11)
+[...]
 
 // Activate that new virtual environment
 $ poetry shell
@@ -677,10 +661,7 @@ $ pip install --user rick-portal-gun
 // Notice that it says "Downloading" 🚀
 Collecting rick-portal-gun
   Downloading rick_portal_gun-0.1.0-py3-none-any.whl (1.8 kB)
-Requirement already satisfied: typer[all]<0.0.12,>=0.0.11 in ./.local/lib/python3.7/site-packages (from rick-portal-gun) (0.0.11)
-Requirement already satisfied: click<7.2.0,>=7.1.1 in ./anaconda3/lib/python3.7/site-packages (from typer[all]<0.0.12,>=0.0.11->rick-portal-gun) (7.1.1)
-Requirement already satisfied: colorama; extra == "all" in ./anaconda3/lib/python3.7/site-packages (from typer[all]<0.0.12,>=0.0.11->rick-portal-gun) (0.4.3)
-Requirement already satisfied: shellingham; extra == "all" in ./anaconda3/lib/python3.7/site-packages (from typer[all]<0.0.12,>=0.0.11->rick-portal-gun) (1.3.1)
+[...]
 Installing collected packages: rick-portal-gun
 Successfully installed rick-portal-gun-0.1.0
 ```
@@ -709,7 +690,7 @@ After installing it, you can use it to generate a new `README.md`:
 <div class="termy">
 
 ```console
-$ typer rick_portal_gun.main utils docs --output README.md --name rick-portal-gun
+$ typer-cloup rick_portal_gun.main utils docs --output README.md --name rick-portal-gun
 
 Docs saved to: README.md
 ```

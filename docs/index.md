@@ -11,10 +11,10 @@
     <a href="https://github.com/alexreg/typer-cloup/actions?query=workflow%3APublish" target="_blank">
         <img src="https://github.com/alexreg/typer-cloup/workflows/Publish/badge.svg" alt="Publish">
     </a>
-    <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/alexreg/typer" target="_blank">
-        <img src="https://coverage-badge.samuelcolvin.workers.dev/alexreg/typer.svg" alt="Coverage">
-    <a href="https://pypi.org/project/typer" target="_blank">
-        <img src="https://img.shields.io/pypi/v/typer?color=%2334D058&label=pypi%20package" alt="Package version">
+    <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/alexreg/typer-cloup" target="_blank">
+        <img src="https://coverage-badge.samuelcolvin.workers.dev/alexreg/typer-cloup.svg" alt="Coverage">
+    <a href="https://pypi.org/project/typer-cloup" target="_blank">
+        <img src="https://img.shields.io/pypi/v/typer-cloup?color=%2334D058&label=pypi%20package" alt="Package version">
     </a>
 </p>
 
@@ -121,7 +121,7 @@ Hello Camila
 
 </div>
 
-**Note**: auto-completion works when you create a Python package and run it with `--install-completion` or when you use <a href="https://typer-cloup.netlify.app/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
+**Note**: auto-completion works when you create a Python package and run it with `--install-completion` or when you use <a href="https://typer-cloup.netlify.app/typer-cloup-cli/" class="internal-link" target="_blank">Typer CLI</a>.
 
 ## Example upgrade
 
@@ -260,7 +260,7 @@ And similarly for **files**, **paths**, **enums** (choices), etc. And there are 
 
 **You get**: great editor support, including **completion** and **type checks** everywhere.
 
-**Your users get**: automatic **`--help`**, **auto-completion** in their terminal (Bash, Zsh, Fish, PowerShell) when they install your package or when using <a href="https://typer-cloup.netlify.app/typer-cli/" class="internal-link" target="_blank">Typer CLI</a>.
+**Your users get**: automatic **`--help`**, **auto-completion** in their terminal (Bash, Zsh, Fish, PowerShell) when they install your package or when using <a href="https://typer-cloup.netlify.app/typer-cloup-cli/" class="internal-link" target="_blank">Typer CLI</a>.
 
 For a more complete example including more features, see the <a href="https://typer-cloup.netlify.app/tutorial/">Tutorial - User Guide</a>.
 
@@ -277,7 +277,7 @@ But you can also install extras:
     * With `shellingham` you can just use `--install-completion`.
     * Without `shellingham`, you have to pass the name of the shell to install completion for, e.g. `--install-completion bash`.
 
-You can install `typer` with all optional dependencies by running `pip install typer-cloup[all]`.
+You can install `typer-cloup` with all optional dependencies by running `pip install typer-cloup[all]`.
 
 ## Other tools and plug-ins
 
@@ -289,7 +289,6 @@ For example:
     * There are several other Click plug-ins at <a href="https://github.com/click-contrib" class="external-link" target="_blank">click-contrib</a> that you can explore.
 * <a href="https://pypi.org/project/tabulate/" class="external-link" target="_blank"><code>tabulate</code></a>: to automatically display tabular data nicely. Independent of Click or Typer.
 * <a href="https://github.com/tqdm/tqdm" class="external-link" target="_blank"><code>tqdm</code></a>: a fast, extensible progress bar, alternative to Typer's own `typer.progressbar()`.
-* etc... you can reuse many of the great available tools for building CLIs.
 
 ## License
 

@@ -474,7 +474,7 @@ You can run with **Typer CLI**:
 <div class="termy">
 
 ```console
-$ typer main.py run
+$ typer-cloup main.py run
 
 Hello World
 ```

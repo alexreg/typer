@@ -4,32 +4,32 @@
     <em>Run <strong>Typer</strong> scripts with completion, without having to create a package, using <strong>Typer CLI</strong>.</em>
 </p>
 <p align="center">
-<a href="https://travis-ci.com/alexreg/typer-cli" target="_blank">
-    <img src="https://travis-ci.com/alexreg/typer-cli.svg?branch=master" alt="Build Status">
-</a>
-<a href="https://codecov.io/gh/alexreg/typer-cli" target="_blank">
-    <img src="https://img.shields.io/codecov/c/github/alexreg/typer-cli" alt="Coverage">
-</a>
-<a href="https://pypi.org/project/typer-cli" target="_blank">
-    <img src="https://badge.fury.io/py/typer-cli.svg" alt="Package version">
-</a>
+    <a href="https://travis-ci.com/alexreg/typer-cloup-cli" target="_blank">
+        <img src="https://travis-ci.com/alexreg/typer-cloup-cli.svg?branch=master" alt="Build Status">
+    </a>
+    <a href="https://codecov.io/gh/alexreg/typer-cloup-cli" target="_blank">
+        <img src="https://img.shields.io/codecov/c/github/alexreg/typer-cloup-cli" alt="Coverage">
+    </a>
+    <a href="https://pypi.org/project/typer-cloup-cli" target="_blank">
+        <img src="https://badge.fury.io/py/typer-cloup-cli.svg" alt="Package version">
+    </a>
 </p>
 
-There is an optional utility tool called **Typer CLI**, additional to **Typer** itself.
+There is an optional utility tool called **Typer CLI**, in addition to **Typer** itself.
 
 It's main feature is to provide ✨ completion ✨ in the Terminal for your own small programs built with **Typer**.
 
-...without you having to create a complete installable Python package.
+... without you having to create a complete installable Python package.
 
 It's probably most useful if you have a small custom Python script using **Typer** (maybe as part of some project), for some small tasks, and it's not complex/important enough to create a whole installable Python package for it (something to be installed with `pip`).
 
-In that case, you can install **Typer CLI**, and run your program with the `typer` command in your Terminal, and it will provide completion for your script.
+In that case, you can install **Typer CLI**, and run your program with the `typer-cloup` command in your Terminal, and it will provide completion for your script.
 
 You can also use **Typer CLI** to generate Markdown documentation for your own **Typer** programs 📝.
 
 ---
 
-**Documentation**: <a href="https://typer-cloup.netlify.app/typer-cli/" target="_blank">https://typer-cloup.netlify.app/typer-cli/</a>
+**Documentation**: <a href="https://typer-cloup.netlify.app/typer-cloup-cli/" target="_blank">https://typer-cloup.netlify.app/typer-cloup-cli/</a>
 
 **Source Code for Typer CLI**: <a href="https://github.com/alexreg/typer-cloup-cli" target="_blank">https://github.com/alexreg/typer-cloup-cli</a>
 
@@ -60,7 +60,7 @@ You use **Typer CLI** in your terminal, to run your scripts (as an alternative t
 <div class="termy">
 
 ```console
-$ typer my_script.py run
+$ typer-cloup my_script.py run
 
 Hello World
 ```
@@ -78,21 +78,21 @@ Install **Typer CLI**:
 <div class="termy">
 
 ```console
-$ pip install typer-cli
+$ pip install typer-cloup-cli
 ---> 100%
-Successfully installed typer-cli
+Successfully installed typer-cloup-cli
 ```
 
 </div>
 
-That creates a `typer` command you can call in your terminal, much like `python`, `git`, or `echo`.
+That creates a `typer-cloup` command you can call in your terminal, much like `python`, `git`, or `echo`.
 
 You can then install completion for it:
 
 <div class="termy">
 
 ```console
-$ typer --install-completion
+$ typer-cloup --install-completion
 
 zsh completion installed in /home/user/.bashrc.
 Completion will take effect once you restart the terminal.
@@ -174,30 +174,30 @@ There's nothing wrong with using Python directly to run it. And, in fact, if som
 
 Here's where **Typer CLI** is useful.
 
-You can also run the same script with the `typer` command you get after installing `typer-cli`:
+You can also run the same script with the `typer-cloup` command you get after installing `typer-cloup-cli`:
 
 <div class="termy">
 
 ```console
-$ typer my_custom_script.py run hello
+$ typer-cloup my_custom_script.py run hello
 
 Hello World!
 
-$ typer my_custom_script.py run hello --name Camila
+$ typer-cloup my_custom_script.py run hello --name Camila
 
 Hello Camila!
 
-$ typer my_custom_script.py run bye --name Camila
+$ typer-cloup my_custom_script.py run bye --name Camila
 
 Bye Camila
 ```
 
 </div>
 
-* Instead of using `python` directly you use the `typer` command.
+* Instead of using `python` directly you use the `typer-cloup` command.
 * After the name of the file, add the subcommand `run`.
 
-✔️ If you installed completion for **Typer CLI** (for the `typer` command) as described above, when you hit <kbd>TAB</kbd> you will have ✨ completion for everything ✨, including all the subcommands and options of your script, like `hello`, `bye`, and `--name` 🚀.
+✔️ If you installed completion for **Typer CLI** (for the `typer-cloup` command) as described above, when you hit <kbd>TAB</kbd> you will have ✨ completion for everything ✨, including all the subcommands and options of your script, like `hello`, `bye`, and `--name` 🚀.
 
 ## If main
 
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     app()
 ```
 
-...you can also remove it if you are calling that script only with **Typer CLI** (using the `typer` command).
+... you can also remove it if you are calling that script only with **Typer CLI** (using the `typer-cloup` command).
 
 ## Run other files
 
@@ -231,8 +231,8 @@ Then you can call it with:
 <div class="termy">
 
 ```console
-$ typer main.py run --help
-Usage: typer run [OPTIONS]
+$ typer-cloup main.py run --help
+Usage: typer-cloup run [OPTIONS]
 
   Say hi to someone, by default to the World.
 
@@ -240,7 +240,7 @@ Options:
   --name TEXT
   --help       Show this message and exit.
 
-$ typer main.py run --name Camila
+$ typer-cloup main.py run --name Camila
 
 Hello Camila
 ```
@@ -258,14 +258,14 @@ For example:
 <div class="termy">
 
 ```console
-$ typer my_package.main run --help
-Usage: typer run [OPTIONS]
+$ typer-cloup my_package.main run --help
+Usage: typer-cloup run [OPTIONS]
 
 Options:
   --name TEXT
   --help       Show this message and exit.
 
-$ typer my_package.main run --name Camila
+$ typer-cloup my_package.main run --name Camila
 
 Hello Camila
 ```
@@ -281,7 +281,7 @@ You can specify one of the following **CLI options**:
 
 ### Defaults
 
-When your run a script with the **Typer CLI** (the `typer` command) it will use the app from the following priority:
+When your run a script with the **Typer CLI** (the `typer-cloup` command) it will use the app from the following priority:
 
 * An app object from the `--app` *CLI Option*.
 * A function to convert to a **Typer** app from `--func` *CLI Option* (like when using `typer.run()`).
@@ -313,7 +313,7 @@ And then the subcommand `docs`.
 <div class="termy">
 
 ```console
-$ typer some_script.py utils docs
+$ typer-cloup some_script.py utils docs
 ```
 
 </div>
@@ -328,7 +328,7 @@ For example:
 <div class="termy">
 
 ```console
-$ typer my_package.main utils docs --name awesome-cli --output README.md
+$ typer-cloup my_package.main utils docs --name awesome-cli --output README.md
 
 Docs saved to: README.md
 ```

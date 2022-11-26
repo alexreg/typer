@@ -24,20 +24,20 @@ And let's try it with **Typer CLI** to get completion:
 
 ```console
 // Hit the TAB key in your keyboard below where you see the: [TAB]
-$ typer ./main.py [TAB][TAB]
+$ typer-cloup ./main.py [TAB][TAB]
 
 // Depending on your terminal/shell you will get some completion like this ✨
 run    -- Run the provided Typer app.
 utils  -- Extra utility commands for Typer apps.
 
 // Then try with "run" and --
-$ typer ./main.py run --[TAB][TAB]
+$ typer-cloup ./main.py run --[TAB][TAB]
 
 // You will get completion for --name, depending on your terminal it will look something like this
 --name  -- The name to say hi to.
 
 // And you can run it as if it was with Python directly
-$ typer ./main.py run --name Camila
+$ typer-cloup ./main.py run --name Camila
 
 Hello Camila
 ```
@@ -61,7 +61,7 @@ And then we get those values when using completion:
 <div class="termy">
 
 ```console
-$ typer ./main.py run --name [TAB][TAB]
+$ typer-cloup ./main.py run --name [TAB][TAB]
 
 // We get the values returned from the function 🎉
 Camila     Carlos     Sebastian
@@ -90,7 +90,7 @@ Now let's try it:
 <div class="termy">
 
 ```console
-$ typer ./main.py run --name Ca[TAB][TAB]
+$ typer-cloup ./main.py run --name Ca[TAB][TAB]
 
 // We get the values returned from the function that start with Ca 🎉
 Camila     Carlos
@@ -140,7 +140,7 @@ If you have a shell like Zsh, it would look like:
 <div class="termy">
 
 ```console
-$ typer ./main.py run --name [TAB][TAB]
+$ typer-cloup ./main.py run --name [TAB][TAB]
 
 // We get the completion items with their help text 🎉
 Camila     -- The reader of books.
@@ -194,7 +194,7 @@ And then we can use it like:
 <div class="termy">
 
 ```console
-$ typer ./main.py run --name Camila --name Sebastian
+$ typer-cloup ./main.py run --name Camila --name Sebastian
 
 Hello Camila
 Hello Sebastian
@@ -229,7 +229,7 @@ Check it:
 <div class="termy">
 
 ```console
-$ typer ./main.py run --name [TAB][TAB]
+$ typer-cloup ./main.py run --name [TAB][TAB]
 
 // The first time we trigger completion, we get all the names
 Camila     -- The reader of books.
@@ -237,14 +237,14 @@ Carlos     -- The writer of scripts.
 Sebastian  -- The type hints guy.
 
 // Add a name and trigger completion again
-$ typer ./main.py run --name Sebastian --name Ca[TAB][TAB]
+$ typer-cloup ./main.py run --name Sebastian --name Ca[TAB][TAB]
 
 // Now we get completion only for the names we haven't used 🎉
 Camila  -- The reader of books.
 Carlos  -- The writer of scripts.
 
 // And if we add another of the available names:
-$ typer ./main.py run --name Sebastian --name Camila --name [TAB][TAB]
+$ typer-cloup ./main.py run --name Sebastian --name Camila --name [TAB][TAB]
 
 // We get completion for the only available one
 Carlos  -- The writer of scripts.
@@ -259,7 +259,7 @@ Carlos  -- The writer of scripts.
 
 You can also get the raw *CLI parameters*, just a `list` of `str` with everything passed in the command line before the incomplete value.
 
-For example, something like `["typer", "main.py", "run", "--name"]`.
+For example, something like `["typer-cloup", "main.py", "run", "--name"]`.
 
 !!! tip
     This would be for advanced scenarios, in most use cases you would be better off using the context.
@@ -297,7 +297,7 @@ And then we just print it to "standard error".
 <div class="termy">
 
 ```console
-$ typer ./main.py run --name [TAB][TAB]
+$ typer-cloup ./main.py run --name [TAB][TAB]
 
 // First we see the raw CLI parameters
 ['./main.py', 'run', '--name']
@@ -328,7 +328,7 @@ Check it:
 <div class="termy">
 
 ```console
-$ typer ./main.py run --name [TAB][TAB]
+$ typer-cloup ./main.py run --name [TAB][TAB]
 
 // First we see the raw CLI parameters
 ['./main.py', 'run', '--name']
@@ -338,7 +338,7 @@ Camila     -- The reader of books.
 Carlos     -- The writer of scripts.
 Sebastian  -- The type hints guy.
 
-$ typer ./main.py run --name Sebastian --name Ca[TAB][TAB]
+$ typer-cloup ./main.py run --name Sebastian --name Ca[TAB][TAB]
 
 // Again, we see the raw CLI parameters
 ['./main.py', 'run', '--name', 'Sebastian', '--name']

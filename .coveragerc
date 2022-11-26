@@ -1,7 +1,7 @@
 [run]
 
 source =
-    typer
+    typer_cloup
     tests
     docs_src
 

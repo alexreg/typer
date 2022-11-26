@@ -63,7 +63,7 @@ To check it worked, use:
     ```console
     $ which pip
 
-    some/directory/typer/env/bin/pip
+    some/directory/typer-cloup/env/bin/pip
     ```
 
     </div>
@@ -75,7 +75,7 @@ To check it worked, use:
     ```console
     $ Get-Command pip
 
-    some/directory/typer/env/bin/pip
+    some/directory/typer-cloup/env/bin/pip
     ```
 
     </div>

@@ -17,8 +17,8 @@ origin
 // Use -v to make it verbose and show more info
 $ git remote -v
 
-origin  git@github.com:yourusername/typer.git (fetch)
-origin  git@github.com:yourusername/typer.git (push)
+origin  git@github.com:yourusername/typer-cloup.git (fetch)
+origin  git@github.com:yourusername/typer-cloup.git (push)
 
 // git remote add takes 2 CLI arguments, a name and URL
 $ git remote add upstream https://github.com/alexreg/typer-cloup.git
@@ -28,8 +28,8 @@ $ git remote add upstream https://github.com/alexreg/typer-cloup.git
 // Now check again
 $ git remote -v
 
-origin  git@github.com:yourusername/typer.git (fetch)
-origin  git@github.com:yourusername/typer.git (push)
+origin  git@github.com:yourusername/typer-cloup.git (fetch)
+origin  git@github.com:yourusername/typer-cloup.git (push)
 upstream        https://github.com/alexreg/typer-cloup.git (fetch)
 upstream        https://github.com/alexreg/typer-cloup.git (push)
 ```

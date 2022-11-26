@@ -51,14 +51,14 @@ To check it quickly without creating a new Python package, install [Typer CLI](.
 
 ```console
 // Hit the TAB key in your keyboard below where you see the: [TAB]
-$ typer ./main.py [TAB][TAB]
+$ typer-cloup ./main.py [TAB][TAB]
 
 // Depending on your terminal/shell you will get some completion like this ✨
 run    -- Run the provided Typer app.
 utils  -- Extra utility commands for Typer apps.
 
 // Then try with "run" and --help
-$ typer ./main.py run --help
+$ typer-cloup ./main.py run --help
 
 // You get a help text with your CLI options as you normally would
 Usage: typer run [OPTIONS]
@@ -70,14 +70,14 @@ Options:
   --help       Show this message and exit.
 
 // Then try completion with your program
-$ typer ./main.py run --[TAB][TAB]
+$ typer-cloup ./main.py run --[TAB][TAB]
 
 // You get completion for CLI options
 --help  -- Show this message and exit.
 --name
 
 // And you can run it as if it was with Python directly
-$ typer ./main.py run --name Camila
+$ typer-cloup ./main.py run --name Camila
 
 Hello Camila
 ```
@@ -106,13 +106,13 @@ It will look something like:
 
 ```console
 // Run it normally
-$ typer ./main.py run --name Camila
+$ typer-cloup ./main.py run --name Camila
 
 // See the extra message "Validating name"
 Validating name
 Hello Camila
 
-$ typer ./main.py run --[TAB][TAB]
+$ typer-cloup ./main.py run --[TAB][TAB]
 
 // Some weird broken error message ⛔️
 (eval):1: command not found: Validating
@@ -146,14 +146,14 @@ Check it:
 <div class="termy">
 
 ```console
-$ typer ./main.py run --[TAB][TAB]
+$ typer-cloup ./main.py run --[TAB][TAB]
 
 // Now it works correctly 🎉
 --help  -- Show this message and exit.
 --name
 
 // And you can call it normally
-$ typer ./main.py run --name Camila
+$ typer-cloup ./main.py run --name Camila
 
 Validating name
 Hello Camila
