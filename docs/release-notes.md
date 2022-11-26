@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+## 0.9.1
+
 ### Internal
 
 * 📝 Miscellaneous improvements to docs
