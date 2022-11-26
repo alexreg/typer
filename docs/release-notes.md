@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+### Internal
+
 * 📝 Miscellaneous improvements to docs
 * ✨ Fix Flake8 issues in codebase
 * ⬆️ Update dependency `pytest-xdist`
