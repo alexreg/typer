@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+* ⬆ pre-commit autoupdate
+
 ## 0.9.0
 
 ### Features
