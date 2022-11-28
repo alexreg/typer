@@ -48,6 +48,8 @@ class TyperParameterMixin(click.Parameter):
 
 
 class TyperArgument(TyperParameterMixin, cloup.Argument):
+    """A Typer argument."""
+
     def __init__(
         self,
         *,
@@ -154,6 +156,8 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
 
 
 class TyperOption(TyperParameterMixin, cloup.Option):
+    """A Typer option."""
+
     def __init__(
         self,
         # click.Parameter
@@ -358,6 +362,8 @@ def _typer_main_shell_completion(
 
 
 class TyperCommand(cloup.Command):
+    """A Typer command."""
+
     context_class: Type[Context] = Context
 
     def _main_shell_completion(
@@ -393,8 +399,8 @@ class TyperCommand(cloup.Command):
         self, ctx: click.Context, is_the_only_visible_option_group: bool = False
     ) -> cloup.OptionGroup:
         """
-        Returns an ``OptionGroup`` instance for the options not explicitly
-        assigned to an option group, eventually including the ``--help`` option.
+        Return an `OptionGroup` instance for the options not explicitly
+        assigned to an option group, eventually including the `--help` option.
         """
         default_group = cloup.OptionGroup("Options")
         default_group.options = self.get_ungrouped_options(ctx)
@@ -402,4 +408,6 @@ class TyperCommand(cloup.Command):
 
 
 class TyperGroup(TyperCommand, cloup.Group):
+    """A Typer group."""
+
     context_class: Type[Context] = Context

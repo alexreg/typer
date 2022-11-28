@@ -61,6 +61,8 @@ def get_install_completion_arguments() -> Tuple[click.Parameter, click.Parameter
 
 
 class Typer:
+    """A CLI application based on type hints."""
+
     def __init__(
         self,
         *,
@@ -149,6 +151,8 @@ class Typer:
         align_option_groups: Optional[bool] = Default(None),
         show_constraints: Optional[bool] = Default(None),
     ) -> Callable[[CommandFunctionType], CommandFunctionType]:
+        """Callback function decorator."""
+
         def decorator(f: CommandFunctionType) -> CommandFunctionType:
             info = TyperInfo(
                 self,
@@ -201,6 +205,7 @@ class Typer:
         align_option_groups: Optional[bool] = None,
         show_constraints: Optional[bool] = None,
     ) -> Callable[[CommandFunctionType], CommandFunctionType]:
+        """Command function decorator"""
         if cls is None:
             cls = TyperCommand
 
@@ -259,6 +264,7 @@ class Typer:
         align_option_groups: Optional[bool] = Default(None),
         show_constraints: Optional[bool] = Default(None),
     ) -> None:
+        """Add the given sub-application to this application."""
         self.registered_groups.append(
             TyperInfo(
                 typer_instance,
@@ -294,11 +300,10 @@ class Typer:
         **kwargs: Any,
     ) -> Any:
         """
-        Invokes a callable that is a registered command or subcommand of the given `Typer` instance.
+        Invoke a callable that is a registered command or subcommand of the given `Typer` instance.
 
         Other arguments are passed on to `click.Context.invoke`.
         """
-
         info = getattr(callback, "_command_info", None)
         if not info:
             raise TypeError("callback is not a command")
@@ -315,11 +320,10 @@ class Typer:
         **kwargs: Any,
     ) -> Any:
         """
-        Forwards a callable that is a registered command or subcommand of the given `Typer` instance.
+        Forward a callable that is a registered command or subcommand of the given `Typer` instance.
 
         Other arguments are passed on to `click.Context.forward`.
         """
-
         info = getattr(callback, "_command_info", None)
         if not info:
             raise TypeError("callback is not a command")
