@@ -2,6 +2,11 @@
 
 ## Latest Changes
 
+* ✨ Add support for shell-quoted list parameter type
+* ✨ Add support for unprocessed parameters
+* 📝 Add note about this fork to main page / README
+* 📝 Add more API docs
+
 ## 0.9.1
 
 ### Internal
