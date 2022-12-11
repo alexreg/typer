@@ -70,7 +70,7 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
                 Union[List["click.shell_completion.CompletionItem"], List[str]],
             ]
         ] = None,
-        # TyperParameter
+        # TyperParameterMixin
         convertor: Optional[Any] = None,
         # TyperArgument
         show_default: Union[bool, str] = True,
@@ -177,7 +177,7 @@ class TyperOption(TyperParameterMixin, cloup.Option):
                 Union[List["click.shell_completion.CompletionItem"], List[str]],
             ]
         ] = None,
-        # TyperParameter
+        # TyperParameterMixin
         convertor: Optional[Any] = None,
         # click.Option
         show_default: Union[bool, str] = False,

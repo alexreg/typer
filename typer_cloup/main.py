@@ -47,6 +47,7 @@ from .models import (
     Required,
     TyperInfo,
 )
+from .param_types import SHELL_QUOTED_LIST
 from .utils import get_params_from_function
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -902,7 +903,10 @@ def get_click_param(
             assert not getattr(
                 main_type, "__origin__", None
             ), "List types with complex sub-types are not currently supported"
-            is_list = True
+            if parameter_info.shell_quoted_list:
+                parameter_type = SHELL_QUOTED_LIST
+            else:
+                is_list = True
         elif lenient_issubclass(origin, Tuple):  # type: ignore
             types = []
             for type_ in main_type.__args__:
@@ -919,7 +923,7 @@ def get_click_param(
             annotation=main_type, parameter_info=parameter_info
         )
     convertor = determine_type_convertor(main_type)
-    if is_list:
+    if is_list or parameter_type is SHELL_QUOTED_LIST:
         convertor = generate_list_convertor(convertor)
     if is_tuple:
         convertor = generate_tuple_convertor(main_type.__args__)

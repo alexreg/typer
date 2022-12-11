@@ -233,6 +233,8 @@ class ParameterInfo:
         resolve_path: bool = False,
         allow_dash: bool = False,
         path_type: Union[None, Type[str], Type[bytes]] = None,
+        # Shell-Quoted List
+        shell_quoted_list: bool = False,
     ):
         self.default = default
         self.param_decls = param_decls
@@ -271,6 +273,8 @@ class ParameterInfo:
         self.resolve_path = resolve_path
         self.allow_dash = allow_dash
         self.path_type = path_type
+        # Shell-Quoted List
+        self.shell_quoted_list = shell_quoted_list
 
 
 class OptionInfo(ParameterInfo):
@@ -329,6 +333,8 @@ class OptionInfo(ParameterInfo):
         resolve_path: bool = False,
         allow_dash: bool = False,
         path_type: Union[None, Type[str], Type[bytes]] = None,
+        # Shell-Quoted List
+        shell_quoted_list: bool = False,
     ):
         super().__init__(
             default=default,
@@ -368,6 +374,8 @@ class OptionInfo(ParameterInfo):
             resolve_path=resolve_path,
             allow_dash=allow_dash,
             path_type=path_type,
+            # Shell-Quoted List
+            shell_quoted_list=shell_quoted_list,
         )
         self.prompt = prompt
         self.confirmation_prompt = confirmation_prompt
@@ -427,6 +435,8 @@ class ArgumentInfo(ParameterInfo):
         resolve_path: bool = False,
         allow_dash: bool = False,
         path_type: Union[None, Type[str], Type[bytes]] = None,
+        # Shell-Quoted List
+        shell_quoted_list: bool = False,
     ):
         super().__init__(
             default=default,
@@ -466,6 +476,8 @@ class ArgumentInfo(ParameterInfo):
             resolve_path=resolve_path,
             allow_dash=allow_dash,
             path_type=path_type,
+            # Shell-Quoted List
+            shell_quoted_list=shell_quoted_list,
         )
 
 

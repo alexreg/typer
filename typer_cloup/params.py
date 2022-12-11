@@ -63,6 +63,8 @@ def Option(
     resolve_path: bool = False,
     allow_dash: bool = False,
     path_type: Union[None, Type[str], Type[bytes]] = None,
+    # Shell-Quoted List
+    shell_quoted_list: bool = False,
 ) -> Any:
     return OptionInfo(
         # Parameter
@@ -112,6 +114,8 @@ def Option(
         resolve_path=resolve_path,
         allow_dash=allow_dash,
         path_type=path_type,
+        # Shell-Quoted List
+        shell_quoted_list=shell_quoted_list,
     )
 
 
@@ -159,6 +163,8 @@ def Argument(
     resolve_path: bool = False,
     allow_dash: bool = False,
     path_type: Union[None, Type[str], Type[bytes]] = None,
+    # Shell-Quoted List
+    shell_quoted_list: bool = False,
 ) -> Any:
     return ArgumentInfo(
         # Parameter
@@ -201,6 +207,8 @@ def Argument(
         resolve_path=resolve_path,
         allow_dash=allow_dash,
         path_type=path_type,
+        # Shell-Quoted List
+        shell_quoted_list=shell_quoted_list,
     )
 
 

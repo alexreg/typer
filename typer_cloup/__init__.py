@@ -35,6 +35,7 @@ from .models import FileBinaryRead as FileBinaryRead
 from .models import FileBinaryWrite as FileBinaryWrite
 from .models import FileText as FileText
 from .models import FileTextWrite as FileTextWrite
+from .param_types import ShellQuotedList
 from .params import Argument as Argument
 from .params import Option as Option
 from .params import constraint as constraint
