@@ -761,6 +761,8 @@ def get_constraints(
 def get_click_type(
     *, annotation: Any, parameter_info: ParameterInfo
 ) -> click.ParamType:
+    if annotation == Any:
+        return click.UNPROCESSED
     if annotation == str:
         return click.STRING
     elif annotation == int:
