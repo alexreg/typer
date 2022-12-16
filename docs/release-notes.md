@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* 👷 Refactor CI artifact upload/download for docs previews. PR [#516](https://github.com/tiangolo/typer/pull/516) by [@tiangolo](https://github.com/tiangolo).
 * ✨ Add support for shell-quoted list parameter type
 * ✨ Add support for unprocessed parameters
 * 📝 Add note about this fork to main page / README
