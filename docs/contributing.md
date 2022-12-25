@@ -32,16 +32,6 @@ Activate the new environment with:
 
     </div>
 
-=== "Windows PowerShell"
-
-    <div class="termy">
-
-    ```console
-    $ .\env\Scripts\Activate.ps1
-    ```
-
-    </div>
-
 === "Windows Bash"
 
     Or if you use Bash for Windows (e.g. <a href="https://gitforwindows.org/" class="external-link" target="_blank">Git Bash</a>):
@@ -62,18 +52,6 @@ To check it worked, use:
 
     ```console
     $ which pip
-
-    some/directory/typer-cloup/env/bin/pip
-    ```
-
-    </div>
-
-=== "Windows PowerShell"
-
-    <div class="termy">
-
-    ```console
-    $ Get-Command pip
 
     some/directory/typer-cloup/env/bin/pip
     ```

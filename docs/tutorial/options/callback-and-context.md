@@ -41,7 +41,7 @@ Error: Invalid value for '--name': Only Camila is allowed
 
 There's something to be aware of with callbacks and completion that requires some small special handling.
 
-But first let's just use completion in your shell (Bash, Zsh, Fish, or PowerShell).
+But first let's just use completion in your shell (Bash, Zsh, Fish).
 
 After installing completion (for your own Python package or for **Typer CLI**), when you use your CLI program and start adding a *CLI option* with `--` an then hit <kbd>TAB</kbd>, your shell will show you the available *CLI options* (the same for *CLI arguments*, etc).
 

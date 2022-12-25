@@ -262,7 +262,7 @@ And similarly for **files**, **paths**, **enums** (choices), etc. And there are 
 
 **You get**: great editor support, including **completion** and **type checks** everywhere.
 
-**Your users get**: automatic **`--help`**, **auto-completion** in their terminal (Bash, Zsh, Fish, PowerShell) when they install your package or when using <a href="https://typer-cloup.netlify.app/typer-cloup-cli/" class="internal-link" target="_blank">Typer CLI</a>.
+**Your users get**: automatic **`--help`**, **auto-completion** in their terminal (Bash, Zsh, Fish) when they install your package or when using <a href="https://typer-cloup.netlify.app/typer-cloup-cli/" class="internal-link" target="_blank">Typer CLI</a>.
 
 For a more complete example including more features, see the <a href="https://typer-cloup.netlify.app/tutorial/">Tutorial - User Guide</a>.
 

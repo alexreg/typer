@@ -46,7 +46,7 @@ The resulting CLI apps created with **Typer** have the nice features of many "pr
 
 * Automatic help options for the main CLI program and all its subcommands.
 * Automatic command and subcommand structure handling (you will see more about subcommands in the Tutorial - User Guide).
-* Automatic completion for the CLI app in all operating systems, in all the shells (Bash, Zsh, Fish, PowerShell), so that the final user of your app can just hit <kbd>TAB</kbd> and get the available options or subcommands. *
+* Automatic completion for the CLI app in all operating systems, in all the shells (Bash, Zsh, Fish), so that the final user of your app can just hit <kbd>TAB</kbd> and get the available options or subcommands. *
 
 !!! note "* Auto completion"
     Auto completion works when you create a package (installable with `pip`). Or when using [Typer CLI](typer-cli.md){.internal-link target=_blank}.
@@ -61,14 +61,9 @@ The resulting CLI apps created with **Typer** have the nice features of many "pr
     If you didn't add `shellingham` those *CLI options* take a value with the name of the shell to install completion for, e.g.:
 
     * `--install-completion bash`.
-    * `--show-completion powershell`.
+    * `--show-completion zsh`.
 
     Then you can tell the user to install completion after installing your CLI program and the rest will just work.
-
-!!! tip
-    **Typer**'s completion is implemented internally, it uses ideas and components from Click and ideas from `click-completion`, but it doesn't use `click-completion` and re-implements some of the relevant parts of Click.
-
-    Then it extends those ideas with features and bug fixes. For example, **Typer** programs also support modern versions of PowerShell (e.g. in Windows 10) among all the other shells.
 
 ## The power of Click
 

@@ -10,7 +10,6 @@ import click.shell_completion
 from ._completion_shared import (
     COMPLETION_SCRIPT_BASH,
     COMPLETION_SCRIPT_FISH,
-    COMPLETION_SCRIPT_POWER_SHELL,
     COMPLETION_SCRIPT_ZSH,
     Shells,
 )
@@ -160,33 +159,7 @@ class FishComplete(click.shell_completion.FishComplete):
         return ""  # pragma: no cover
 
 
-class PowerShellComplete(click.shell_completion.ShellComplete):
-    name = Shells.powershell.value
-    source_template = COMPLETION_SCRIPT_POWER_SHELL
-
-    def source_vars(self) -> Dict[str, Any]:
-        return {
-            "complete_func": self.func_name,
-            "autocomplete_var": self.complete_var,
-            "prog_name": self.prog_name,
-        }
-
-    def get_completion_args(self) -> Tuple[List[str], str]:
-        completion_args = os.getenv("_TYPER_COMPLETE_ARGS", "")
-        incomplete = os.getenv("_TYPER_COMPLETE_WORD_TO_COMPLETE", "")
-        cwords = click.parser.split_arg_string(completion_args)
-        args = cwords[1:]
-        return args, incomplete
-
-    def format_completion(self, item: click.shell_completion.CompletionItem) -> str:
-        return f"{item.value}:::{item.help or ' '}"
-
-
 def completion_init() -> None:
     click.shell_completion.add_completion_class(BashComplete, Shells.bash.value)
     click.shell_completion.add_completion_class(ZshComplete, Shells.zsh.value)
     click.shell_completion.add_completion_class(FishComplete, Shells.fish.value)
-    click.shell_completion.add_completion_class(
-        PowerShellComplete, Shells.powershell.value
-    )
-    click.shell_completion.add_completion_class(PowerShellComplete, Shells.pwsh.value)

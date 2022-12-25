@@ -1,6 +1,5 @@
 import os
 import re
-import subprocess
 import sys
 from enum import Enum
 from pathlib import Path
@@ -21,8 +20,6 @@ class Shells(str, Enum):
     bash = "bash"
     zsh = "zsh"
     fish = "fish"
-    powershell = "powershell"
-    pwsh = "pwsh"
 
 
 COMPLETION_SCRIPT_BASH = """
@@ -49,34 +46,10 @@ compdef %(complete_func)s %(prog_name)s
 
 COMPLETION_SCRIPT_FISH = 'complete --command %(prog_name)s --no-files --arguments "(env %(autocomplete_var)s=complete_fish _TYPER_COMPLETE_FISH_ACTION=get-args _TYPER_COMPLETE_ARGS=(commandline -cp) %(prog_name)s)" --condition "env %(autocomplete_var)s=complete_fish _TYPER_COMPLETE_FISH_ACTION=is-args _TYPER_COMPLETE_ARGS=(commandline -cp) %(prog_name)s"'
 
-COMPLETION_SCRIPT_POWER_SHELL = """
-Import-Module PSReadLine
-Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
-$scriptblock = {
-    param($wordToComplete, $commandAst, $cursorPosition)
-    $Env:%(autocomplete_var)s = "complete_powershell"
-    $Env:_TYPER_COMPLETE_ARGS = $commandAst.ToString()
-    $Env:_TYPER_COMPLETE_WORD_TO_COMPLETE = $wordToComplete
-    %(prog_name)s | ForEach-Object {
-        $commandArray = $_ -Split ":::"
-        $command = $commandArray[0]
-        $helpString = $commandArray[1]
-        [System.Management.Automation.CompletionResult]::new(
-            $command, $command, 'ParameterValue', $helpString)
-    }
-    $Env:%(autocomplete_var)s = ""
-    $Env:_TYPER_COMPLETE_ARGS = ""
-    $Env:_TYPER_COMPLETE_WORD_TO_COMPLETE = ""
-}
-Register-ArgumentCompleter -Native -CommandName %(prog_name)s -ScriptBlock $scriptblock
-"""
-
 _completion_scripts = {
     "bash": COMPLETION_SCRIPT_BASH,
     "zsh": COMPLETION_SCRIPT_ZSH,
     "fish": COMPLETION_SCRIPT_FISH,
-    "powershell": COMPLETION_SCRIPT_POWER_SHELL,
-    "pwsh": COMPLETION_SCRIPT_POWER_SHELL,
 }
 
 # TODO: Probably refactor this; copied from Click 7.x
@@ -164,49 +137,6 @@ def install_fish(*, prog_name: str, complete_var: str, shell: str) -> Path:
     return path_obj
 
 
-def install_powershell(*, prog_name: str, complete_var: str, shell: str) -> Path:
-    subprocess.run(
-        [
-            shell,
-            "-Command",
-            "Set-ExecutionPolicy",
-            "Unrestricted",
-            "-Scope",
-            "CurrentUser",
-        ]
-    )
-    result = subprocess.run(
-        [shell, "-NoProfile", "-Command", "echo", "$profile"],
-        check=True,
-        stdout=subprocess.PIPE,
-    )
-    if result.returncode != 0:  # pragma: no cover
-        click.echo("Couldn't get PowerShell user profile", err=True)
-        raise click.exceptions.Exit(result.returncode)
-    path_str = ""
-    if isinstance(result.stdout, str):  # pragma: no cover
-        path_str = result.stdout
-    if isinstance(result.stdout, bytes):
-        try:
-            # PowerShell would be predominant in Windows
-            path_str = result.stdout.decode("windows-1252")
-        except UnicodeDecodeError:  # pragma: no cover
-            try:
-                path_str = result.stdout.decode("utf8")
-            except UnicodeDecodeError:
-                click.echo("Couldn't decode the path automatically", err=True)
-                raise click.exceptions.Exit(1)
-    path_obj = Path(path_str.strip())
-    parent_dir: Path = path_obj.parent
-    parent_dir.mkdir(parents=True, exist_ok=True)
-    script_content = get_completion_script(
-        prog_name=prog_name, complete_var=complete_var, shell=shell
-    )
-    with path_obj.open(mode="a") as f:
-        f.write(f"{script_content}\n")
-    return path_obj
-
-
 def install(
     shell: Optional[str] = None,
     prog_name: Optional[str] = None,
@@ -231,11 +161,6 @@ def install(
         return shell, installed_path
     elif shell == "fish":
         installed_path = install_fish(
-            prog_name=prog_name, complete_var=complete_var, shell=shell
-        )
-        return shell, installed_path
-    elif shell in {"powershell", "pwsh"}:
-        installed_path = install_powershell(
             prog_name=prog_name, complete_var=complete_var, shell=shell
         )
         return shell, installed_path

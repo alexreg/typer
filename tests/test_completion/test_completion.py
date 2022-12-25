@@ -137,39 +137,3 @@ def test_completion_source_fish():
         },
     )
     assert "complete --command tutorial001.py --no-files" in result.stdout
-
-
-def test_completion_source_powershell():
-    result = subprocess.run(
-        ["coverage", "run", mod.__file__],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding="utf-8",
-        env={
-            **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "source_powershell",
-            "_TYPER_COMPLETE_TESTING": "True",
-        },
-    )
-    assert (
-        "Register-ArgumentCompleter -Native -CommandName tutorial001.py -ScriptBlock $scriptblock"
-        in result.stdout
-    )
-
-
-def test_completion_source_pwsh():
-    result = subprocess.run(
-        ["coverage", "run", mod.__file__],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding="utf-8",
-        env={
-            **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "source_pwsh",
-            "_TYPER_COMPLETE_TESTING": "True",
-        },
-    )
-    assert (
-        "Register-ArgumentCompleter -Native -CommandName tutorial001.py -ScriptBlock $scriptblock"
-        in result.stdout
-    )

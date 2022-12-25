@@ -100,13 +100,6 @@ And there's another "**virtual file**" called "**standard error**" that is norma
 
 But we can also "print" to "standard error". And both are shown on the terminal to the users.
 
-!!! info
-    If you use PowerShell it's quite possible that what you print to "standard error" won't be shown in the terminal.
-
-    In PowerShell, to see "standard error" you would have to check the variable `$Error`.
-
-    But it will work normally in Bash, Zsh, and Fish.
-
 ### Printing to "standard error"
 
 You can print to "standard error" with `typer.echo("some text", err=True)`.

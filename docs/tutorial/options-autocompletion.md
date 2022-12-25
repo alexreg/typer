@@ -111,7 +111,7 @@ Now we are only returning the valid values, that start with `Ca`, we are no long
 
 Right now we are returning a `list` of `str`.
 
-But some shells (Zsh, Fish, PowerShell) are capable of showing extra help text for completion.
+But some shells (Zsh, Fish) are capable of showing extra help text for completion.
 
 We can provide that extra help text so that those shells can show it.
 
@@ -131,7 +131,7 @@ So, in the end, we return a `list` of `tuples` of `str`:
     So in the end, the return will be a `list` (or other iterable) of `tuples` of 2 `str`.
 
 !!! info
-    The help text will be visible in Zsh, Fish, and PowerShell.
+    The help text will be visible in Zsh, Fish.
 
     Bash doesn't support showing the help text, but completion will still work the same.
 

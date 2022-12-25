@@ -127,42 +127,6 @@ def test_completion_complete_subcommand_fish_should_complete_no():
     assert result.returncode != 0
 
 
-def test_completion_complete_subcommand_powershell():
-    result = subprocess.run(
-        ["coverage", "run", mod.__file__, " "],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding="utf-8",
-        env={
-            **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_powershell",
-            "_TYPER_COMPLETE_ARGS": "tutorial001.py del",
-            "_TYPER_COMPLETE_TESTING": "True",
-        },
-    )
-    assert (
-        "delete:::Delete a user with USERNAME.\ndelete-all:::Delete ALL users in the database."
-    ) in result.stdout
-
-
-def test_completion_complete_subcommand_pwsh():
-    result = subprocess.run(
-        ["coverage", "run", mod.__file__, " "],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding="utf-8",
-        env={
-            **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_pwsh",
-            "_TYPER_COMPLETE_ARGS": "tutorial001.py del",
-            "_TYPER_COMPLETE_TESTING": "True",
-        },
-    )
-    assert (
-        "delete:::Delete a user with USERNAME.\ndelete-all:::Delete ALL users in the database."
-    ) in result.stdout
-
-
 def test_completion_complete_subcommand_noshell():
     result = subprocess.run(
         ["coverage", "run", mod.__file__, " "],
