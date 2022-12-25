@@ -38,7 +38,7 @@ def test_install_invalid_shell():
         shellingham, "detect_shell", return_value=("xshell", "/usr/bin/xshell")
     ):
         result = runner.invoke(app, ["--install-completion"])
-        assert "Shell xshell is not supported." in result.stdout
+        assert "Shell 'xshell' is not supported." in result.stdout
     result = runner.invoke(app)
     assert "Hello World" in result.stdout
 
@@ -103,16 +103,20 @@ def test_completion_untyped_parameters():
         encoding="utf-8",
         env={
             **os.environ,
-            "_COMPLETION_NO_TYPES.PY_COMPLETE": "complete_zsh",
-            "_TYPER_COMPLETE_ARGS": "completion_no_types.py --name Sebastian --name Ca",
+            "_COMPLETION_NO_TYPES.PY_COMPLETE": "zsh_complete",
+            "COMP_WORDS": "completion_no_types.py --name Sebastian --name Ca",
+            "COMP_CWORD": "4",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
     assert "info name is: completion_no_types.py" in result.stderr
     assert "param is: name" in result.stderr
     assert "incomplete is: Ca" in result.stderr
-    assert '"Camila":"The reader of books."' in result.stdout
-    assert '"Carlos":"The writer of scripts."' in result.stdout
+    assert (
+        "plain\nCamila\nThe reader of books.\n"
+        "plain\nCarlos\nThe writer of scripts.\n"
+        "plain\nSebastian\nThe type hints guy.\n" in result.stdout
+    )
 
     result = subprocess.run(
         ["coverage", "run", str(file_path)],
@@ -132,16 +136,19 @@ def test_completion_untyped_parameters_different_order_correct_names():
         encoding="utf-8",
         env={
             **os.environ,
-            "_COMPLETION_NO_TYPES_ORDER.PY_COMPLETE": "complete_zsh",
-            "_TYPER_COMPLETE_ARGS": "completion_no_types_order.py --name Sebastian --name Ca",
+            "_COMPLETION_NO_TYPES_ORDER.PY_COMPLETE": "zsh_complete",
+            "COMP_WORDS": "completion_no_types.py --name Sebastian --name Ca",
+            "COMP_CWORD": "4",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
     assert "info name is: completion_no_types_order.py" in result.stderr
     assert "param is: name" in result.stderr
     assert "incomplete is: Ca" in result.stderr
-    assert '"Camila":"The reader of books."' in result.stdout
-    assert '"Carlos":"The writer of scripts."' in result.stdout
+    assert (
+        "plain\nCamila\nThe reader of books.\n"
+        "plain\nCarlos\nThe writer of scripts.\n" in result.stdout
+    )
 
     result = subprocess.run(
         ["coverage", "run", str(file_path)],

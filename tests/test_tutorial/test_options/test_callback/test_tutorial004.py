@@ -42,7 +42,7 @@ def test_completion():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL004.PY_COMPLETE": "complete_bash",
+            "_TUTORIAL004.PY_COMPLETE": "bash_complete",
             "COMP_WORDS": "tutorial004.py --",
             "COMP_CWORD": "1",
             "_TYPER_COMPLETE_TESTING": "True",

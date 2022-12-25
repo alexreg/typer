@@ -47,14 +47,14 @@ def test_completion_install_bash():
     install_source = ".bash_completions/tutorial001.py.sh"
     assert install_source not in text
     assert install_source in new_text
-    assert "completion installed in" in result.stdout
+    assert "completion installed at" in result.stdout
     assert "Completion will take effect once you restart the terminal" in result.stdout
     install_source_path = Path.home() / install_source
     assert install_source_path.is_file()
     install_content = install_source_path.read_text()
     install_source_path.unlink()
     assert (
-        "complete -o default -F _tutorial001py_completion tutorial001.py"
+        "complete -o nosort -F _tutorial001py_completion tutorial001.py"
         in install_content
     )
 
@@ -81,7 +81,7 @@ def test_completion_install_zsh():
     completion_path.write_text(text)
     zfunc_fragment = "fpath+=~/.zfunc"
     assert zfunc_fragment in new_text
-    assert "completion installed in" in result.stdout
+    assert "completion installed at" in result.stdout
     assert "Completion will take effect once you restart the terminal" in result.stdout
     install_source_path = Path.home() / ".zfunc/_tutorial001.py"
     assert install_source_path.is_file()

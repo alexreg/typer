@@ -32,7 +32,7 @@ def test_completion_show_bash():
         },
     )
     assert (
-        "complete -o default -F _tutorial001py_completion tutorial001.py"
+        "complete -o nosort -F _tutorial001py_completion tutorial001.py"
         in result.stdout
     )
 
@@ -64,4 +64,4 @@ def test_completion_source_fish():
             "_TYPER_COMPLETE_TEST_DISABLE_SHELL_DETECTION": "True",
         },
     )
-    assert "complete --command tutorial001.py --no-files" in result.stdout
+    assert "complete --no-files --command tutorial001.py" in result.stdout

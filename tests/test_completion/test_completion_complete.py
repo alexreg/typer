@@ -12,13 +12,13 @@ def test_completion_complete_subcommand_bash():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_bash",
+            "_TUTORIAL001.PY_COMPLETE": "bash_complete",
             "COMP_WORDS": "tutorial001.py del",
             "COMP_CWORD": "1",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    assert "delete\ndelete-all" in result.stdout
+    assert "plain,delete\n" "plain,delete-all\n" in result.stdout
 
 
 def test_completion_complete_subcommand_bash_invalid():
@@ -29,13 +29,35 @@ def test_completion_complete_subcommand_bash_invalid():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_bash",
+            "_TUTORIAL001.PY_COMPLETE": "bash_complete",
             "COMP_WORDS": "tutorial001.py del",
             "COMP_CWORD": "42",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    assert "create\ndelete\ndelete-all\ninit" in result.stdout
+    assert (
+        "plain,create\n"
+        "plain,delete\n"
+        "plain,delete-all\n"
+        "plain,init\n" in result.stdout
+    )
+
+
+def test_completion_complete_subcommand_bash_argument():
+    result = subprocess.run(
+        ["coverage", "run", mod.__file__, " "],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        encoding="utf-8",
+        env={
+            **os.environ,
+            "_TUTORIAL001.PY_COMPLETE": "bash_complete",
+            "COMP_WORDS": "tutorial001.py delete ",
+            "COMP_CWORD": "2",
+            "_TYPER_COMPLETE_TESTING": "True",
+        },
+    )
+    assert "plain" not in result.stdout
 
 
 def test_completion_complete_subcommand_zsh():
@@ -46,31 +68,16 @@ def test_completion_complete_subcommand_zsh():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_zsh",
-            "_TYPER_COMPLETE_ARGS": "tutorial001.py del",
+            "_TUTORIAL001.PY_COMPLETE": "zsh_complete",
+            "COMP_WORDS": "tutorial001.py del",
+            "COMP_CWORD": "1",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
     assert (
-        """_arguments '*: :(("delete":"Delete a user with USERNAME."\n"""
-        """\"delete-all":"Delete ALL users in the database."))'"""
-    ) in result.stdout
-
-
-def test_completion_complete_subcommand_zsh_files():
-    result = subprocess.run(
-        ["coverage", "run", mod.__file__, " "],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding="utf-8",
-        env={
-            **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_zsh",
-            "_TYPER_COMPLETE_ARGS": "tutorial001.py delete ",
-            "_TYPER_COMPLETE_TESTING": "True",
-        },
+        "plain\ndelete\nDelete a user with USERNAME.\n"
+        "plain\ndelete-all\nDelete ALL users in the database.\n" in result.stdout
     )
-    assert "_files" in result.stdout
 
 
 def test_completion_complete_subcommand_fish():
@@ -81,63 +88,13 @@ def test_completion_complete_subcommand_fish():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_fish",
-            "_TYPER_COMPLETE_ARGS": "tutorial001.py del",
-            "_TYPER_COMPLETE_FISH_ACTION": "get-args",
+            "_TUTORIAL001.PY_COMPLETE": "fish_complete",
+            "COMP_WORDS": "tutorial001.py del",
+            "COMP_CWORD": "del",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
     assert (
-        "delete\tDelete a user with USERNAME.\ndelete-all\tDelete ALL users in the database."
-        in result.stdout
+        "plain,delete\tDelete a user with USERNAME.\n"
+        "plain,delete-all\tDelete ALL users in the database.\n" in result.stdout
     )
-
-
-def test_completion_complete_subcommand_fish_should_complete():
-    result = subprocess.run(
-        ["coverage", "run", mod.__file__, " "],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding="utf-8",
-        env={
-            **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_fish",
-            "_TYPER_COMPLETE_ARGS": "tutorial001.py del",
-            "_TYPER_COMPLETE_FISH_ACTION": "is-args",
-            "_TYPER_COMPLETE_TESTING": "True",
-        },
-    )
-    assert result.returncode == 0
-
-
-def test_completion_complete_subcommand_fish_should_complete_no():
-    result = subprocess.run(
-        ["coverage", "run", mod.__file__, " "],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding="utf-8",
-        env={
-            **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_fish",
-            "_TYPER_COMPLETE_ARGS": "tutorial001.py delete ",
-            "_TYPER_COMPLETE_FISH_ACTION": "is-args",
-            "_TYPER_COMPLETE_TESTING": "True",
-        },
-    )
-    assert result.returncode != 0
-
-
-def test_completion_complete_subcommand_noshell():
-    result = subprocess.run(
-        ["coverage", "run", mod.__file__, " "],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        encoding="utf-8",
-        env={
-            **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "complete_noshell",
-            "_TYPER_COMPLETE_ARGS": "tutorial001.py del",
-            "_TYPER_COMPLETE_TESTING": "True",
-        },
-    )
-    assert "" in result.stdout

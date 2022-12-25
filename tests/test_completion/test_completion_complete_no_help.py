@@ -12,13 +12,13 @@ def test_completion_complete_subcommand_zsh():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL002.PY_COMPLETE": "complete_zsh",
-            "_TYPER_COMPLETE_ARGS": "tutorial002.py ",
+            "_TUTORIAL002.PY_COMPLETE": "zsh_complete",
+            "COMP_WORDS": "tutorial002.py ",
+            "COMP_CWORD": "1",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    assert "create" in result.stdout
-    assert "delete" in result.stdout
+    assert "plain\ncreate\n_\n" "plain\ndelete\n_\n" in result.stdout
 
 
 def test_completion_complete_subcommand_fish():
@@ -29,10 +29,10 @@ def test_completion_complete_subcommand_fish():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL002.PY_COMPLETE": "complete_fish",
-            "_TYPER_COMPLETE_ARGS": "tutorial002.py ",
-            "_TYPER_COMPLETE_FISH_ACTION": "get-args",
+            "_TUTORIAL002.PY_COMPLETE": "fish_complete",
+            "COMP_WORDS": "tutorial002.py ",
+            "COMP_CWORD": "",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    assert "create\ndelete" in result.stdout
+    assert "plain,create\n" "plain,delete\n" in result.stdout

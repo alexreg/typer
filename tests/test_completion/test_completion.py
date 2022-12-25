@@ -18,7 +18,7 @@ def test_show_completion():
         encoding="utf-8",
         env={**os.environ, "SHELL": "/bin/bash", "_TYPER_COMPLETE_TESTING": "True"},
     )
-    assert "_TUTORIAL001.PY_COMPLETE=complete_bash" in result.stdout
+    assert "_TUTORIAL001.PY_COMPLETE=bash_complete" in result.stdout
 
 
 def test_install_completion():
@@ -41,7 +41,7 @@ def test_install_completion():
     bash_completion_path.write_text(text)
     assert "source" in new_text
     assert ".bash_completions/tutorial001.py.sh" in new_text
-    assert "completion installed in" in result.stdout
+    assert "completion installed at" in result.stdout
     assert "Completion will take effect once you restart the terminal" in result.stdout
 
 
@@ -53,7 +53,7 @@ def test_completion_invalid_instruction():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "sourcebash",
+            "_TUTORIAL001.PY_COMPLETE": "bashsource",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
@@ -69,12 +69,12 @@ def test_completion_source_bash():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "source_bash",
+            "_TUTORIAL001.PY_COMPLETE": "bash_source",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
     assert (
-        "complete -o default -F _tutorial001py_completion tutorial001.py"
+        "complete -o nosort -F _tutorial001py_completion tutorial001.py"
         in result.stdout
     )
 
@@ -87,11 +87,11 @@ def test_completion_source_invalid_shell():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "source_xxx",
+            "_TUTORIAL001.PY_COMPLETE": "xxx_source",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    assert "Shell xxx not supported." in result.stderr
+    assert "Shell 'xxx' is not supported." in result.stderr
 
 
 def test_completion_source_invalid_instruction():
@@ -102,11 +102,11 @@ def test_completion_source_invalid_instruction():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "explode_bash",
+            "_TUTORIAL001.PY_COMPLETE": "bash_explode",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    assert 'Completion instruction "explode" not supported.' in result.stderr
+    assert "Completion instruction 'explode' is not supported." in result.stderr
 
 
 def test_completion_source_zsh():
@@ -117,7 +117,7 @@ def test_completion_source_zsh():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "source_zsh",
+            "_TUTORIAL001.PY_COMPLETE": "zsh_source",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
@@ -132,8 +132,8 @@ def test_completion_source_fish():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL001.PY_COMPLETE": "source_fish",
+            "_TUTORIAL001.PY_COMPLETE": "fish_source",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    assert "complete --command tutorial001.py --no-files" in result.stdout
+    assert "complete --no-files --command tutorial001.py" in result.stdout

@@ -15,8 +15,9 @@ def test_completion():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL003.PY_COMPLETE": "complete_zsh",
-            "_TYPER_COMPLETE_ARGS": "tutorial003.py --name Seb",
+            "_TUTORIAL003.PY_COMPLETE": "zsh_complete",
+            "COMP_WORDS": "tutorial003.py --name Seb",
+            "COMP_CWORD": "2",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )

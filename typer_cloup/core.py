@@ -348,7 +348,7 @@ def _typer_main_shell_completion(
     complete_var: Optional[str] = None,
 ) -> None:
     if complete_var is None:
-        complete_var = f"_{prog_name}_COMPLETE".replace("-", "_").upper()
+        complete_var = "_{}_COMPLETE".format(prog_name.replace("-", "_").upper())
 
     instruction = os.environ.get(complete_var)
 

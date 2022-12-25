@@ -15,14 +15,17 @@ def test_completion():
         encoding="utf-8",
         env={
             **os.environ,
-            "_TUTORIAL002.PY_COMPLETE": "complete_zsh",
-            "_TYPER_COMPLETE_ARGS": "tutorial002.py --name ",
+            "_TUTORIAL002.PY_COMPLETE": "zsh_complete",
+            "COMP_WORDS": "tutorial002.py --name ",
+            "COMP_CWORD": "2",
             "_TYPER_COMPLETE_TESTING": "True",
         },
     )
-    assert "Camila" in result.stdout
-    assert "Carlos" in result.stdout
-    assert "Sebastian" in result.stdout
+    assert (
+        "plain\nCamila\n_\n"
+        "plain\nCarlos\n_\n"
+        "plain\nSebastian\n_\n" in result.stdout
+    )
 
 
 def test_1():
