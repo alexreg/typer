@@ -138,6 +138,7 @@ def Argument(
     show_default: Union[bool, str] = True,
     show_choices: bool = True,
     show_envvar: bool = True,
+    allow_from_autoenv: bool = False,
     help: Optional[str] = None,
     hidden: bool = False,
     # Choice
@@ -182,6 +183,7 @@ def Argument(
         show_default=show_default,
         show_choices=show_choices,
         show_envvar=show_envvar,
+        allow_from_autoenv=allow_from_autoenv,
         help=help,
         hidden=hidden,
         # Choice

@@ -76,6 +76,7 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
         show_default: Union[bool, str] = True,
         show_choices: bool = True,
         show_envvar: bool = True,
+        allow_from_autoenv: bool = False,
         help: Optional[str] = None,
         hidden: bool = False,
     ):
@@ -93,12 +94,34 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
             shell_complete=shell_complete,
             convertor=convertor,
         )
-
+        self.allow_from_autoenv = allow_from_autoenv
         self.help = help
         self.show_default = show_default
         self.show_choices = show_choices
         self.show_envvar = show_envvar
         self.hidden = hidden
+
+    def resolve_envvar_value(self, ctx: click.Context) -> Optional[str]:
+        rv = super().resolve_envvar_value(ctx)
+
+        if rv is not None:
+            return rv
+
+        if (
+            self.allow_from_autoenv
+            and ctx.auto_envvar_prefix is not None
+            and self.name is not None
+        ):
+            envvar = self.name.upper()
+            if ctx.auto_envvar_prefix:
+                envvar = f"{ctx.auto_envvar_prefix}_{envvar}"
+
+            rv = os.environ.get(envvar)
+
+            if rv:
+                return rv
+
+        return None
 
     def get_help_record(self, ctx: click.Context) -> Tuple[str, str]:
         # Modified version of click.core.Option.get_help_record()
@@ -107,9 +130,20 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
         name = self.make_metavar()
         help = self.help or ""
         extra = []
+
         if self.show_envvar:
             envvar = self.envvar
-            # allow_from_autoenv is currently not supported in Typer for CLI Arguments
+
+            if envvar is None:
+                if (
+                    self.allow_from_autoenv
+                    and ctx.auto_envvar_prefix is not None
+                    and self.name is not None
+                ):
+                    envvar = self.name.upper()
+                    if ctx.auto_envvar_prefix:
+                        envvar = f"{ctx.auto_envvar_prefix}_{envvar}"
+
             if envvar is not None:
                 var_str = (
                     ", ".join(str(d) for d in envvar)
@@ -117,21 +151,48 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
                     else envvar
                 )
                 extra.append(f"env var: {var_str}")
-        if self.default is not None and (self.show_default or ctx.show_default):
-            if isinstance(self.show_default, str):
+
+        # Temporarily enable resilient parsing to avoid type casting
+        # failing for the default. Might be possible to extend this to
+        # help formatting in general.
+        resilient = ctx.resilient_parsing
+        ctx.resilient_parsing = True
+
+        try:
+            default_value = self.get_default(ctx, call=False)
+        finally:
+            ctx.resilient_parsing = resilient
+
+        show_default_is_str = isinstance(self.show_default, str)
+
+        if show_default_is_str or (
+            default_value is not None and (self.show_default or ctx.show_default)
+        ):
+            if show_default_is_str:
                 default_string = f"({self.show_default})"
-            elif isinstance(self.default, (list, tuple)):
-                default_string = ", ".join(str(d) for d in self.default)
-            elif inspect.isfunction(self.default):
-                default_string = "(dynamic)"
+            elif isinstance(default_value, (list, tuple)):
+                default_string = ", ".join(str(d) for d in default_value)
+            elif callable(default_value):
+                default_string = _("(dynamic)")
             else:
-                default_string = str(self.default)
-            extra.append(f"default: {default_string}")
+                default_string = str(default_value)
+
+            if default_string:
+                extra.append(_("default: {default}").format(default=default_string))
+
+        if isinstance(self.type, click.types._NumberRangeBase):
+            range_str = self.type._describe_range()
+
+            if range_str:
+                extra.append(range_str)
+
         if self.required:
-            extra.append("required")
+            extra.append(_("required"))
+
         if extra:
-            extra_str = ";".join(extra)
+            extra_str = "; ".join(extra)
             help = f"{help}  [{extra_str}]" if help else f"[{extra_str}]"
+
         return name, help
 
     def make_metavar(self) -> str:
@@ -227,10 +288,33 @@ class TyperOption(TyperParameterMixin, cloup.Option):
             group=group,
         )
 
+    def resolve_envvar_value(self, ctx: click.Context) -> Optional[str]:
+        rv = super().resolve_envvar_value(ctx)
+
+        if rv is not None:
+            return rv
+
+        if (
+            self.allow_from_autoenv
+            and ctx.auto_envvar_prefix is not None
+            and self.name is not None
+        ):
+            envvar = self.name.upper()
+            if ctx.auto_envvar_prefix:
+                envvar = f"{ctx.auto_envvar_prefix}_{envvar}"
+
+            rv = os.environ.get(envvar)
+
+            if rv:
+                return rv
+
+        return None
+
     def get_help_record(self, ctx: click.Context) -> Optional[Tuple[str, str]]:
-        # Duplicate all of Click's logic only to modify a single line, to allow boolean
-        # flags with only names for False values as it's currently supported by Typer
-        # Ref: https://typer-cloup.netlify.app/tutorial/parameter-types/bool/#only-names-for-false
+        # Duplicate all of Click's logic with two exceptions:
+        # 1.  handle case when `ctx.auto_envvar_prefix` is empty string
+        # 2.  to allow boolean flags with only names for False values as it's currently supported by Typer
+        #     Ref: https://typer-cloup.netlify.app/tutorial/parameter-types/bool/#only-names-for-false
 
         any_prefix_is_slash = False
 
@@ -264,7 +348,11 @@ class TyperOption(TyperParameterMixin, cloup.Option):
                     and ctx.auto_envvar_prefix is not None
                     and self.name is not None
                 ):
-                    envvar = f"{ctx.auto_envvar_prefix}_{self.name.upper()}"
+                    # Typer override, original commented
+                    envvar = self.name.upper()
+                    if ctx.auto_envvar_prefix:
+                        envvar = f"{ctx.auto_envvar_prefix}_{envvar}"
+                    # Typer override end
 
             if envvar is not None:
                 var_str = (
@@ -285,16 +373,23 @@ class TyperOption(TyperParameterMixin, cloup.Option):
         finally:
             ctx.resilient_parsing = resilient
 
-        show_default_is_str = isinstance(self.show_default, str)
+        show_default = False
+        show_default_is_str = False
 
-        if show_default_is_str or (
-            default_value is not None and (self.show_default or ctx.show_default)
-        ):
+        if self.show_default is not None:
+            if isinstance(self.show_default, str):
+                show_default_is_str = show_default = True
+            else:
+                show_default = self.show_default
+        elif ctx.show_default is not None:  # pragma: no cover
+            show_default = ctx.show_default
+
+        if show_default_is_str or (show_default and (default_value is not None)):
             if show_default_is_str:
                 default_string = f"({self.show_default})"
             elif isinstance(default_value, (list, tuple)):
                 default_string = ", ".join(str(d) for d in default_value)
-            elif callable(default_value):
+            elif inspect.isfunction(default_value):
                 default_string = _("(dynamic)")
             elif self.is_bool_flag and self.secondary_opts:
                 # For boolean flags that have distinct True/False opts,
@@ -319,7 +414,11 @@ class TyperOption(TyperParameterMixin, cloup.Option):
             if default_string:
                 extra.append(_("default: {default}").format(default=default_string))
 
-        if isinstance(self.type, click.types._NumberRangeBase):
+        if (
+            isinstance(self.type, click.types._NumberRangeBase)
+            # skip count with default range type
+            and not (self.count and self.type.min == 0 and self.type.max is None)
+        ):
             range_str = self.type._describe_range()
 
             if range_str:

@@ -208,6 +208,7 @@ class ParameterInfo:
         show_default: Union[bool, str] = True,
         show_choices: bool = True,
         show_envvar: bool = True,
+        allow_from_autoenv: bool = False,
         help: Optional[str] = None,
         hidden: bool = False,
         # Choice
@@ -248,6 +249,7 @@ class ParameterInfo:
         self.show_default = show_default
         self.show_choices = show_choices
         self.show_envvar = show_envvar
+        self.allow_from_autoenv = allow_from_autoenv
         self.help = help
         self.hidden = hidden
         # Choice
@@ -349,6 +351,7 @@ class OptionInfo(ParameterInfo):
             show_default=show_default,
             show_choices=show_choices,
             show_envvar=show_envvar,
+            allow_from_autoenv=allow_from_autoenv,
             help=help,
             hidden=hidden,
             # Choice
@@ -384,7 +387,6 @@ class OptionInfo(ParameterInfo):
         self.is_flag = is_flag
         self.flag_value = flag_value
         self.count = count
-        self.allow_from_autoenv = allow_from_autoenv
         self.group = group
 
 
@@ -410,6 +412,7 @@ class ArgumentInfo(ParameterInfo):
         show_default: Union[bool, str] = True,
         show_choices: bool = True,
         show_envvar: bool = True,
+        allow_from_autoenv: bool = False,
         help: Optional[str] = None,
         hidden: bool = False,
         # Choice
@@ -451,6 +454,7 @@ class ArgumentInfo(ParameterInfo):
             show_default=show_default,
             show_choices=show_choices,
             show_envvar=show_envvar,
+            allow_from_autoenv=allow_from_autoenv,
             help=help,
             hidden=hidden,
             # Choice

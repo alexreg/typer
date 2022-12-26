@@ -998,6 +998,7 @@ def get_click_param(
                 show_default=parameter_info.show_default,
                 show_choices=parameter_info.show_choices,
                 show_envvar=parameter_info.show_envvar,
+                allow_from_autoenv=parameter_info.allow_from_autoenv,
                 help=parameter_info.help,
                 hidden=parameter_info.hidden,
                 # Parameter
