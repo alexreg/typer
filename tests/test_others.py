@@ -86,7 +86,7 @@ def test_callback_3_untyped_parameters():
 
     @app.command()
     def main(name: str = typer.Option(..., callback=name_callback)):
-        typer.echo("Hello World")
+        pass
 
     result = runner.invoke(app, ["--name", "Camila"])
     assert "info name is: main" in result.stdout
@@ -300,20 +300,20 @@ def test_help_slash_option():
     assert "/name TEXT" in result.output
 
 
-def test_help_hidden_option():
+def test_help_hidden_parameter():
     app = typer.Typer()
 
     @app.command()
     def main(
-        name: str = typer.Option(..., hidden=True),
-        lastname: str = typer.Option(...),
+        name: str = typer.Argument(..., hidden=True),
+        lastname: str = typer.Option(..., hidden=True),
     ):
         pass  # pragma: no cover
 
     result = runner.invoke(app, ["main", "--help"])
     assert result.exit_code == 0
-    assert "--name" not in result.output
-    assert "lastname" in result.output
+    assert "  NAME" not in result.output
+    assert "--lastname" not in result.output
 
 
 def test_help_hidden_group():
