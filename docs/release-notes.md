@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+## 0.10.0
+
 ### Features
 
 * ✨ Improve handling of environment variables for parameters
