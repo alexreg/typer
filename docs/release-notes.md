@@ -2,17 +2,25 @@
 
 ## Latest Changes
 
-* ✅ Update tests and coverage
+### Features
+
 * ✨ Improve handling of environment variables for parameters
 * ✨ Use Click shell completion scripts
 * ✨ Remove support for PowerShell completion
+* ✨ Add support for shell-quoted list parameter type
+* ✨ Add support for unprocessed parameters
+
+### Docs
+
+* 📝 Add note about this fork to main page / README
+* 📝 Add more API docs
+
+### Internal
+
+* ✅ Update tests and coverage
 * ⬆ [pre-commit.ci] pre-commit autoupdate. PR [#512](https://github.com/tiangolo/typer/pull/512) by [@pre-commit-ci[bot]](https://github.com/apps/pre-commit-ci).
 * ⬆ Bump nwtgck/actions-netlify from 1.2.4 to 2.0.0. PR [#513](https://github.com/tiangolo/typer/pull/513) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * 👷 Refactor CI artifact upload/download for docs previews. PR [#516](https://github.com/tiangolo/typer/pull/516) by [@tiangolo](https://github.com/tiangolo).
-* ✨ Add support for shell-quoted list parameter type
-* ✨ Add support for unprocessed parameters
-* 📝 Add note about this fork to main page / README
-* 📝 Add more API docs
 
 ## 0.9.1
 
