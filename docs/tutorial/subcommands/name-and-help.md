@@ -76,7 +76,7 @@ def create(item: str):
     typer.echo(f"Creating item: {item}")
 ```
 
-...will create a command `create` with a help text of `Create an item`.
+... will create a command `create` with a help text of `Create an item`.
 
 ### Inferring name and help from `@app.callback()`
 

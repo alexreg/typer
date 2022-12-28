@@ -47,7 +47,7 @@ $ python main.py Camila
 
 // Let's imagine the password typed was "typerrocks"
 Hello Camila. Doing something very secure with password.
-...just kidding, here it is, very insecure: typerrocks
+... just kidding, here it is, very insecure: typerrocks
 ```
 
 </div>

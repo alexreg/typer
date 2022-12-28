@@ -35,7 +35,7 @@ Options:
 
 </div>
 
-...but this program is still not very useful. Let's extend it.
+... but this program is still not very useful. Let's extend it.
 
 ## What is a **CLI argument**
 
@@ -414,7 +414,7 @@ are called "Python function parameters" or "Python function arguments".
     person = bring_person("Camila", lastname="Gutiérrez")
     ```
 
-    ...but you will probably see them used interchangeably in most of the places (including here).
+    ... but you will probably see them used interchangeably in most of the places (including here).
 
 #### Python default values
 
@@ -481,7 +481,7 @@ Hello World
 
 </div>
 
-...and it will give you auto completion in your terminal when you hit <kbd>TAB</kbd> for all your code.
+... and it will give you auto completion in your terminal when you hit <kbd>TAB</kbd> for all your code.
 
 So you can use it to have auto completion for your own scripts as you continue with the tutorial.
 

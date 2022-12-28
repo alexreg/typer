@@ -8,7 +8,7 @@ def main(
     ),
 ):
     typer.echo(f"Hello {name}. Doing something very secure with password.")
-    typer.echo(f"...just kidding, here it is, very insecure: {password}")
+    typer.echo(f"... just kidding, here it is, very insecure: {password}")
 
 
 if __name__ == "__main__":

@@ -132,7 +132,7 @@ $ python main.py
 
 </div>
 
-...It would be called like:
+... It would be called like:
 
 <div class="termy">
 

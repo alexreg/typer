@@ -82,7 +82,7 @@ some settings
 la cigüeña trae al niño
 ```
 
-...not to write binary `bytes`.
+... not to write binary `bytes`.
 
 Check it:
 

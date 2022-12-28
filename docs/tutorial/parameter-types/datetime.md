@@ -58,7 +58,7 @@ For example, let's imagine that you want to accept an ISO formatted datetime, bu
 * then the year
 * separated with "`/`"
 
-...It's a crazy example, but let's say you also needed that strange format:
+... It's a crazy example, but let's say you also needed that strange format:
 
 ```Python hl_lines="8"
 {!../docs_src/parameter_types/datetime/tutorial002.py!}

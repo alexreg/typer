@@ -75,4 +75,4 @@ Successfully installed typer-cloup click colorama shellingham
 
 </div>
 
-...that also includes `colorama` and `shellingham`.
+... that also includes `colorama` and `shellingham`.

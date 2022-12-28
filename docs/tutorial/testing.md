@@ -144,7 +144,7 @@ If you have a script and you never created an explicit `typer.Typer` app, like:
 {!../docs_src/testing/app03/main.py!}
 ```
 
-...you can still test it, by creating an app during testing:
+... you can still test it, by creating an app during testing:
 
 ```Python hl_lines="6 7  13"
 {!../docs_src/testing/app03/test_main.py!}
@@ -210,4 +210,4 @@ def main(name: str = "World"):
 app.command()(main)
 ```
 
-...that's it. It's still probably simpler to just create the explicit `typer.Typer` in the `main.py` file 😅.
+... that's it. It's still probably simpler to just create the explicit `typer.Typer` in the `main.py` file 😅.
