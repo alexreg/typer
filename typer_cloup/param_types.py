@@ -7,7 +7,7 @@ import click
 class ShellQuotedList(click.ParamType):
     """Converts a shell-quoted string into a list of strings."""
 
-    name = "shell-quoted list"
+    name = "shell-quoted-list"
 
     def convert(
         self,
