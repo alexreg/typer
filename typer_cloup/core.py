@@ -102,7 +102,7 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
         self.hidden = hidden
 
     def resolve_envvar_value(self, ctx: click.Context) -> Optional[str]:
-        rv = super().resolve_envvar_value(ctx)
+        rv = click.Parameter.resolve_envvar_value(self, ctx)
 
         if rv is not None:
             return rv
@@ -289,7 +289,7 @@ class TyperOption(TyperParameterMixin, cloup.Option):
         )
 
     def resolve_envvar_value(self, ctx: click.Context) -> Optional[str]:
-        rv = super().resolve_envvar_value(ctx)
+        rv = click.Parameter.resolve_envvar_value(self, ctx)
 
         if rv is not None:
             return rv

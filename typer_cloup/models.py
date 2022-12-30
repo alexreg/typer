@@ -33,7 +33,55 @@ Required = ...
 
 
 class Context(cloup.Context):
-    pass
+    def __init__(
+        self,
+        command: "click.Command",
+        parent: Optional["click.Context"] = None,
+        info_name: Optional[str] = None,
+        obj: Optional[Any] = None,
+        auto_envvar_prefix: Optional[str] = None,
+        default_map: Optional[Dict[str, Any]] = None,
+        terminal_width: Optional[int] = None,
+        max_content_width: Optional[int] = None,
+        resilient_parsing: bool = False,
+        allow_extra_args: Optional[bool] = None,
+        allow_interspersed_args: Optional[bool] = None,
+        ignore_unknown_options: Optional[bool] = None,
+        help_option_names: Optional[List[str]] = None,
+        token_normalize_func: Optional[Callable[[str], str]] = None,
+        color: Optional[bool] = None,
+        show_default: Optional[bool] = None,
+    ):
+        if auto_envvar_prefix is None:
+            if (
+                parent is not None
+                and parent.auto_envvar_prefix is not None
+                and info_name is not None
+            ):
+                auto_envvar_prefix = info_name.upper()
+                if parent.auto_envvar_prefix:
+                    auto_envvar_prefix = (
+                        f"{parent.auto_envvar_prefix}_{auto_envvar_prefix}"
+                    )
+
+        super().__init__(
+            command,
+            parent,
+            info_name,
+            obj,
+            auto_envvar_prefix,
+            default_map,
+            terminal_width,
+            max_content_width,
+            resilient_parsing,
+            allow_extra_args,
+            allow_interspersed_args,
+            ignore_unknown_options,
+            help_option_names,
+            token_normalize_func,
+            color,
+            show_default,
+        )
 
 
 class FileText(io.TextIOWrapper):

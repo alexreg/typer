@@ -276,16 +276,17 @@ def test_help_defaults():
     assert "(dynamic)" in result.output
 
 
-def test_help_auto_envvar_prefix():
-    app = typer.Typer(context_settings=dict(auto_envvar_prefix="TEST"))
+def test_help_option_envvar():
+    # Mainly for coverage/completeness
+    app = typer.Typer()
 
     @app.command()
-    def main(name: str = typer.Option(...)):
-        pass  # pragma: no cover
+    def main(name: str = typer.Option("World", envvar="AWESOME_NAME")):
+        typer.echo(f"Hello Mr. {name}")
 
-    result = runner.invoke(app, ["main", "--help"])
+    result = runner.invoke(app, env={"AWESOME_NAME": "Wednesday"})
     assert result.exit_code == 0
-    assert "env var: TEST_NAME" in result.output
+    assert "Hello Mr. Wednesday" in result.output
 
 
 def test_help_slash_option():
