@@ -35,6 +35,7 @@ Required = ...
 class Context(cloup.Context):
     def __init__(
         self,
+        # click.Context
         command: "click.Command",
         parent: Optional["click.Context"] = None,
         info_name: Optional[str] = None,
@@ -51,6 +52,13 @@ class Context(cloup.Context):
         token_normalize_func: Optional[Callable[[str], str]] = None,
         color: Optional[bool] = None,
         show_default: Optional[bool] = None,
+        # cloup.Context
+        align_option_groups: Optional[bool] = None,
+        align_sections: Optional[bool] = None,
+        show_subcommand_aliases: Optional[bool] = None,
+        show_constraints: Optional[bool] = None,
+        check_constraints_consistency: Optional[bool] = None,
+        formatter_settings: Dict[str, Any] = {},
     ):
         if auto_envvar_prefix is None:
             if (
@@ -65,22 +73,28 @@ class Context(cloup.Context):
                     )
 
         super().__init__(
-            command,
-            parent,
-            info_name,
-            obj,
-            auto_envvar_prefix,
-            default_map,
-            terminal_width,
-            max_content_width,
-            resilient_parsing,
-            allow_extra_args,
-            allow_interspersed_args,
-            ignore_unknown_options,
-            help_option_names,
-            token_normalize_func,
-            color,
-            show_default,
+            command=command,
+            parent=parent,
+            info_name=info_name,
+            obj=obj,
+            auto_envvar_prefix=auto_envvar_prefix,
+            default_map=default_map,
+            terminal_width=terminal_width,
+            max_content_width=max_content_width,
+            resilient_parsing=resilient_parsing,
+            allow_extra_args=allow_extra_args,
+            allow_interspersed_args=allow_interspersed_args,
+            ignore_unknown_options=ignore_unknown_options,
+            help_option_names=help_option_names,
+            token_normalize_func=token_normalize_func,
+            color=color,
+            show_default=show_default,
+            align_option_groups=align_option_groups,
+            align_sections=align_sections,
+            show_subcommand_aliases=show_subcommand_aliases,
+            show_constraints=show_constraints,
+            check_constraints_consistency=check_constraints_consistency,
+            formatter_settings=formatter_settings,
         )
 
 
