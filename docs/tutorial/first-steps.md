@@ -28,9 +28,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 ```
 
 </div>
@@ -121,9 +119,7 @@ Arguments:
   LASTNAME  [required]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help    Show this message and exit.
 
 // There are now 2 CLI arguments, name and lastname
 
@@ -236,13 +232,11 @@ $ python main.py --help
 Usage: main.py [OPTIONS] NAME LASTNAME
 
 Arguments:
-  NAME      [required]
-  LASTNAME  [required]
+  NAME                    [required]
+  LASTNAME                [required]
 
 Options:
-  --formal / --no-formal  [default: False]
-  --install-completion    Install completion for the current shell.
-  --show-completion       Show completion for the current shell, to copy it or customize the installation.
+  --formal / --no-formal  [default: no-formal]
   --help                  Show this message and exit.
 ```
 
@@ -295,13 +289,11 @@ $ python main.py --help
 Usage: main.py [OPTIONS] NAME
 
 Arguments:
-  NAME  [required]
+  NAME                    [required]
 
 Options:
-  --lastname TEXT         [default: ]
-  --formal / --no-formal  [default: False]
-  --install-completion    Install completion for the current shell.
-  --show-completion       Show completion for the current shell, to copy it or customize the installation.
+  --lastname TEXT
+  --formal / --no-formal  [default: no-formal]
   --help                  Show this message and exit.
 ```
 
@@ -366,20 +358,18 @@ Usage: main.py [OPTIONS] NAME
   If --formal is used, say hi very formally.
 
 Arguments:
-  NAME  [required]
+  NAME                    [required]
 
 Options:
-  --lastname TEXT         [default: ]
-  --formal / --no-formal  [default: False]
-  --install-completion    Install completion for the current shell.
-  --show-completion       Show completion for the current shell, to copy it or customize the installation.
+  --lastname TEXT
+  --formal / --no-formal  [default: no-formal]
   --help                  Show this message and exit.
 ```
 
 </div>
 
 !!! tip
-    There is another place to document the specific *CLI options* and *CLI arguments* that will show up next to them in the help text as with `--install-completion` or `--help`, you will learn that later in the tutorial.
+    There is another place to document the specific *CLI options* and *CLI arguments* that will show up next to them in the help text as with `--help`; you will learn that later in the tutorial.
 
 ## Arguments, options, parameters, optional, required
 

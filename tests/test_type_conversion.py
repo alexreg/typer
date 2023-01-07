@@ -91,3 +91,18 @@ def test_tuple_parameter_elements_are_converted_recursively(type_annotation):
 
     result = runner.invoke(app, ["one", "two"])
     assert result.exit_code == 0
+
+
+def test_callback():
+    app = typer.Typer()
+
+    def value_callback(value: Optional[SomeEnum]):
+        typer.echo(f"Value: {value}")
+
+    @app.command()
+    def main(value: Optional[SomeEnum] = typer.Option(..., callback=value_callback)):
+        pass
+
+    result = runner.invoke(app, ["--value", "one"])
+    assert result.exit_code == 0
+    assert "Value: SomeEnum.ONE" in result.output

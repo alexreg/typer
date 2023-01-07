@@ -297,10 +297,7 @@ Usage: rick-portal-gun [OPTIONS] COMMAND [ARGS]...
   Awesome Portal Gun
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   load   Load the portal gun
@@ -379,36 +376,6 @@ Shooting portal gun
 
 </div>
 
-Having it installed globally (and not in a single environment), you can now install completion globally for it:
-
-<div class="termy">
-
-```console
-$ rick-portal-gun --install-completion
-
-zsh completion installed in /home/user/.zshrc.
-Completion will take effect once you restart the terminal.
-```
-
-</div>
-
-!!! tip
-    If you want to remove completion you can just delete the added line in that file.
-
-And after you restart the terminal you will get completion for your new CLI program:
-
-<div class="termy">
-
-```console
-$ rick-portal-gun [TAB][TAB]
-
-// You get completion for your CLI program ✨
-load   -- Load the portal gun
-shoot  -- Shoot the portal gun
-```
-
-</div>
-
 ## Support `python -m` (optional)
 
 You may have seen that you can call many Python modules as scripts with `python -m some-module`.
@@ -482,10 +449,7 @@ Usage: __main__.py [OPTIONS] COMMAND [ARGS]...
   Awesome Portal Gun
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   load   Load the portal gun
@@ -532,10 +496,7 @@ Usage: rick-portal-gun [OPTIONS] COMMAND [ARGS]...
   Awesome Portal Gun
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   load   Load the portal gun

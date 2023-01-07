@@ -70,9 +70,9 @@ For the tutorial, you might want to install it with all the optional dependencie
 ```console
 $ pip install typer-cloup[all]
 ---> 100%
-Successfully installed typer-cloup click colorama shellingham
+Successfully installed typer-cloup click colorama docstring_parser
 ```
 
 </div>
 
-... that also includes `colorama` and `shellingham`.
+... that also includes `colorama` and `docstring_parser`.

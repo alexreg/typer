@@ -25,9 +25,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   users  Manage users in the app.
@@ -110,9 +108,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   users  Manage users in the app.
@@ -160,9 +156,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   users  Manage users in the app.
@@ -206,9 +200,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   users  Manage users in the app.
@@ -256,9 +248,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   new-users  I have the highland! Create some users.
@@ -330,9 +320,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   exp-users  Explicit help.
@@ -378,9 +366,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   call-users  Help from callback for users.
@@ -424,9 +410,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   cake-sith-users  Unlimited powder! Eh, users.

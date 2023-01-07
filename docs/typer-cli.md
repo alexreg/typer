@@ -87,17 +87,6 @@ Successfully installed typer-cloup-cli
 
 That creates a `typer-cloup` command you can call in your terminal, much like `python`, `git`, or `echo`.
 
-You can then install completion for it:
-
-<div class="termy">
-
-```console
-$ typer-cloup --install-completion
-
-zsh completion installed in /home/user/.bashrc.
-Completion will take effect once you restart the terminal.
-```
-
 </div>
 
 ### Sample script
@@ -353,8 +342,6 @@ $ awesome-cli [OPTIONS] COMMAND [ARGS]...
 
 **Options**:
 
-* `--install-completion`: Install completion for the current shell.
-* `--show-completion`: Show completion for the current shell, to copy it or customize the installation.
 * `--help`: Show this message and exit.
 
 **Commands**:

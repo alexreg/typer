@@ -27,7 +27,6 @@ try:
 except ImportError:  # pragma: no cover
     docstring_parser = None  # type: ignore
 
-from .completion import get_completion_inspect_parameters
 from .core import TyperArgument, TyperCommand, TyperGroup, TyperOption
 from .models import (
     AnyType,
@@ -52,13 +51,6 @@ from .utils import get_params_from_function
 
 if TYPE_CHECKING:  # pragma: no cover
     from cloup.constraints import BoundConstraintSpec
-
-
-def get_install_completion_arguments() -> Tuple[click.Parameter, click.Parameter]:
-    install_param, show_param = get_completion_inspect_parameters()
-    click_install_param, _ = get_click_param(install_param)
-    click_show_param, _ = get_click_param(show_param)
-    return click_install_param, click_show_param
 
 
 class Typer:
@@ -92,10 +84,7 @@ class Typer:
         deprecated: bool = Default(False),
         align_option_groups: Optional[bool] = Default(None),
         show_constraints: Optional[bool] = Default(None),
-        # Completion
-        add_completion: bool = True,
     ):
-        self._add_completion = add_completion
         self.info = TyperInfo(
             self,
             name=name,
@@ -376,8 +365,6 @@ def get_group(typer_instance: Typer) -> click.Group:
 
 
 def get_command(typer_instance: Typer) -> click.Command:
-    if typer_instance._add_completion:
-        click_install_param, click_show_param = get_install_completion_arguments()
     if (
         typer_instance.registered_callback
         or typer_instance.info.callback
@@ -385,11 +372,7 @@ def get_command(typer_instance: Typer) -> click.Command:
         or len(typer_instance.registered_commands) > 1
     ):
         # Create a Group
-        click_command = cast(click.Command, get_group(typer_instance))
-        if typer_instance._add_completion:
-            click_command.params.append(click_install_param)
-            click_command.params.append(click_show_param)
-        return click_command
+        return cast(click.Command, get_group(typer_instance))
     elif len(typer_instance.registered_commands) == 1:
         # Create a single Command
         single_command = typer_instance.registered_commands[0]
@@ -399,11 +382,7 @@ def get_command(typer_instance: Typer) -> click.Command:
         ):
             single_command.context_settings = typer_instance.info.context_settings
 
-        click_command = get_command_from_info(single_command)
-        if typer_instance._add_completion:
-            click_command.params.append(click_install_param)
-            click_command.params.append(click_show_param)
-        return click_command
+        return get_command_from_info(single_command)
     assert False, "Could not get a command for this Typer instance"  # pragma no cover
 
 
@@ -1039,7 +1018,7 @@ def get_param_callback(
     # Extract value param name first
     if untyped_names:
         value_name = untyped_names.pop()
-    # If context and Click param were not typed (old/Click callback style) extract them
+    # If context and Click param were not typed (old/Click callback style), extract them
     if untyped_names:
         if ctx_name is None:
             ctx_name = untyped_names.pop(0)
@@ -1124,6 +1103,6 @@ def get_param_completion(
 
 
 def run(function: Callable[..., Any]) -> None:
-    app = Typer(add_completion=False)
+    app = Typer()
     app.command()(function)
     app()

@@ -52,10 +52,8 @@ $ python main.py --help
 Usage: main.py [OPTIONS]
 
 Options:
-  --name TEXT           [required]
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --name TEXT  [required]
+  --help       Show this message and exit.
 
 // Try it
 $ python --name Camila
@@ -202,8 +200,6 @@ Usage: main.py [OPTIONS]
 
 Options:
   -n, --name TEXT       [required]
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
   --help                Show this message and exit.
 
 // Try the short version
@@ -233,10 +229,8 @@ $ python main.py --help
 Usage: main.py [OPTIONS]
 
 Options:
-  -n TEXT               [required]
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  -n TEXT  [required]
+  --help   Show this message and exit.
 
 // Try it
 $ python main.py -n Camila
@@ -267,8 +261,6 @@ Usage: main.py [OPTIONS]
 
 Options:
   -n, --user-name TEXT  [required]
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
   --help                Show this message and exit.
 
 // Try it
@@ -309,8 +301,6 @@ Usage: main.py [OPTIONS]
 Options:
   -n, --name TEXT       [required]
   -f, --formal
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
   --help                Show this message and exit.
 
 // Try the short versions

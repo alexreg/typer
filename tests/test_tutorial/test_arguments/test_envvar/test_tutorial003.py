@@ -15,7 +15,7 @@ def test_help():
     assert result.exit_code == 0
     assert "[OPTIONS] [NAME]" in result.output
     assert "Arguments:" in result.output
-    assert "[env var: AWESOME_NAME;default: World]" not in result.output
+    assert "[env var: AWESOME_NAME; default: World]" not in result.output
     assert columns_match(result.output, "[NAME]", "[default: World]")
 
 

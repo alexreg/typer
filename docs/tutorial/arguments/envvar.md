@@ -17,12 +17,10 @@ $ python main.py --help
 Usage: main.py [OPTIONS] [NAME]
 
 Arguments:
-  [NAME]  [env var: AWESOME_NAME;default: World]
+  [NAME]  [env var: AWESOME_NAME; default: World]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 // Call it without a CLI argument
 $ python main.py
@@ -66,12 +64,10 @@ $ python main.py --help
 Usage: main.py [OPTIONS] [NAME]
 
 Arguments:
-  [NAME]  [env var: AWESOME_NAME, GOD_NAME;default: World]
+  [NAME]  [env var: AWESOME_NAME, GOD_NAME; default: World]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 // Try the first env var
 $ AWESOME_NAME=Wednesday python main.py
@@ -109,9 +105,7 @@ Arguments:
   [NAME]  [default: World]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 // But it will still be able to use it
 $ AWESOME_NAME=Wednesday python main.py

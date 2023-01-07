@@ -1,11 +1,9 @@
 import os
 import subprocess
 from pathlib import Path
-from unittest import mock
 
 import click
 import pytest
-import shellingham
 
 import typer_cloup as typer
 from typer_cloup.main import solve_typer_info_defaults, solve_typer_info_help
@@ -32,15 +30,10 @@ def test_install_invalid_shell():
 
     @app.command()
     def main():
-        typer.echo("Hello World")
+        pass  # pragma: no cover
 
-    with mock.patch.object(
-        shellingham, "detect_shell", return_value=("xshell", "/usr/bin/xshell")
-    ):
-        result = runner.invoke(app, ["--install-completion"])
-        assert "Shell 'xshell' is not supported." in result.stdout
-    result = runner.invoke(app)
-    assert "Hello World" in result.stdout
+    result = runner.invoke(app, env={"_MAIN_COMPLETE": "xshell_source"})
+    assert "Shell 'xshell' is not supported." in result.stdout
 
 
 def test_callback_too_many_parameters():

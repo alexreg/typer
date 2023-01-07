@@ -68,9 +68,7 @@ Usage: main.py [OPTIONS]
 
 Options:
   --user &lt;TEXT INTEGER BOOLEAN&gt;...
-  --install-completion            Install completion for the current shell.
-  --show-completion               Show completion for the current shell, to copy it or customize the installation.
-  --help                          Show this message and exit.
+  --help  Show this message and exit.
 
 // Now try it
 $ python main.py --user Camila 50 yes

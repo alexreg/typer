@@ -19,13 +19,11 @@ $ python main.py --help
 Usage: main.py [OPTIONS] ID
 
 Arguments:
-  ID  [required]
+  ID                    [0<=x<=1000; required]
 
 Options:
-  --age INTEGER RANGE   [default: 20]
-  --score FLOAT RANGE   [default: 0]
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
+  --age INTEGER RANGE   [default: 20; x>=18]
+  --score FLOAT RANGE   [default: 0; x<=100]
   --help                Show this message and exit.
 
 // Pass all the CLI parameters

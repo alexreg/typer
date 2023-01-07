@@ -37,9 +37,7 @@ Usage: main.py [OPTIONS] COMMAND [ARGS]...
   Manage users in the awesome CLI app.
 
 Options:
-  --verbose / --no-verbose  [default: False]
-  --install-completion      Install completion for the current shell.
-  --show-completion         Show completion for the current shell, to copy it or customize the installation.
+  --verbose / --no-verbose  [default: no-verbose]
   --help                    Show this message and exit.
 
 Commands:
@@ -148,9 +146,7 @@ Usage: main.py [OPTIONS] COMMAND [ARGS]...
   A new user with the given NAME will be created.
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   create

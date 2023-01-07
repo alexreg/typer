@@ -104,12 +104,10 @@ $ python main.py --help
 Usage: main.py [OPTIONS] NAME
 
 Arguments:
-  NAME  [required]
+  NAME    [required]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 // When you create a package you get ✨ auto-completion ✨ for free, installed with --install-completion
 
@@ -178,9 +176,7 @@ $ python main.py --help
 Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 Commands:
   goodbye
@@ -195,7 +191,7 @@ $ python main.py hello --help
 Usage: main.py hello [OPTIONS] NAME
 
 Arguments:
-  NAME  [required]
+  NAME    [required]
 
 Options:
   --help  Show this message and exit.
@@ -207,10 +203,10 @@ $ python main.py goodbye --help
 Usage: main.py goodbye [OPTIONS] NAME
 
 Arguments:
-  NAME  [required]
+  NAME                    [required]
 
 Options:
-  --formal / --no-formal  [default: False]
+  --formal / --no-formal  [default: no-formal]
   --help                  Show this message and exit.
 
 // Automatic --formal and --no-formal for the bool option 🎉
@@ -275,9 +271,7 @@ But you can also install extras:
 * <a href="https://pypi.org/project/colorama/" class="external-link" target="_blank"><code>colorama</code></a>: and Click will automatically use it to make sure your terminal's colors always work correctly, even in Windows.
     * Then you can use any tool you want to output your terminal's colors in all the systems, including the integrated `typer.style()` and `typer.secho()` (provided by Click).
     * Or any other tool, e.g. <a href="https://pypi.org/project/wasabi/" class="external-link" target="_blank"><code>wasabi</code></a>, <a href="https://github.com/erikrose/blessings" class="external-link" target="_blank"><code>blessings</code></a>.
-* <a href="https://github.com/sarugaku/shellingham" class="external-link" target="_blank"><code>shellingham</code></a>: and Typer will automatically detect the current shell when installing completion.
-    * With `shellingham` you can just use `--install-completion`.
-    * Without `shellingham`, you have to pass the name of the shell to install completion for, e.g. `--install-completion bash`.
+* <a href="https://pypi.org/project/docstring_parser/" class="external-link" target="_blank"><code>docstring_parser</code></a>: and Typer will automatically use it to parse help text for parameters from docstrings of functions.
 
 You can install `typer-cloup` with all optional dependencies by running `pip install typer-cloup[all]`.
 

@@ -48,13 +48,11 @@ Usage: main.py [OPTIONS] NAME
   If --formal is used, say hi very formally.
 
 Arguments:
-  NAME  [required]
+  NAME                    [required]
 
 Options:
-  --lastname TEXT         Last name of person to greet. [default: ]
-  --formal / --no-formal  Say hi formally.  [default: False]
-  --install-completion    Install completion for the current shell.
-  --show-completion       Show completion for the current shell, to copy it or customize the installation.
+  --lastname TEXT         Last name of person to greet.
+  --formal / --no-formal  Say hi formally.  [default: no-formal]
   --help                  Show this message and exit.
 
 // Now you have a help text for the --lastname and --formal CLI options 🎉
@@ -86,9 +84,7 @@ Usage: main.py [OPTIONS]
 
 Options:
   --fullname TEXT
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help           Show this message and exit.
 
 // Notice there's no [default: Wade Wilson] 🔥
 ```

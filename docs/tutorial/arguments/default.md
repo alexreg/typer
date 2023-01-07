@@ -30,9 +30,7 @@ Arguments:
   [NAME]  [default: Wade Wilson]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 // With no optional CLI argument
 $ python main.py
@@ -73,9 +71,7 @@ Arguments:
   [NAME]  [default: (dynamic)]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 // Try it several times, it will use a random default each time
 $ python main.py

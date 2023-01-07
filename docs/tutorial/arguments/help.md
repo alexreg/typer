@@ -27,12 +27,10 @@ $ python main.py --help
 Usage: main.py [OPTIONS] NAME
 
 Arguments:
-  NAME  The name of the user to greet  [required]
+  NAME    The name of the user to greet  [required]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 ```
 
 </div>
@@ -58,12 +56,10 @@ Usage: main.py [OPTIONS] NAME
   Say hi to NAME very gently, like Dirk.
 
 Arguments:
-  NAME  The name of the user to greet  [required]
+  NAME    The name of the user to greet  [required]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 ```
 
 </div>
@@ -92,9 +88,7 @@ Arguments:
   [NAME]  Who to greet  [default: World]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 ```
 
 </div>
@@ -121,10 +115,7 @@ Arguments:
   [NAME]  Who to greet
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 ```
 
 </div>
@@ -156,9 +147,7 @@ Arguments:
 
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 
 // See it shows "(Deadpoolio the amazing's name)" instead of the actual default of "Wade Wilson"
 ```
@@ -204,9 +193,7 @@ Arguments:
   ✨username✨  [default: World]
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help        Show this message and exit.
 ```
 
 </div>
@@ -234,9 +221,7 @@ Usage: main.py [OPTIONS] [NAME]
   Say hi to NAME very gently, like Dirk.
 
 Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or customize the installation.
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 ```
 
 </div>
