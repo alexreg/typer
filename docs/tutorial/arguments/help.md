@@ -235,7 +235,7 @@ Options:
 
 Click itself doesn't support adding help for *CLI arguments*, and it doesn't generate help for them as in the "`Arguments:`" sections in the examples above.
 
-Not supporting `help` in *CLI arguments* is an intentional <a href="https://click.palletsprojects.com/en/7.x/documentation/#documenting-arguments" class="external-link" target="_blank">design decision in Click</a>:
+Not supporting `help` in *CLI arguments* is an intentional <a href="https://click.palletsprojects.com/en/8.1.x/documentation/#documenting-arguments" class="external-link" target="_blank">design decision in Click</a>:
 
 > This is to follow the general convention of Unix tools of using arguments for only the most necessary things, and to document them in the command help text by referring to them by name.
 

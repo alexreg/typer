@@ -31,7 +31,7 @@ It inspired a lot of the ideas in **FastAPI** and **Typer**.
 Plac is another library to create CLIs using parameters in functions, similar to Hug.
 
 !!! check "Inspired **Typer** to"
-    Provide a simple way to use a function as a command line app, without having to create a complete app, with `typer.run(some_function)`.
+    Provide a simple way to use a function as a command-line app, without having to create a complete app, with `typer.run(some_function)`.
 
 ### <a href="https://pydantic-docs.helpmanual.io/" class="external-link" target="_blank">Pydantic</a>
 

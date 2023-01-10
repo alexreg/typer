@@ -55,7 +55,7 @@ You can perform several validations for `Path` *CLI parameters*:
     It will not expand a tilde-prefix (something with `~`, like `~/Documents/`), as this is supposed to be done by the shell only.
 
 !!! tip
-    All these parameters come directly from <a href="https://click.palletsprojects.com/en/7.x/parameters/#parameter-types" class="external-link" target="_blank">Click</a>.
+    All these parameters come directly from <a href="https://click.palletsprojects.com/en/8.1.x/parameters/#parameter-types" class="external-link" target="_blank">Click</a>.
 
 For example:
 

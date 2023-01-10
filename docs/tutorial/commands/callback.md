@@ -161,7 +161,7 @@ Creating user: Camila
 
 ## Click Group
 
-If you come from Click, this **Typer** callback is the equivalent of the function in a <a href="https://click.palletsprojects.com/en/7.x/quickstart/#nesting-commands" class="external-link" target="_blank">Click Group</a>.
+If you come from Click, this **Typer** callback is the equivalent of the function in a <a href="https://click.palletsprojects.com/en/8.1.x/quickstart/#nesting-commands" class="external-link" target="_blank">Click Group</a>.
 
 For example:
 

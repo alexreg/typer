@@ -28,7 +28,7 @@
 
 **NOTE**: This project is a fork of <a href="https://github.com/tiangolo/typer" class="external-link" target="_blank">the original Typer project</a>, building upon <a href="https://github.com/janLuke/cloup" class="external-link" target="_blank">Cloup</a> rather than <a href="https://click.palletsprojects.com/" class="external-link" target="_blank">Click</a> (of which Cloup is an extension). `typer-cloup` is largely but not entirely backward compatible with `typer` 0.4.2, and also includes some changes to `typer` made since then.
 
-Typer is a library for building <abbr title="command line interface, programs executed from a terminal">CLI</abbr> applications that users will **love using** and developers will **love creating**. Based on Python 3.7+ type hints.
+Typer is a library for building <abbr title="command-line interface, programs executed from a terminal">CLI</abbr> applications that users will **love using** and developers will **love creating**. Based on Python 3.7+ type hints.
 
 The key features are:
 
@@ -277,7 +277,7 @@ You can install `typer-cloup` with all optional dependencies by running `pip ins
 
 ## Other tools and plug-ins
 
-Click has many plug-ins available that you can use. And there are many tools that help with command line applications that you can use as well, even if they are not related to Typer or Click.
+Click has many plug-ins available that you can use. And there are many tools that help with command-line applications that you can use as well, even if they are not related to Typer or Click.
 
 For example:
 

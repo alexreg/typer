@@ -37,7 +37,7 @@ You can also use **Typer CLI** to generate Markdown documentation for your own *
 
 ## **Typer** or **Typer CLI**
 
-**Typer** is a library for building CLIs (Command Line Interface applications).
+**Typer** is a library for building CLIs (Command-Line Interface applications).
 
 You use **Typer** in your Python scripts. Like in:
 
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     typer.run(main)
 ```
 
-**Typer CLI** is a command line application to run simple programs created with **Typer**, with completion in your terminal 🚀.
+**Typer CLI** is a command-line application to run simple programs created with **Typer**, with completion in your terminal 🚀.
 
 You use **Typer CLI** in your terminal, to run your scripts (as an alternative to calling `python` directly). Like in:
 

@@ -204,7 +204,7 @@ Notice that the help text now shows the 2 commands: `create` and `delete`.
 
 ## Click Group
 
-If you come from Click, a `typer.Typer` app with subcommands is more or less the equivalent of a <a href="https://click.palletsprojects.com/en/7.x/quickstart/#nesting-commands" class="external-link" target="_blank">Click Group</a>.
+If you come from Click, a `typer.Typer` app with subcommands is more or less the equivalent of a <a href="https://click.palletsprojects.com/en/8.1.x/quickstart/#nesting-commands" class="external-link" target="_blank">Click Group</a>.
 
 !!! note "Technical Details"
     A `typer.Typer` app is *not* a Click Group, but it provides the equivalent functionality. And it creates a Click Group when calling it.

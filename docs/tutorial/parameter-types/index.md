@@ -2,7 +2,7 @@ You can use several data types for the *CLI options* and *CLI arguments*, and yo
 
 ## Data conversion
 
-When you declare a *CLI parameter* with some type **Typer** will convert the data received in the command line to that data type.
+When you declare a *CLI parameter* with some type **Typer** will convert the data received from the command line to that data type.
 
 For example:
 
@@ -63,4 +63,4 @@ See more about specific types and validations in the next sections...
 
 
 !!! info "Technical Details"
-    All the types you will see in the next sections are handled underneath by <a href="https://click.palletsprojects.com/en/7.x/parameters/#parameter-types" class="external-link" target="_blank">Click's Parameter Types</a>.
+    All the types you will see in the next sections are handled underneath by <a href="https://click.palletsprojects.com/en/8.1.x/parameters/#parameter-types" class="external-link" target="_blank">Click's Parameter Types</a>.

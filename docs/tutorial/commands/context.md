@@ -1,4 +1,4 @@
-When you create a **Typer** application it uses Click underneath. And every Click application has a special object called a <a href="https://click.palletsprojects.com/en/7.x/commands/#nested-handling-and-contexts" class="external-link" target="_blank">"Context"</a> that is normally hidden.
+When you create a **Typer** application it uses Click underneath. And every Click application has a special object called a <a href="https://click.palletsprojects.com/en/8.1.x/commands/#nested-handling-and-contexts" class="external-link" target="_blank">"Context"</a> that is normally hidden.
 
 But you can access the context by declaring a function parameter of type `typer.Context`.
 
@@ -103,7 +103,7 @@ Creating user: Camila
 
 You can pass configurations for the context when creating a command or callback.
 
-To read more about the available configurations check the docs for <a href="https://click.palletsprojects.com/en/7.x/api/#context" class="external-link" target="_blank">Click's `Context`</a>.
+To read more about the available configurations check the docs for <a href="https://click.palletsprojects.com/en/8.1.x/api/#context" class="external-link" target="_blank">Click's `Context`</a>.
 
 For example, you could keep additional *CLI parameters* not declared in your CLI program with `ignore_unknown_options` and `allow_extra_args`.
 

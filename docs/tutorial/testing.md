@@ -31,7 +31,7 @@ Create another file/module `app/test_main.py`.
 
 Import `CliRunner` and create a `runner` object.
 
-This runner is what will "invoke" or "call" your command line application.
+This runner is what will "invoke" or "call" your command-line application.
 
 ```Python hl_lines="1  5"
 {!../docs_src/testing/app01/test_main.py!}

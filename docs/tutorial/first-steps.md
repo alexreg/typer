@@ -423,7 +423,7 @@ And a parameter like `name`, that doesn't have a default value, is considered *r
 
 ### In CLIs
 
-When talking about command line interface applications, the words **"argument"** and **"parameter"** are commonly used to refer to that data passed to a CLI app, those parameters.
+When talking about command-line interface applications, the words **"argument"** and **"parameter"** are commonly used to refer to that data passed to a CLI app, those parameters.
 
 But those words **don't imply** anything about the data being required, needing to be passed in a certain order, nor having a flag like `--lastname`.
 

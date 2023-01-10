@@ -251,7 +251,7 @@ from rick_portal_gun.main import app
 app()
 ```
 
-That config section tells Poetry that when this package is installed we want it to create a command line program called `rick-portal-gun`.
+That config section tells Poetry that when this package is installed we want it to create a command-line program called `rick-portal-gun`.
 
 And that the object to call (like a function) is the one in the variable `app` inside of the module `rick_portal_gun.main`.
 
