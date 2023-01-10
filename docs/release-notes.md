@@ -2,6 +2,17 @@
 
 ## Latest Changes
 
+* ✨ Allow manual specification of Click `ParamType` for parameters
+* ✨ Add `VersionOption` function for creating `--version` option
+* 📝 Add more API docs
+* 📝 Update Security policy
+* 📝 Miscellaneous improvements to docs
+* ✨ Remove support for installation of shell completion
+* 🐛 Fix initializer of `Context` class
+* 🐛 Fix minor issues with resolving and displaying of parameter env vars
+* 🐛 Fix `name` attribute of `ShellQuotedList` class
+* 🎨 Adjust spacing after ellipses in documentation
+
 ## 0.10.0
 
 ### Features
