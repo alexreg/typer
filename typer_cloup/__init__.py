@@ -38,5 +38,6 @@ from .models import FileTextWrite as FileTextWrite
 from .param_types import ShellQuotedList
 from .params import Argument as Argument
 from .params import Option as Option
+from .params import VersionOption as VersionOption
 from .params import constraint as constraint
 from .params import option_group as option_group

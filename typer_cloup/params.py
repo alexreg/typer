@@ -1,3 +1,6 @@
+import inspect
+from gettext import gettext as _
+from types import ModuleType
 from typing import TYPE_CHECKING, Any, Callable, List, Optional, Type, Union, cast
 
 import click
@@ -215,6 +218,109 @@ def Argument(
         path_type=path_type,
         # Shell-Quoted List
         shell_quoted_list=shell_quoted_list,
+    )
+
+
+def VersionOption(
+    version: Optional[str] = None,
+    *param_decls: str,
+    package_name: Optional[str] = None,
+    prog_name: Optional[str] = None,
+    message: Optional[str] = None,
+    # Option
+    help: Optional[str] = "Show the version and exit.",
+    hidden: bool = False,
+    group: Optional[cloup.OptionGroup] = None,
+) -> Any:
+    """Specify a ``--version`` option which immediately prints the version number and exits the program.
+
+    If ``version`` is not provided, Typer will try to detect it using :func:`importlib.metadata.version` to get the version for the ``package_name``. On Python < 3.8, the ``importlib_metadata`` backport must be installed.
+
+    If ``package_name`` is not provided, Typer will try to detect it by inspecting the stack frames. This will be used to detect the version, so it must match the name of the installed package.
+
+    :param version: The version number to show. If not provided, Typer will try to detect it.
+    :param param_decls: One or more option names. Defaults to the single value ``"--version"``.
+    :param package_name: The package name to detect the version from. If not provided, Typer will try to detect it.
+    :param prog_name: The name of the CLI to show in the message. If not provided, it will be detected from the command.
+    :param message: The message to show. The values ``%(prog)s``, ``%(package)s``, and ``%(version)s`` are available. Defaults to ``"%(prog)s, version %(version)s"``.
+
+    :raise RuntimeError: ``version`` could not be detected.
+    """
+
+    if message is None:
+        message = _("%(prog)s, version %(version)s")
+
+    if version is None and package_name is None:
+        frame = inspect.currentframe()
+        f_back = frame.f_back if frame is not None else None
+        f_globals = f_back.f_globals if f_back is not None else None
+        # break reference cycle
+        # https://docs.python.org/3/library/inspect.html#the-interpreter-stack
+        del frame
+
+        if f_globals is not None:
+            package_name: str = f_globals.get("__name__")
+
+            if package_name == "__main__":
+                package_name = f_globals.get("__package__")  # pragma: no cover
+
+            if package_name:
+                package_name = package_name.partition(".")[0]
+
+    def callback(ctx: click.Context, param: click.Parameter, value: bool) -> None:
+        if not value or ctx.resilient_parsing:
+            return  # pragma: no cover
+
+        nonlocal prog_name
+        nonlocal version
+
+        if prog_name is None:
+            prog_name = ctx.find_root().info_name
+
+        if version is None and package_name is not None:
+            metadata: Optional[ModuleType]
+
+            try:
+                from importlib import metadata  # type: ignore
+            except ImportError:  # pragma: no cover
+                # Python < 3.8
+                import importlib_metadata as metadata  # type: ignore
+
+            try:
+                version = metadata.version(package_name)  # type: ignore
+            except metadata.PackageNotFoundError:  # type: ignore
+                raise RuntimeError(
+                    f"{package_name!r} is not installed. Try passing 'package_name' instead."
+                ) from None
+
+        if version is None:
+            raise RuntimeError(  # pragma: no cover
+                f"Could not determine the version for {package_name!r} automatically."
+            )
+
+        click.echo(
+            cast(str, message)
+            % {"prog": prog_name, "package": package_name, "version": version},
+            color=ctx.color,
+        )
+        ctx.exit()
+
+    if not param_decls:
+        param_decls = ("--version",)
+
+    return OptionInfo(
+        # Parameter
+        param_decls=param_decls,
+        callback=callback,
+        expose_value=False,
+        is_eager=True,
+        envvar=None,
+        # Option
+        is_flag=True,
+        allow_from_autoenv=False,
+        help=help,
+        hidden=hidden,
+        group=group,
     )
 
 
