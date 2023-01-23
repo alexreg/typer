@@ -66,6 +66,8 @@ def Option(
     # Shell-Quoted List
     shell_quoted_list: bool = False,
 ) -> Any:
+    """Specify an option."""
+
     return OptionInfo(
         # Parameter
         default=default,
@@ -167,6 +169,8 @@ def Argument(
     # Shell-Quoted List
     shell_quoted_list: bool = False,
 ) -> Any:
+    """Specify an argument."""
+
     return ArgumentInfo(
         # Parameter
         default=default,
@@ -221,6 +225,8 @@ def option_group(
     constraint: Optional[cloup.constraints.Constraint] = None,
     hidden: bool = False,
 ) -> Callable[[CommandFunctionType], CommandFunctionType]:
+    """Specify an option group."""
+
     if not isinstance(title, str):
         raise TypeError(
             "the first argument of `@option_group` must be its title, a string; "
@@ -247,4 +253,6 @@ def constraint(
     constr: cloup.constraints.Constraint,
     *params: str,
 ) -> Callable[[CommandFunctionType], CommandFunctionType]:
+    """Specify a parameter constraint."""
+
     return cloup.constraint(constr, params)
