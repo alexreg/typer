@@ -837,7 +837,7 @@ def get_click_param(
     param: ParamMeta,
 ) -> Tuple[Union[click.Argument, click.Option], Any]:
     # First, find out what will be:
-    # * ParamInfo (ArgumentInfo or OptionInfo)
+    # * ParameterInfo (ArgumentInfo or OptionInfo)
     # * default_value
     # * required
     default_value = None
@@ -865,7 +865,10 @@ def get_click_param(
     parameter_type: Any = None
     is_flag = None
     origin = getattr(main_type, "__origin__", None)
-    if origin is not None:
+    if parameter_info.type is not None:
+        main_type = parameter_info.type
+        parameter_type = parameter_info.type
+    elif origin is not None:
         # Handle Optional[SomeType]
         if origin is Union:
             types = []

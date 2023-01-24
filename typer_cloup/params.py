@@ -17,6 +17,7 @@ def Option(
     # Parameter
     default: Optional[Any],
     *param_decls: str,
+    type: Optional[Union[click.types.ParamType, Any]] = None,
     callback: Optional[Callable[..., Any]] = None,
     metavar: Optional[str] = None,
     expose_value: bool = True,
@@ -75,6 +76,7 @@ def Option(
         # Parameter
         default=default,
         param_decls=param_decls,
+        type=type,
         callback=callback,
         metavar=metavar,
         expose_value=expose_value,
@@ -128,6 +130,7 @@ def Argument(
     # Parameter
     default: Optional[Any],
     *,
+    type: Optional[Union[click.types.ParamType, Any]] = None,
     callback: Optional[Callable[..., Any]] = None,
     metavar: Optional[str] = None,
     expose_value: bool = True,
@@ -180,6 +183,7 @@ def Argument(
         # Arguments can only have one param declaration
         # it will be generated from the param name
         param_decls=None,
+        type=type,
         callback=callback,
         metavar=metavar,
         expose_value=expose_value,

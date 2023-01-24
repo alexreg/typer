@@ -255,6 +255,7 @@ class ParameterInfo:
         *,
         default: Optional[Any] = None,
         param_decls: Optional[Sequence[str]] = None,
+        type: Optional[Union[click.types.ParamType, Any]] = None,
         callback: Optional[Callable[..., Any]] = None,
         metavar: Optional[str] = None,
         expose_value: bool = True,
@@ -301,6 +302,7 @@ class ParameterInfo:
     ):
         self.default = default
         self.param_decls = param_decls
+        self.type = type
         self.callback = callback
         self.metavar = metavar
         self.expose_value = expose_value
@@ -348,6 +350,7 @@ class OptionInfo(ParameterInfo):
         # ParameterInfo
         default: Optional[Any] = None,
         param_decls: Optional[Sequence[str]] = None,
+        type: Optional[Union[click.types.ParamType, Any]] = None,
         callback: Optional[Callable[..., Any]] = None,
         metavar: Optional[str] = None,
         expose_value: bool = True,
@@ -403,6 +406,7 @@ class OptionInfo(ParameterInfo):
         super().__init__(
             default=default,
             param_decls=param_decls,
+            type=type,
             callback=callback,
             metavar=metavar,
             expose_value=expose_value,
@@ -459,6 +463,7 @@ class ArgumentInfo(ParameterInfo):
         # ParameterInfo
         default: Optional[Any] = None,
         param_decls: Optional[Sequence[str]] = None,
+        type: Optional[Union[click.types.ParamType, Any]] = None,
         callback: Optional[Callable[..., Any]] = None,
         metavar: Optional[str] = None,
         expose_value: bool = True,
@@ -506,6 +511,7 @@ class ArgumentInfo(ParameterInfo):
         super().__init__(
             default=default,
             param_decls=param_decls,
+            type=type,
             callback=callback,
             metavar=metavar,
             expose_value=expose_value,

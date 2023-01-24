@@ -55,7 +55,7 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
         *,
         # click.Parameter
         param_decls: List[str],
-        type: Optional[Any] = None,
+        type: Optional[Union[click.types.ParamType, Any]] = None,
         required: Optional[bool] = None,
         default: Optional[Any] = None,
         callback: Optional[Callable[..., Any]] = None,

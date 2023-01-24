@@ -1,10 +1,27 @@
 from typing import Any, List
 
+import click.types
+
 import typer_cloup as typer
 from typer_cloup.param_types import SHELL_QUOTED_LIST
 from typer_cloup.testing import CliRunner
 
 runner = CliRunner()
+
+
+def test_typer_parameter_manual_type():
+    app = typer.Typer()
+
+    @app.command()
+    def main(
+        x: Any = typer.Argument(..., type=click.types.INT),
+        y: Any = typer.Argument(..., type=click.types.FLOAT),
+    ):
+        assert isinstance(x, int)
+        assert isinstance(y, float)
+
+    result = runner.invoke(app, ["1", "2"])
+    assert result.exit_code == 0
 
 
 def test_typer_unprocessed():
