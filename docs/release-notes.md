@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+## 0.11.0
+
 ### Features
 
 * ✨ Allow manual specification of Click `ParamType` for parameters
