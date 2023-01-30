@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+* 🔧 Update pre-commit, Python version, isort version. PR [#542](https://github.com/tiangolo/typer/pull/542) by [@tiangolo](https://github.com/tiangolo).
+
 ## 0.11.0
 
 ### Features
