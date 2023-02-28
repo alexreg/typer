@@ -268,7 +268,7 @@ class ParameterInfo:
             ]
         ] = None,
         # TyperArgument
-        show_default: Union[bool, str] = True,
+        show_default: Union[bool, str, Callable[[], Union[bool, str]]] = True,
         show_choices: bool = True,
         show_envvar: bool = True,
         allow_from_autoenv: bool = False,
@@ -363,7 +363,7 @@ class OptionInfo(ParameterInfo):
             ]
         ] = None,
         # Option
-        show_default: Union[bool, str] = True,
+        show_default: Union[bool, str, Callable[[], Union[bool, str]]] = True,
         prompt: Union[bool, str] = False,
         confirmation_prompt: bool = False,
         prompt_required: bool = True,
@@ -476,7 +476,7 @@ class ArgumentInfo(ParameterInfo):
             ]
         ] = None,
         # TyperArgument
-        show_default: Union[bool, str] = True,
+        show_default: Union[bool, str, Callable[[], Union[bool, str]]] = True,
         show_choices: bool = True,
         show_envvar: bool = True,
         allow_from_autoenv: bool = False,

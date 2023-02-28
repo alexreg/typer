@@ -1,4 +1,3 @@
-import inspect
 import os
 import sys
 from gettext import gettext as _
@@ -73,7 +72,7 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
         # TyperParameterMixin
         convertor: Optional[Any] = None,
         # TyperArgument
-        show_default: Union[bool, str] = True,
+        show_default: Union[bool, str, Callable[[], Union[bool, str]]] = True,
         show_choices: bool = True,
         show_envvar: bool = True,
         allow_from_autoenv: bool = False,
@@ -163,13 +162,16 @@ class TyperArgument(TyperParameterMixin, cloup.Argument):
         finally:
             ctx.resilient_parsing = resilient
 
-        show_default_is_str = isinstance(self.show_default, str)
+        show_default = (
+            self.show_default() if callable(self.show_default) else self.show_default
+        )
+        show_default_is_str = isinstance(show_default, str)
 
         if show_default_is_str or (
-            default_value is not None and (self.show_default or ctx.show_default)
+            default_value is not None and (show_default or ctx.show_default)
         ):
             if show_default_is_str:
-                default_string = f"({self.show_default})"
+                default_string = str(show_default)
             elif isinstance(default_value, (list, tuple)):
                 default_string = ", ".join(str(d) for d in default_value)
             elif callable(default_value):
@@ -241,7 +243,7 @@ class TyperOption(TyperParameterMixin, cloup.Option):
         # TyperParameterMixin
         convertor: Optional[Any] = None,
         # click.Option
-        show_default: Union[bool, str] = False,
+        show_default: Union[bool, str, Callable[[], Union[bool, str]]] = False,
         prompt: Union[bool, str] = False,
         confirmation_prompt: Union[bool, str] = False,
         prompt_required: bool = True,
@@ -373,23 +375,19 @@ class TyperOption(TyperParameterMixin, cloup.Option):
         finally:
             ctx.resilient_parsing = resilient
 
-        show_default = False
-        show_default_is_str = False
+        show_default = (
+            self.show_default() if callable(self.show_default) else self.show_default
+        )
+        show_default_is_str = isinstance(show_default, str)
 
-        if self.show_default is not None:
-            if isinstance(self.show_default, str):
-                show_default_is_str = show_default = True
-            else:
-                show_default = self.show_default
-        elif ctx.show_default is not None:  # pragma: no cover
-            show_default = ctx.show_default
-
-        if show_default_is_str or (show_default and (default_value is not None)):
+        if show_default_is_str or (
+            default_value is not None and (show_default or ctx.show_default)
+        ):
             if show_default_is_str:
-                default_string = f"({self.show_default})"
+                default_string = str(self.show_default)
             elif isinstance(default_value, (list, tuple)):
                 default_string = ", ".join(str(d) for d in default_value)
-            elif inspect.isfunction(default_value):
+            elif callable(default_value):
                 default_string = _("(dynamic)")
             elif self.is_bool_flag and self.secondary_opts:
                 # For boolean flags that have distinct True/False opts,

@@ -18,7 +18,7 @@ def test_help():
     assert columns_match(
         result.output,
         "[NAME]",
-        "Who to greet  [default: (Deadpoolio the amazing's name)]",
+        "Who to greet  [default: Deadpoolio the amazing's name]",
     )
 
 

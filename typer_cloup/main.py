@@ -574,7 +574,7 @@ def get_params_convertors_ctx_param_name_from_function(
             params[param_name] = click_param
         callback_obj = cast(Any, callback)
         if hasattr(callback_obj, "__opt_groups"):
-            for (opt_group, opt_group_params) in reversed(callback_obj.__opt_groups):
+            for opt_group, opt_group_params in reversed(callback_obj.__opt_groups):
                 for param_name in opt_group_params:
                     option = params.get(param_name, None)
                     if option is None:
