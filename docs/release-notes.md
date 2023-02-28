@@ -2,6 +2,7 @@
 
 ## Latest Changes
 
+* ✨ Add callable support to `show_default`
 * 🐛 Fix type hint for `show_default` parameter of `Option`
 * ⬆️ Upgrade analytics. PR [#557](https://github.com/tiangolo/typer/pull/557) by [@tiangolo](https://github.com/tiangolo).
 * 🔧 Update gitignore
